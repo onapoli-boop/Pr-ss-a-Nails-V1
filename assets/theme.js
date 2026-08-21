@@ -264,6 +264,114 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ------------------------------------------------------------------
+  // PDP — gallery thumbnails
+  // ------------------------------------------------------------------
+  const pdpMainImage = document.querySelector('.js-pdp-main-image');
+  document.querySelectorAll('.pdp-thumb').forEach(thumb => {
+    thumb.addEventListener('click', () => {
+      const img = thumb.dataset.img;
+      if (img && pdpMainImage) {
+        pdpMainImage.style.opacity = 0;
+        setTimeout(() => {
+          pdpMainImage.style.backgroundImage = `url('${img}')`;
+          pdpMainImage.style.opacity = 1;
+        }, 150);
+      }
+      document.querySelectorAll('.pdp-thumb').forEach(t => t.classList.remove('active'));
+      thumb.classList.add('active');
+    });
+  });
+
+  // ------------------------------------------------------------------
+  // PDP — variant picker (generic: works for any number of options,
+  // not just the mockup's single "Forme" option). Reads every variant
+  // from the JSON Shopify embeds in #ProductVariantsData, matches the
+  // currently selected option pills against variant.options, and
+  // updates price / add-to-cart button / sticky bar accordingly.
+  // ------------------------------------------------------------------
+  const variantsDataEl = document.getElementById('ProductVariantsData');
+  if (variantsDataEl) {
+    const variants = JSON.parse(variantsDataEl.textContent);
+    const optionGroups = document.querySelectorAll('#ProductVariants .pdp-chips');
+    const selected = Array.from(optionGroups).map(group => {
+      const active = group.querySelector('.pdp-chip.active');
+      return active ? active.dataset.value : null;
+    });
+
+    function findMatchingVariant() {
+      return variants.find(v => v.options.every((opt, i) => opt === selected[i]));
+    }
+
+    function formatMoney(cents) {
+      return (cents / 100).toLocaleString(document.documentElement.lang || 'fr-FR', {
+        style: 'currency',
+        currency: window.theme?.currency || 'EUR',
+      });
+    }
+
+    function updateForVariant(variant) {
+      if (!variant) return;
+      document.querySelectorAll('[data-pdp-price]').forEach(el => { el.innerHTML = formatMoney(variant.price); });
+      document.querySelectorAll('[data-pdp-add-price]').forEach(el => { el.textContent = formatMoney(variant.price); });
+      document.querySelectorAll('[data-pdp-sticky-price]').forEach(el => { el.textContent = formatMoney(variant.price); });
+      document.querySelectorAll('[data-add-to-cart]').forEach(btn => {
+        btn.dataset.variantId = variant.id;
+        btn.disabled = !variant.available;
+      });
+      if (variant.featured_image && pdpMainImage) {
+        pdpMainImage.style.backgroundImage = `url('${variant.featured_image.src}')`;
+      }
+    }
+
+    optionGroups.forEach((group, index) => {
+      group.querySelectorAll('.pdp-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+          group.querySelectorAll('.pdp-chip').forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+          selected[index] = chip.dataset.value;
+          updateForVariant(findMatchingVariant());
+        });
+      });
+    });
+  }
+
+  // ------------------------------------------------------------------
+  // PDP — wishlist toggle (visual only, matches the mockup)
+  // ------------------------------------------------------------------
+  const pdpWishBtn = document.getElementById('pdpWishBtn');
+  pdpWishBtn?.addEventListener('click', () => {
+    pdpWishBtn.classList.toggle('saved');
+    const label = pdpWishBtn.querySelector('[data-wish-label]');
+    if (label) {
+      label.textContent = pdpWishBtn.classList.contains('saved')
+        ? (window.theme?.strings?.wishlistAdded || 'Enregistré')
+        : (window.theme?.strings?.wishlistAdd || 'Enregistrer');
+    }
+  });
+
+  // ------------------------------------------------------------------
+  // PDP — sticky mobile add-to-cart bar, shown once the main buybox
+  // has scrolled out of view
+  // ------------------------------------------------------------------
+  const stickyBuyBar = document.getElementById('stickyBuyBar');
+  const pdpBuybox = document.querySelector('.pdp-buybox');
+  if (stickyBuyBar && pdpBuybox) {
+    if (hasGSAP) {
+      ScrollTrigger.create({
+        trigger: pdpBuybox,
+        start: 'bottom top',
+        onEnter: () => stickyBuyBar.classList.add('visible'),
+        onLeaveBack: () => stickyBuyBar.classList.remove('visible'),
+      });
+    } else {
+      window.addEventListener('scroll', () => {
+        const rect = pdpBuybox.getBoundingClientRect();
+        stickyBuyBar.classList.toggle('visible', rect.bottom < 0);
+      });
+    }
+  }
+
+  // ------------------------------------------------------------------
   // Quick add feedback + real add-to-cart (bestsellers / product grids)
   // ------------------------------------------------------------------
   document.querySelectorAll('.quick-add[data-variant-id]').forEach(btn => {
