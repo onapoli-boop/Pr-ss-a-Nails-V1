@@ -264,28 +264,13 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ------------------------------------------------------------------
-  // Language selector — switches locale via Shopify's localization form
-  // (header buttons + the duplicate footer links use the same pattern)
+  // Language selector (visual only for now, same as the mockup — real
+  // locale switching comes once DE/ES/EN translations exist)
   // ------------------------------------------------------------------
-  document.querySelectorAll('.lang-select button[data-locale]').forEach(btn => {
+  document.querySelectorAll('.lang-select button').forEach(btn => {
     btn.addEventListener('click', () => {
-      const form = document.getElementById('localeForm');
-      const input = form?.querySelector('input[name="locale_code"]');
-      if (form && input) {
-        input.value = btn.dataset.locale;
-        form.submit();
-      }
-    });
-  });
-  document.querySelectorAll('[data-locale-footer]').forEach(link => {
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
-      const form = document.getElementById('localeFormFooter');
-      const input = form?.querySelector('input[name="locale_code"]');
-      if (form && input) {
-        input.value = link.dataset.localeFooter;
-        form.submit();
-      }
+      document.querySelectorAll('.lang-select button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
     });
   });
 

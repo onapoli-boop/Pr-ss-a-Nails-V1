@@ -43,21 +43,12 @@
       </div>
       <div class="footer-col">
         <h4>{{ 'layout.footer.language' | t }}</h4>
-        {%- form 'localization', id: 'localeFormFooter' -%}
-          <input type="hidden" name="locale_code" value="{{ request.locale.iso_code }}">
-          <ul>
-            {%- for code_label in (section.settings.language_codes | split: ',') -%}
-              {%- assign lang = localization.available_languages | where: 'iso_code', code_label | first -%}
-              <li>
-                {%- if lang -%}
-                  <a href="#" data-locale-footer="{{ lang.iso_code }}">{{ code_label | upcase }}</a>
-                {%- else -%}
-                  <span style="opacity:.4">{{ code_label | upcase }}</span>
-                {%- endif -%}
-              </li>
-            {%- endfor -%}
-          </ul>
-        {%- endform -%}
+        <ul>
+          {%- assign lang_codes = section.settings.language_codes | split: ',' -%}
+          {%- for code_label in lang_codes -%}
+            <li><a href="#">{{ code_label | upcase }}</a></li>
+          {%- endfor -%}
+        </ul>
       </div>
     </div>
     <div class="footer-bottom">

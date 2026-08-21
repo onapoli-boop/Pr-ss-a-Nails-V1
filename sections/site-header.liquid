@@ -21,20 +21,13 @@
       <a href="{{ routes.root_url }}#about">{{ 'layout.header.nav.about' | t }}</a>
     </nav>
     <div class="header-actions">
-      {%- form 'localization', id: 'localeForm' -%}
-        <input type="hidden" name="locale_code" value="{{ request.locale.iso_code }}">
-        <div class="lang-select">
-          {%- for code_label in (section.settings.language_codes | split: ',') -%}
-            {%- assign lang = localization.available_languages | where: 'iso_code', code_label | first -%}
-            {%- if lang -%}
-              <button type="button" data-locale="{{ lang.iso_code }}" class="{% if lang.iso_code == request.locale.iso_code %}active{% endif %}">{{ code_label | upcase }}</button>
-            {%- else -%}
-              <button type="button" disabled>{{ code_label | upcase }}</button>
-            {%- endif -%}
-            {%- unless forloop.last %}·{% endunless -%}
-          {%- endfor -%}
-        </div>
-      {%- endform -%}
+      <div class="lang-select">
+        {%- assign lang_codes = section.settings.language_codes | split: ',' -%}
+        {%- for code_label in lang_codes -%}
+          <button type="button" class="{% if code_label == request.locale.iso_code %}active{% endif %}">{{ code_label | upcase }}</button>
+          {%- unless forloop.last %}·{% endunless -%}
+        {%- endfor -%}
+      </div>
       <button class="icon-btn" aria-label="{{ 'general.accessibility.search' | t }}">
         {% render 'icon', name: 'search' %}
       </button>
@@ -58,7 +51,7 @@
       "id": "language_codes",
       "label": "Langues affichées (codes ISO, séparés par des virgules)",
       "default": "fr,de,es,en",
-      "info": "Une langue n'apparaît comme sélectionnable que si elle est publiée dans les paramètres de la boutique."
+      "info": "Affichage visuel uniquement pour l'instant (comme dans la maquette) — le changement de langue réel sera branché une fois les traductions DE/ES/EN ajoutées."
     }
   ]
 }
