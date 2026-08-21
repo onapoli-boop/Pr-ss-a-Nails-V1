@@ -25,13 +25,14 @@
 <body class="template-{{ template.name }}">
   <a class="visually-hidden skip-to-content-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
 
-  {% sections 'header-group' %}
+  {% section 'announcement-bar' %}
+  {% section 'site-header' %}
 
   <main id="MainContent">
     {{ content_for_layout }}
   </main>
 
-  {% sections 'footer-group' %}
+  {% section 'site-footer' %}
 
   {% render 'cart-drawer' %}
 
