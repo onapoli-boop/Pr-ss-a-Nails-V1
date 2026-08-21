@@ -332,7 +332,6 @@ nav.main-nav a:hover::after { right: 0; }
   padding: clamp(40px,6vw,90px) var(--gutter);
   max-width: 620px;
 }
-.hero-copy > * { opacity: 0; transform: translateY(16px); }
 .hero-copy .eyebrow { margin-bottom: 22px; }
 .hero-copy h1 {
   font-family: var(--f-display);
@@ -1291,10 +1290,12 @@ footer.site-footer {
 .cart-drawer-foot .btn { width: 100%; justify-content: center; }
 
 /* ==========================================================================
-   Reveal on scroll — base hidden state; GSAP + ScrollTrigger drive the
-   actual animation in script.js (transition removed to avoid double-easing)
+   Reveal on scroll — visible by default. assets/theme.js sets the hidden
+   starting state itself via gsap.fromTo() right before animating, so
+   content never depends on CSS + JS both firing correctly to be seen
+   (important in contexts like the theme editor's preview iframe, where
+   ScrollTrigger may not fire the same way it does in a real browser tab).
    ========================================================================== */
-.reveal { opacity: 0; }
 
 /* ==========================================================================
    Responsive

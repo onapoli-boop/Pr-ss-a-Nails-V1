@@ -13,19 +13,17 @@ document.addEventListener('DOMContentLoaded', () => {
   // Hero entrance — staggered fade-up (falls back to instantly visible)
   // ------------------------------------------------------------------
   if (hasGSAP) {
-    gsap.to('.hero-copy > *', {
-      opacity: 1,
-      y: 0,
-      duration: 0.6,
-      ease: 'power2.out',
-      stagger: 0.08,
-      delay: 0.1,
-    });
-  } else {
-    document.querySelectorAll('.hero-copy > *').forEach(el => {
-      el.style.opacity = 1;
-      el.style.transform = 'none';
-    });
+    gsap.fromTo('.hero-copy > *',
+      { opacity: 0, y: 16 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: 'power2.out',
+        stagger: 0.08,
+        delay: 0.1,
+      }
+    );
   }
 
   // ------------------------------------------------------------------
@@ -57,6 +55,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
   initReveals();
+
+  // ------------------------------------------------------------------
+  // Safety net: gsap.fromTo() with a scrollTrigger renders its hidden
+  // "from" state as soon as it runs, before the trigger condition is
+  // ever checked. If ScrollTrigger never actually fires — GSAP fails to
+  // load, or a sandboxed context like the theme editor's preview iframe
+  // doesn't dispatch scroll/resize the way a real tab does — content
+  // would stay invisible forever. Force-show anything still hidden after
+  // a short delay so a broken trigger can never permanently hide content.
+  // ------------------------------------------------------------------
+  setTimeout(() => {
+    document.querySelectorAll('.reveal, .hero-copy > *').forEach(el => {
+      if (getComputedStyle(el).opacity === '0') {
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+      }
+    });
+  }, 1200);
 
   // ------------------------------------------------------------------
   // 7 Days stat count-up (falls back to showing the final number directly)
