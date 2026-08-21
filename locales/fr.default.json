@@ -73,7 +73,22 @@
     "decrease": "Diminuer la quantité",
     "increase": "Augmenter la quantité",
     "adding": "Ajout...",
-    "added": "Ajouté ✓"
+    "added": "Ajouté ✓",
+    "page_title": "Ton panier",
+    "product": "Produit",
+    "price": "Prix",
+    "quantity": "Quantité",
+    "total": "Total",
+    "update": "Mettre à jour"
+  },
+  "collection": {
+    "empty": "Aucun produit dans cette collection pour le moment.",
+    "all_collections": "Toutes nos collections"
+  },
+  "search": {
+    "results_for": "Résultats pour \"{{ terms }}\"",
+    "no_results": "Aucun résultat pour \"{{ terms }}\".",
+    "results_count": "{{ count }} résultats"
   },
   "products": {
     "quick_add": "Ajout rapide",
@@ -119,6 +134,13 @@
   "onboarding": {
     "product_title": "Nom du produit",
     "no_collection": "Choisis une collection dans les réglages de cette section."
+  },
+  "gift_card": {
+    "title": "Carte cadeau",
+    "remaining": "Solde restant : {{ balance }}",
+    "expired": "Cette carte cadeau a expiré.",
+    "instructions": "Utilise ce code lors du paiement pour appliquer le solde de ta carte cadeau.",
+    "print": "Imprimer"
   },
   "newsletter": {
     "eyebrow": "Rejoins la liste",

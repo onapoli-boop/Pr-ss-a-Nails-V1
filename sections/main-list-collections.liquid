@@ -1,0 +1,29 @@
+<div class="container breadcrumb">
+  <a href="{{ routes.root_url }}">{{ 'layout.breadcrumb.home' | t }}</a><span>/</span>
+  <span class="current">{{ 'collection.all_collections' | t }}</span>
+</div>
+
+<section class="edits">
+  <div class="container">
+    <div class="section-head reveal">
+      <h1 style="font-family:var(--f-display); font-weight:400; font-size:clamp(28px,3.4vw,44px); letter-spacing:-0.01em; line-height:1.05;">{{ 'collection.all_collections' | t }}</h1>
+    </div>
+    <div class="edits-grid reveal">
+      {%- for collection in collections -%}
+        <a class="edit-card" href="{{ collection.url }}">
+          {%- render 'placeholder-media', image: collection.featured_image -%}
+          <div class="edit-info">
+            <h3>{{ collection.title }}</h3>
+            <div class="looks">{{ collection.products_count }}</div>
+          </div>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Liste des collections"
+}
+{% endschema %}

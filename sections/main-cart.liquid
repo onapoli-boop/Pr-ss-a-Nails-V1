@@ -1,0 +1,57 @@
+<div class="container breadcrumb">
+  <a href="{{ routes.root_url }}">{{ 'layout.breadcrumb.home' | t }}</a><span>/</span>
+  <span class="current">{{ 'cart.page_title' | t }}</span>
+</div>
+
+<section class="products">
+  <div class="container">
+    <div class="section-head reveal">
+      <h1 style="font-family:var(--f-display); font-weight:400; font-size:clamp(28px,3.4vw,44px); letter-spacing:-0.01em; line-height:1.05;">{{ 'cart.page_title' | t }}</h1>
+    </div>
+
+    {%- if cart.items.size == 0 -%}
+      <p class="blog-empty">{{ 'cart.empty' | t }}</p>
+      <div class="hero-ctas" style="justify-content:center;">
+        <a href="{{ routes.root_url }}#shop" class="btn btn-primary">{{ 'cart.empty_cta' | t }}</a>
+      </div>
+    {%- else -%}
+      {%- comment -%}
+        Native Shopify cart form — works without JS. The drawer (rendered
+        globally in the layout) covers the fast AJAX path; this page is the
+        no-JS-safe fallback and the direct-checkout destination.
+      {%- endcomment -%}
+      {%- form 'cart', cart -%}
+        <div class="article-content" style="max-width:none;">
+          {%- for item in cart.items -%}
+            <div class="cart-item cart-item-page">
+              {%- render 'placeholder-media', image: item.image, class: 'cart-item-media' -%}
+              <div class="ci-info">
+                <div class="name"><a href="{{ item.url }}">{{ item.product.title }}</a></div>
+                <div class="coll">{% if item.variant.title != 'Default Title' %}{{ item.variant.title }}{% endif %}</div>
+                <div class="price">{{ item.final_price | money }}</div>
+                <div class="ci-qty">
+                  <label class="visually-hidden" for="qty-{{ forloop.index }}">{{ 'cart.quantity' | t }}</label>
+                  <input type="number" id="qty-{{ forloop.index }}" name="updates[{{ item.key }}]" value="{{ item.quantity }}" min="0" class="ci-qty-input">
+                </div>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+
+        <div class="cart-drawer-foot" style="border:1px solid var(--line); border-radius: var(--radius-lg); max-width: 420px; margin-left:auto; padding: 26px;">
+          <div class="subtotal"><span>{{ 'cart.subtotal' | t }}</span><span>{{ cart.total_price | money }}</span></div>
+          <div class="cart-page-actions">
+            <button type="submit" name="update" class="btn btn-ghost">{{ 'cart.update' | t }}</button>
+            <button type="submit" name="checkout" class="btn btn-primary">{{ 'cart.checkout' | t }}</button>
+          </div>
+        </div>
+      {%- endform -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Panier"
+}
+{% endschema %}

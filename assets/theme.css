@@ -1402,6 +1402,59 @@ footer.site-footer {
 .ci-qty-btn:hover { border-color: var(--noir); background: var(--ivoire); }
 
 /* ==========================================================================
+   Cart page (full page — /cart), collection/search/404/page utility pages
+   ========================================================================== */
+.cart-item-page {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line);
+}
+.cart-item-page .ph { width: 88px; height: 108px; flex-shrink: 0; }
+.cart-item-page .ci-info { flex: 1; }
+.ci-qty-input {
+  width: 60px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 6px 8px;
+  font-family: inherit;
+  font-size: 13px;
+  margin-top: 10px;
+}
+.cart-page-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 18px;
+}
+.cart-page-actions .btn { flex: 1; justify-content: center; }
+.search-form {
+  display: flex;
+  max-width: 480px;
+  gap: 12px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 14px;
+}
+.search-form input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  outline: none;
+  font-family: var(--f-body);
+  color: var(--noir);
+}
+.search-form button {
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--bordeaux);
+  white-space: nowrap;
+}
+.search-form button:hover { color: var(--noir); }
+
+/* ==========================================================================
    Accessibility utilities
    ========================================================================== */
 .visually-hidden {

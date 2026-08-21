@@ -1,0 +1,16 @@
+<section class="blog-hero">
+  <div class="container" style="text-align:center;">
+    <span class="eyebrow">404</span>
+    <h1>{{ 'general.404.title' | t }}</h1>
+    <p>{{ 'general.404.subtext' | t }}</p>
+    <div class="hero-ctas" style="justify-content:center; margin-top:30px;">
+      <a href="{{ routes.root_url }}" class="btn btn-primary">{{ 'general.404.link' | t }}</a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Page 404"
+}
+{% endschema %}
