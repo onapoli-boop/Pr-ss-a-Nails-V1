@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VELOUR — Tes ongles. Ton look. Ton moment.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ANNOUNCEMENT BAR -->
+<div class="announce">
+  <div class="announce-track">
+    <span>KIT SOIN DES ONGLES OFFERT DÈS 40€ D'ACHAT</span><span class="dot">•</span>
+    <span>LIVRAISON EUROPÉENNE — FR · DE · ES · EN</span><span class="dot">•</span>
+    <span>NOUVELLES COLLECTIONS CHAQUE MOIS</span><span class="dot">•</span>
+    <span>KIT SOIN DES ONGLES OFFERT DÈS 40€ D'ACHAT</span><span class="dot">•</span>
+    <span>LIVRAISON EUROPÉENNE — FR · DE · ES · EN</span><span class="dot">•</span>
+    <span>NOUVELLES COLLECTIONS CHAQUE MOIS</span><span class="dot">•</span>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="burger" id="burgerBtn"><span></span><span></span><span></span></div>
+    <a href="#" class="logo">VELOUR</a>
+    <nav class="main-nav">
+      <a href="#shop">Boutique</a>
+      <a href="#mood">Collections</a>
+      <a href="#week">7 Days</a>
+      <a href="#edits">Bundles</a>
+      <a href="#journal">Journal</a>
+      <a href="#about">À propos</a>
+    </nav>
+    <div class="header-actions">
+      <div class="lang-select">
+        <button class="active">FR</button>·<button>DE</button>·<button>ES</button>·<button>EN</button>
+      </div>
+      <button class="icon-btn" aria-label="Recherche">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.6" y2="16.6"/></svg>
+      </button>
+      <button class="icon-btn" aria-label="Compte">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20c1.6-4 4.4-6 7.5-6s5.9 2 7.5 6"/></svg>
+      </button>
+      <button class="icon-btn" aria-label="Panier" id="cartOpenBtn">
+        <svg viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        <span class="cart-count">2</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-copy">
+    <span class="eyebrow">Ton look. Tes ongles.</span>
+    <h1>Tes ongles.<br>Ton look.<br>Ton <em>moment</em>.</h1>
+    <p>Des press-on pensés pour évoluer avec toi.</p>
+    <div class="hero-ctas">
+      <a href="#shop" class="btn btn-primary">Découvrir les press-on</a>
+      <a href="#week" class="btn btn-ghost">7 Days · 7 Looks</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <!-- Placeholder type: hero lifestyle photography — real photo (Unsplash, free license) -->
+    <div class="ph ph-photo" style="background-image:url('https://images.unsplash.com/photo-1662580946467-9279de61ed99?w=1400&h=1700&fit=crop&auto=format&q=80');"></div>
+  </div>
+</section>
+
+<!-- 7 DAYS · 7 LOOKS -->
+<section class="week" id="week">
+  <div class="container">
+    <div class="week-head reveal">
+      <span class="eyebrow">L'offre signature</span>
+      <h2>Une semaine.<br><em>Sept moods.</em><br>Une routine simple.</h2>
+    </div>
+
+    <div class="week-calendar reveal">
+      <div class="day-card"><div class="ph"></div><span class="day-label">Lundi</span></div>
+      <div class="day-card"><div class="ph ph-rose"></div><span class="day-label">Mardi</span></div>
+      <div class="day-card"><div class="ph ph-noir"></div><span class="day-label">Mercredi</span></div>
+      <div class="day-card"><div class="ph"></div><span class="day-label">Jeudi</span></div>
+      <div class="day-card"><div class="ph ph-bordeaux"></div><span class="day-label">Vendredi</span></div>
+      <div class="day-card"><div class="ph ph-rose"></div><span class="day-label">Samedi</span></div>
+      <div class="day-card"><div class="ph ph-noir"></div><span class="day-label">Dimanche</span></div>
+    </div>
+
+    <div class="week-offer reveal">
+      <div class="week-offer-copy">
+        <div class="stat-row">
+          <div class="stat"><b data-count="7">0</b><span>Sets press-on</span></div>
+          <div class="stat"><b data-count="1">0</b><span>Semaine de looks</span></div>
+          <div class="stat"><b data-count="40" data-suffix="€">0</b><span>Tout inclus</span></div>
+        </div>
+        <a href="#" class="btn btn-light" id="openBuilderBtn">Obtenir les 7 looks</a>
+        <p class="note">+ Kit soin des ongles offert inclus. Les chiffres de comparaison ci-dessous sont donnés à titre indicatif, basés sur nos prix à l'unité (8,90–18,50 €), uniquement pour cette maquette.</p>
+      </div>
+      <div class="compare">
+        <div class="compare-row">
+          <span class="label">Achetés séparément</span>
+          <span class="val">≈ 92 €<span class="disclaimer">Exemple de maquette, pas un prix réel</span></span>
+        </div>
+        <div class="compare-row highlight">
+          <span class="label">7 Days · 7 Looks</span>
+          <span class="val">40 €</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT'S YOUR MOOD -->
+<section class="mood" id="mood">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>Quel est ton mood ?</h2>
+      <p class="section-sub">Choisis ton esthétique avant de choisir un produit.</p>
+    </div>
+    <div class="mood-grid reveal">
+      <a class="mood-card" href="#shop">
+        <div class="ph ph-rose"></div>
+        <div class="mood-info">
+          <span class="num">01</span>
+          <h3>Clean Girl</h3>
+          <p>Tes ongles du lundi au vendredi, 9h-17h.</p>
+          <span class="btn btn-light">Découvrir</span>
+        </div>
+      </a>
+      <a class="mood-card" href="#shop">
+        <div class="ph"></div>
+        <div class="mood-info">
+          <span class="num">02</span>
+          <h3>Girlboss</h3>
+          <p>Soignée. Affirmée. Impeccable.</p>
+          <span class="btn btn-light">Découvrir</span>
+        </div>
+      </a>
+      <a class="mood-card" href="#shop">
+        <div class="ph ph-photo" style="background-image:url('https://images.unsplash.com/photo-1477408326134-9b64b5934e46?w=800&h=1100&fit=crop&auto=format&q=80');"></div>
+        <div class="mood-info">
+          <span class="num">03</span>
+          <h3>Soft Girl</h3>
+          <p>Jolie, sans en faire trop.</p>
+          <span class="btn btn-light">Découvrir</span>
+        </div>
+      </a>
+      <a class="mood-card" href="#shop">
+        <div class="ph ph-photo" style="background-image:url('https://images.unsplash.com/photo-1457972729786-0411a3b2b626?w=800&h=1100&fit=crop&auto=format&q=80');"></div>
+        <div class="mood-info">
+          <span class="num">04</span>
+          <h3>After Dark</h3>
+          <p>Tes plans commencent après 18h.</p>
+          <span class="btn btn-light">Découvrir</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SHOP THE LOOK -->
+<section class="lookbook">
+  <div class="container">
+    <div class="lookbook-grid reveal">
+      <div class="lookbook-media">
+        <!-- Placeholder type: full look lifestyle — real photo (Unsplash, free license), swap for the actual Blue Hour shot later -->
+        <div class="ph ph-photo" style="background-image:url('https://images.unsplash.com/photo-1662580946467-9279de61ed99?w=1200&h=1500&fit=crop&auto=format&q=80');"></div>
+      </div>
+      <div class="lookbook-copy">
+        <span class="eyebrow">Adopte le look</span>
+        <div class="collection">After Dark</div>
+        <h2>Blue Hour</h2>
+        <p class="desc">Cat-eye bleu nuit. Liseré argenté. Énergie after-hours.</p>
+        <span class="price-tag">14,90 €</span>
+        <a href="product.html" class="btn btn-primary">Découvrir Blue Hour</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BESTSELLERS -->
+<section class="products" id="shop">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>Les incontournables</h2>
+      <p class="section-sub">Nos sets les plus aimés, réassortis chaque semaine.</p>
+    </div>
+    <div class="product-grid reveal">
+      <div class="product-card">
+        <div class="product-media">
+          <a href="product.html" aria-label="Voir Blue Hour"><div class="ph ph-noir"></div></a>
+          <button class="wish-btn" aria-label="Ajouter aux favoris"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.5-9.3-9C1 7 3 4 6.2 4c2 0 3.5 1.2 4.3 2.6C11.3 5.2 12.8 4 14.8 4 18 4 20 7 19.3 11 17 15.5 12 20 12 20z"/></svg></button>
+          <div class="quick-add">Ajout rapide</div>
+        </div>
+        <div class="product-info">
+          <div class="collection">After Dark</div>
+          <h3><a href="product.html">Blue Hour</a></h3>
+          <div class="meta">
+            <span class="price">14,90 €</span>
+            <span class="rating">★★★★★ (128)</span>
+          </div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-media">
+          <div class="ph"></div>
+          <button class="wish-btn" aria-label="Ajouter aux favoris"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.5-9.3-9C1 7 3 4 6.2 4c2 0 3.5 1.2 4.3 2.6C11.3 5.2 12.8 4 14.8 4 18 4 20 7 19.3 11 17 15.5 12 20 12 20z"/></svg></button>
+          <div class="quick-add">Ajout rapide</div>
+        </div>
+        <div class="product-info">
+          <div class="collection">Girlboss</div>
+          <h3>CEO Nude</h3>
+          <div class="meta">
+            <span class="price">12,90 €</span>
+            <span class="rating">★★★★★ (94)</span>
+          </div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-media">
+          <div class="ph ph-rose"></div>
+          <button class="wish-btn" aria-label="Ajouter aux favoris"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.5-9.3-9C1 7 3 4 6.2 4c2 0 3.5 1.2 4.3 2.6C11.3 5.2 12.8 4 14.8 4 18 4 20 7 19.3 11 17 15.5 12 20 12 20z"/></svg></button>
+          <div class="quick-add">Ajout rapide</div>
+        </div>
+        <div class="product-info">
+          <div class="collection">Clean Girl</div>
+          <h3>Milky Monday</h3>
+          <div class="meta">
+            <span class="price">11,90 €</span>
+            <span class="rating">★★★★★ (156)</span>
+          </div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-media">
+          <div class="ph ph-bordeaux"></div>
+          <button class="wish-btn" aria-label="Ajouter aux favoris"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.5-9.3-9C1 7 3 4 6.2 4c2 0 3.5 1.2 4.3 2.6C11.3 5.2 12.8 4 14.8 4 18 4 20 7 19.3 11 17 15.5 12 20 12 20z"/></svg></button>
+          <div class="quick-add">Ajout rapide</div>
+        </div>
+        <div class="product-info">
+          <div class="collection">After Dark</div>
+          <h3>Cherry After Hours</h3>
+          <div class="meta">
+            <span class="price">14,90 €</span>
+            <span class="rating">★★★★★ (77)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUNDLES — THE EDITS -->
+<section class="edits" id="edits">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>Les sélections</h2>
+      <p class="section-sub">Trois looks choisis pour toi, en édition limitée.</p>
+    </div>
+    <div class="edits-grid reveal">
+      <a class="edit-card" href="#">
+        <div class="ph"></div>
+        <div class="edit-info">
+          <span class="eyebrow">Sélection Girlboss</span>
+          <h3>La Sélection Girlboss</h3>
+          <div class="looks">3 looks</div>
+          <span class="btn btn-light">Découvrir la sélection</span>
+        </div>
+      </a>
+      <a class="edit-card" href="#">
+        <div class="ph ph-rose"></div>
+        <div class="edit-info">
+          <span class="eyebrow">Sélection Soft Girl</span>
+          <h3>La Sélection Soft Girl</h3>
+          <div class="looks">3 looks</div>
+          <span class="btn btn-light">Découvrir la sélection</span>
+        </div>
+      </a>
+      <a class="edit-card" href="#">
+        <div class="ph ph-noir"></div>
+        <div class="edit-info">
+          <span class="eyebrow">Sélection After Dark</span>
+          <h3>La Sélection After Dark</h3>
+          <div class="looks">3 looks</div>
+          <span class="btn btn-light">Découvrir la sélection</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY VELOUR -->
+<section class="why">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>Pourquoi Velour</h2>
+    </div>
+    <div class="why-grid reveal">
+      <div class="why-item">
+        <span class="idx">01</span>
+        <h3>Look salon<br>en quelques minutes</h3>
+        <p>Prêt en une seule pose.</p>
+      </div>
+      <div class="why-item">
+        <span class="idx">02</span>
+        <h3>Réutilisable<br>fait pour durer</h3>
+        <p>Entretenu, il se reporte.</p>
+      </div>
+      <div class="why-item">
+        <span class="idx">03</span>
+        <h3>Sans rendez-vous<br>à ton rythme</h3>
+        <p>À appliquer quand tu veux.</p>
+      </div>
+      <div class="why-item">
+        <span class="idx">04</span>
+        <h3>Change de look<br>quand tu veux</h3>
+        <p>On change d'humeur, on change de look.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BEFORE / AFTER -->
+<section class="compare-section">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>Vois la différence</h2>
+      <p class="section-sub">Glisse pour comparer — ongles nus vs. ton look Velour.</p>
+    </div>
+    <div class="compare-slider reveal" id="compareSlider">
+      <div class="compare-img compare-before">
+        <!-- Placeholder type: hand model, bare nails -->
+        <div class="ph"></div>
+        <span class="compare-tag">Avant</span>
+      </div>
+      <div class="compare-img compare-after" id="compareAfter">
+        <!-- Placeholder type: hand model, Velour set applied — real photo (Unsplash, free license) -->
+        <div class="ph ph-photo" style="background-image:url('https://images.unsplash.com/photo-1457972729786-0411a3b2b626?w=1200&h=700&fit=crop&auto=format&q=80');"></div>
+        <span class="compare-tag">Après</span>
+      </div>
+      <div class="compare-handle" id="compareHandle"><span></span></div>
+      <input type="range" min="0" max="100" value="50" class="compare-range" id="compareRange" aria-label="Comparer avant après">
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF -->
+<section class="proof">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>Elles adorent</h2>
+    </div>
+    <div class="proof-grid reveal">
+      <div class="proof-card">
+        <span class="demo-flag">Contenu démo</span>
+        <div class="stars">★★★★★</div>
+        <p class="quote">"On dirait que je sors du salon."</p>
+        <div class="author">— Camille</div>
+      </div>
+      <div class="proof-card">
+        <span class="demo-flag">Contenu démo</span>
+        <div class="stars">★★★★★</div>
+        <p class="quote">"Je les ai mis avant d'aller dîner, parfaits toute la soirée."</p>
+        <div class="author">— Léa</div>
+      </div>
+      <div class="proof-card">
+        <span class="demo-flag">Contenu démo</span>
+        <div class="stars">★★★★★</div>
+        <p class="quote">"Blue Hour, c'est LE set qui fait tourner les têtes."</p>
+        <div class="author">— Inès</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTAGRAM / UGC -->
+<section class="ugc">
+  <div class="container">
+    <div class="ugc-head reveal">
+      <h2 style="font-family:var(--f-display);font-weight:400;font-size:clamp(28px,3.4vw,44px);">Ton look. Identifié.</h2>
+      <div class="handle">@VELOURNAILS</div>
+    </div>
+    <div class="ugc-grid reveal">
+      <!-- Placeholder types: hand model / full look / outfit / nails detail — no text -->
+      <div class="ugc-item"><div class="ph"></div></div>
+      <div class="ugc-item"><div class="ph ph-rose"></div></div>
+      <div class="ugc-item"><div class="ph ph-noir"></div></div>
+      <div class="ugc-item"><div class="ph ph-bordeaux"></div></div>
+      <div class="ugc-item"><div class="ph"></div></div>
+      <div class="ugc-item"><div class="ph ph-rose"></div></div>
+    </div>
+    <div class="ugc-cta reveal"><a href="#" class="btn btn-ghost">Nous suivre</a></div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section class="blog" id="journal">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>Le Journal</h2>
+      <p class="section-sub">Conseils de pose, tendances mood et coulisses de la marque.</p>
+    </div>
+    <div class="blog-grid reveal">
+      <a class="blog-card" href="article.html">
+        <div class="blog-media"><div class="ph ph-rose"></div></div>
+        <div class="blog-info">
+          <div class="blog-cat">Conseils</div>
+          <h3>Faire tenir son press-on 2 semaines : nos astuces</h3>
+          <span class="blog-meta">4 min de lecture</span>
+        </div>
+      </a>
+      <a class="blog-card" href="#">
+        <div class="blog-media"><div class="ph"></div></div>
+        <div class="blog-info">
+          <div class="blog-cat">Tendances</div>
+          <h3>Le guide des moods : quel look pour quelle occasion</h3>
+          <span class="blog-meta">5 min de lecture</span>
+        </div>
+      </a>
+      <a class="blog-card" href="#">
+        <div class="blog-media"><div class="ph ph-noir"></div></div>
+        <div class="blog-info">
+          <div class="blog-cat">Coulisses</div>
+          <h3>Comment on choisit les couleurs de la saison</h3>
+          <span class="blog-meta">3 min de lecture</span>
+        </div>
+      </a>
+    </div>
+    <div class="blog-cta reveal"><a href="blog.html" class="btn btn-ghost">Voir tous les articles</a></div>
+  </div>
+</section>
+
+<!-- EMAIL CAPTURE -->
+<section class="capture">
+  <div class="container">
+    <span class="eyebrow">Rejoins la liste</span>
+    <h2>Ton prochain look<br>arrive dans ta boîte mail.</h2>
+    <p class="sub">Accède en avant-première aux nouveautés, éditions limitées et offres privées.</p>
+    <form class="capture-form" onsubmit="event.preventDefault();">
+      <input type="email" placeholder="Ton adresse email" required>
+      <button type="submit">Rejoindre la liste</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer" id="about">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">VELOUR</div>
+        <p>Press-on nails premium et accessibles, pensés en Europe pour les marchés FR · DE · ES · EN.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Boutique</h4>
+        <ul>
+          <li><a href="#mood">Collections</a></li>
+          <li><a href="#shop">Meilleures ventes</a></li>
+          <li><a href="#week">7 Days</a></li>
+          <li><a href="#edits">Bundles</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Aide</h4>
+        <ul>
+          <li><a href="#">Livraison</a></li>
+          <li><a href="#">Retours</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>À propos</h4>
+        <ul>
+          <li><a href="#">Notre histoire</a></li>
+          <li><a href="#">Les press-on</a></li>
+          <li><a href="#">Guide d'entretien</a></li>
+          <li><a href="#journal">Le Journal</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Langue</h4>
+        <ul>
+          <li><a href="#">FR</a></li>
+          <li><a href="#">DE</a></li>
+          <li><a href="#">ES</a></li>
+          <li><a href="#">EN</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 VELOUR — Contenu de maquette, boutique non active</span>
+      <div class="legal">
+        <a href="#">Instagram</a><a href="#">TikTok</a><a href="#">Pinterest</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- CART DRAWER -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-drawer-head">
+    <h3>Ton panier</h3>
+    <button class="cart-close" id="cartCloseBtn">✕</button>
+  </div>
+  <div class="cart-drawer-body">
+    <div class="cart-item">
+      <div class="ph ph-noir"></div>
+      <div class="ci-info">
+        <div class="name">Blue Hour</div>
+        <div class="coll">After Dark</div>
+        <div class="price">14,90 €</div>
+      </div>
+    </div>
+    <div class="cart-item">
+      <div class="ph"></div>
+      <div class="ci-info">
+        <div class="name">CEO Nude</div>
+        <div class="coll">Girlboss</div>
+        <div class="price">12,90 €</div>
+      </div>
+    </div>
+  </div>
+  <div class="cart-drawer-foot">
+    <div class="subtotal"><span>Sous-total</span><span>27,80 €</span></div>
+    <div class="gift-note">Ajoute encore 12,20 € pour débloquer ton kit soin offert.</div>
+    <a href="#" class="btn btn-primary">Passer commande</a>
+  </div>
+</div>
+
+<!-- LOOK BUILDER — 7 DAYS QUIZ -->
+<div class="modal-overlay" id="builderOverlay"></div>
+<div class="look-builder" id="lookBuilder" role="dialog" aria-modal="true" aria-labelledby="builderTitle" hidden>
+  <button class="builder-close" id="builderCloseBtn" aria-label="Fermer">✕</button>
+  <div class="builder-progress">
+    <span class="dot active" data-dot="0"></span>
+    <span class="dot" data-dot="1"></span>
+    <span class="dot" data-dot="2"></span>
+    <span class="dot" data-dot="3"></span>
+  </div>
+
+  <div class="builder-step" data-step="0">
+    <span class="eyebrow">7 Days · 7 Looks</span>
+    <h3 id="builderTitle">Construisons ta semaine.</h3>
+    <p>Deux questions rapides, puis tes 7 looks — modifiable ensuite jour par jour.</p>
+    <button class="btn btn-primary" id="builderStart">Commencer</button>
+  </div>
+
+  <div class="builder-step" data-step="1" hidden>
+    <span class="eyebrow">Question 1 / 2</span>
+    <h3>À quoi ressemblent tes semaines de travail ?</h3>
+    <div class="builder-options">
+      <button class="builder-option" data-answer="girlboss">
+        <span class="opt-title">Girlboss</span>
+        <span class="opt-desc">Bureau, réunions, soignée.</span>
+      </button>
+      <button class="builder-option" data-answer="cleangirl">
+        <span class="opt-title">Clean Girl</span>
+        <span class="opt-desc">Décontracté, courses, sans effort.</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="builder-step" data-step="2" hidden>
+    <span class="eyebrow">Question 2 / 2</span>
+    <h3>Et tes soirées du vendredi et samedi ?</h3>
+    <div class="builder-options">
+      <button class="builder-option" data-answer="afterwork">
+        <span class="opt-title">Afterwork</span>
+        <span class="opt-desc">Dîners, verres, chic décontracté.</span>
+      </button>
+      <button class="builder-option" data-answer="dark">
+        <span class="opt-title">After Dark</span>
+        <span class="opt-desc">Sorties qui durent jusqu'au bout de la nuit.</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="builder-step builder-result" data-step="3" hidden>
+    <span class="eyebrow">Ta semaine</span>
+    <h3>Tes 7 looks sont prêts.</h3>
+    <p class="builder-hint">Touche un jour pour changer de mood.</p>
+    <div class="builder-days" id="builderDays"></div>
+    <div class="builder-summary">
+      <div>
+        <span class="builder-summary-title">7 Days · 7 Looks</span>
+        <span class="builder-summary-sub">+ Kit soin offert</span>
+      </div>
+      <span class="builder-price">40 €</span>
+    </div>
+    <button class="btn btn-primary" id="builderAdd">Ajouter ma semaine au panier</button>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

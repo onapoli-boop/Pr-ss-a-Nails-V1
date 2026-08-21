@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Journal — VELOUR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ANNOUNCEMENT BAR -->
+<div class="announce">
+  <div class="announce-track">
+    <span>KIT SOIN DES ONGLES OFFERT DÈS 40€ D'ACHAT</span><span class="dot">•</span>
+    <span>LIVRAISON EUROPÉENNE — FR · DE · ES · EN</span><span class="dot">•</span>
+    <span>NOUVELLES COLLECTIONS CHAQUE MOIS</span><span class="dot">•</span>
+    <span>KIT SOIN DES ONGLES OFFERT DÈS 40€ D'ACHAT</span><span class="dot">•</span>
+    <span>LIVRAISON EUROPÉENNE — FR · DE · ES · EN</span><span class="dot">•</span>
+    <span>NOUVELLES COLLECTIONS CHAQUE MOIS</span><span class="dot">•</span>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="burger" id="burgerBtn"><span></span><span></span><span></span></div>
+    <a href="index.html" class="logo">VELOUR</a>
+    <nav class="main-nav">
+      <a href="index.html#shop">Boutique</a>
+      <a href="index.html#mood">Collections</a>
+      <a href="index.html#week">7 Days</a>
+      <a href="index.html#edits">Bundles</a>
+      <a href="blog.html">Journal</a>
+      <a href="index.html#about">À propos</a>
+    </nav>
+    <div class="header-actions">
+      <div class="lang-select">
+        <button class="active">FR</button>·<button>DE</button>·<button>ES</button>·<button>EN</button>
+      </div>
+      <button class="icon-btn" aria-label="Recherche">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.6" y2="16.6"/></svg>
+      </button>
+      <button class="icon-btn" aria-label="Compte">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20c1.6-4 4.4-6 7.5-6s5.9 2 7.5 6"/></svg>
+      </button>
+      <button class="icon-btn" aria-label="Panier" id="cartOpenBtn">
+        <svg viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        <span class="cart-count">2</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- BREADCRUMB -->
+<div class="container breadcrumb">
+  <a href="index.html">Accueil</a><span>/</span>
+  <span class="current">Le Journal</span>
+</div>
+
+<!-- BLOG HERO -->
+<section class="blog-hero">
+  <div class="container">
+    <span class="eyebrow">Le Journal</span>
+    <h1>Conseils, tendances<br>et coulisses de la marque.</h1>
+    <p>Tout ce qu'il faut savoir pour bien poser, bien choisir et bien porter tes press-on.</p>
+  </div>
+</section>
+
+<!-- FILTERS -->
+<section class="blog-filters">
+  <div class="container">
+    <div class="pdp-chips" id="blogFilters">
+      <button class="pdp-chip active" data-filter="all">Tous</button>
+      <button class="pdp-chip" data-filter="conseils">Conseils</button>
+      <button class="pdp-chip" data-filter="tendances">Tendances</button>
+      <button class="pdp-chip" data-filter="coulisses">Coulisses</button>
+    </div>
+  </div>
+</section>
+
+<!-- ARTICLES -->
+<section class="blog-list">
+  <div class="container">
+    <div class="blog-grid blog-grid-list reveal" id="blogGrid">
+
+      <a class="blog-card" href="article.html" data-category="conseils">
+        <div class="blog-media"><div class="ph ph-rose"></div></div>
+        <div class="blog-info">
+          <div class="blog-cat">Conseils</div>
+          <h3>Faire tenir son press-on 2 semaines : nos astuces</h3>
+          <p class="blog-excerpt">La différence entre un set qui tient dix jours et un set qui tient deux se joue avant la pose. Voici ce qui compte vraiment.</p>
+          <span class="blog-meta">4 min de lecture</span>
+        </div>
+      </a>
+
+      <a class="blog-card" href="#" data-category="tendances">
+        <div class="blog-media"><div class="ph"></div></div>
+        <div class="blog-info">
+          <div class="blog-cat">Tendances</div>
+          <h3>Le guide des moods : quel look pour quelle occasion</h3>
+          <p class="blog-excerpt">Girlboss, Clean Girl, Soft Girl, After Dark — comment choisir le bon univers selon ta semaine.</p>
+          <span class="blog-meta">5 min de lecture</span>
+        </div>
+      </a>
+
+      <a class="blog-card" href="#" data-category="coulisses">
+        <div class="blog-media"><div class="ph ph-noir"></div></div>
+        <div class="blog-info">
+          <div class="blog-cat">Coulisses</div>
+          <h3>Comment on choisit les couleurs de la saison</h3>
+          <p class="blog-excerpt">Un tour des tendances beauté européennes, du salon parisien au feed Pinterest, avant qu'une teinte rejoigne le catalogue.</p>
+          <span class="blog-meta">3 min de lecture</span>
+        </div>
+      </a>
+
+      <a class="blog-card" href="#" data-category="conseils">
+        <div class="blog-media"><div class="ph ph-bordeaux"></div></div>
+        <div class="blog-info">
+          <div class="blog-cat">Conseils</div>
+          <h3>Retirer un press-on sans abîmer l'ongle naturel</h3>
+          <p class="blog-excerpt">La méthode en trois étapes pour un retrait tout en douceur, sans lime agressive ni dissolvant fort.</p>
+          <span class="blog-meta">3 min de lecture</span>
+        </div>
+      </a>
+
+      <a class="blog-card" href="#" data-category="tendances">
+        <div class="blog-media"><div class="ph ph-rose"></div></div>
+        <div class="blog-info">
+          <div class="blog-cat">Tendances</div>
+          <h3>5 looks pour une rentrée réussie</h3>
+          <p class="blog-excerpt">De la réunion du lundi au dîner du vendredi, cinq sets pour couvrir toute la semaine sans y penser.</p>
+          <span class="blog-meta">4 min de lecture</span>
+        </div>
+      </a>
+
+      <a class="blog-card" href="#" data-category="conseils">
+        <div class="blog-media"><div class="ph"></div></div>
+        <div class="blog-info">
+          <div class="blog-cat">Conseils</div>
+          <h3>Quelle forme d'ongle choisir selon la forme de ta main</h3>
+          <p class="blog-excerpt">Amande, ballerine, carré ou stiletto — un petit guide pour trouver la forme qui met tes mains en valeur.</p>
+          <span class="blog-meta">4 min de lecture</span>
+        </div>
+      </a>
+
+    </div>
+
+    <p class="blog-empty" id="blogEmpty" hidden>Aucun article dans cette catégorie pour le moment.</p>
+  </div>
+</section>
+
+<!-- EMAIL CAPTURE -->
+<section class="capture">
+  <div class="container">
+    <span class="eyebrow">Rejoins la liste</span>
+    <h2>Ton prochain look<br>arrive dans ta boîte mail.</h2>
+    <p class="sub">Accède en avant-première aux nouveautés, éditions limitées et offres privées.</p>
+    <form class="capture-form" onsubmit="event.preventDefault();">
+      <input type="email" placeholder="Ton adresse email" required>
+      <button type="submit">Rejoindre la liste</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer" id="about">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">VELOUR</div>
+        <p>Press-on nails premium et accessibles, pensés en Europe pour les marchés FR · DE · ES · EN.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Boutique</h4>
+        <ul>
+          <li><a href="index.html#mood">Collections</a></li>
+          <li><a href="index.html#shop">Meilleures ventes</a></li>
+          <li><a href="index.html#week">7 Days</a></li>
+          <li><a href="index.html#edits">Bundles</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Aide</h4>
+        <ul>
+          <li><a href="#">Livraison</a></li>
+          <li><a href="#">Retours</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>À propos</h4>
+        <ul>
+          <li><a href="#">Notre histoire</a></li>
+          <li><a href="#">Les press-on</a></li>
+          <li><a href="#">Guide d'entretien</a></li>
+          <li><a href="blog.html">Le Journal</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Langue</h4>
+        <ul>
+          <li><a href="#">FR</a></li>
+          <li><a href="#">DE</a></li>
+          <li><a href="#">ES</a></li>
+          <li><a href="#">EN</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 VELOUR — Contenu de maquette, boutique non active</span>
+      <div class="legal">
+        <a href="#">Instagram</a><a href="#">TikTok</a><a href="#">Pinterest</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- CART DRAWER -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-drawer-head">
+    <h3>Ton panier</h3>
+    <button class="cart-close" id="cartCloseBtn">✕</button>
+  </div>
+  <div class="cart-drawer-body">
+    <div class="cart-item">
+      <div class="ph ph-noir"></div>
+      <div class="ci-info">
+        <div class="name">Blue Hour</div>
+        <div class="coll">After Dark</div>
+        <div class="price">14,90 €</div>
+      </div>
+    </div>
+    <div class="cart-item">
+      <div class="ph"></div>
+      <div class="ci-info">
+        <div class="name">CEO Nude</div>
+        <div class="coll">Girlboss</div>
+        <div class="price">12,90 €</div>
+      </div>
+    </div>
+  </div>
+  <div class="cart-drawer-foot">
+    <div class="subtotal"><span>Sous-total</span><span>27,80 €</span></div>
+    <div class="gift-note">Ajoute encore 12,20 € pour débloquer ton kit soin offert.</div>
+    <a href="#" class="btn btn-primary">Passer commande</a>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
