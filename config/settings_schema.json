@@ -1,1 +1,57 @@
-[]
+[
+  {
+    "name": "theme_info",
+    "theme_name": "VELOUR",
+    "theme_version": "0.1.0",
+    "theme_author": "VELOUR",
+    "theme_documentation_url": "",
+    "theme_support_url": ""
+  },
+  {
+    "name": "Panier",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Kit soin offert"
+      },
+      {
+        "type": "number",
+        "id": "free_gift_threshold",
+        "label": "Seuil du kit soin offert (€)",
+        "info": "Montant du panier à partir duquel le kit soin des ongles est offert. Utilisé dans la barre d'annonce et le panier.",
+        "default": 40
+      }
+    ]
+  },
+  {
+    "name": "Navigation",
+    "settings": [
+      {
+        "type": "blog",
+        "id": "journal_blog",
+        "label": "Blog \"Le Journal\"",
+        "info": "Utilisé pour les liens de navigation \"Journal\" sur les pages autres que l'accueil (l'accueil pointe vers sa propre section Journal)."
+      }
+    ]
+  },
+  {
+    "name": "Réseaux sociaux",
+    "settings": [
+      {
+        "type": "url",
+        "id": "social_instagram",
+        "label": "Instagram"
+      },
+      {
+        "type": "url",
+        "id": "social_tiktok",
+        "label": "TikTok"
+      },
+      {
+        "type": "url",
+        "id": "social_pinterest",
+        "label": "Pinterest"
+      }
+    ]
+  }
+]
