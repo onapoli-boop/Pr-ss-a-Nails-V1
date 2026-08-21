@@ -135,6 +135,14 @@
     "product_title": "Nom du produit",
     "no_collection": "Choisis une collection dans les réglages de cette section."
   },
+  "contact": {
+    "name": "Nom",
+    "email": "Email",
+    "message": "Message",
+    "submit": "Envoyer",
+    "success": "Merci, ton message a bien été envoyé — on te répond rapidement.",
+    "error": "Une erreur est survenue, réessaie."
+  },
   "gift_card": {
     "title": "Carte cadeau",
     "remaining": "Solde restant : {{ balance }}",

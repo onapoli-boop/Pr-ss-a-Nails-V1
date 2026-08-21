@@ -1,0 +1,51 @@
+<div class="container breadcrumb">
+  <a href="{{ routes.root_url }}">{{ 'layout.breadcrumb.home' | t }}</a><span>/</span>
+  <span class="current">{{ page.title }}</span>
+</div>
+
+<section class="article-header">
+  <div class="container">
+    <h1>{{ page.title }}</h1>
+  </div>
+</section>
+
+<section class="article-body">
+  <div class="container">
+    <div class="article-content" style="max-width:560px;">
+      {{ page.content }}
+
+      {%- if form.posted_successfully? -%}
+        <p class="note" role="status" style="margin:24px 0; opacity:1;">{{ 'contact.success' | t }}</p>
+      {%- endif -%}
+
+      {%- form 'contact' -%}
+        {%- if form.errors -%}
+          <div class="note" role="alert" style="color:var(--bordeaux); margin-bottom:20px;">
+            {{ 'contact.error' | t }}
+          </div>
+        {%- endif -%}
+        <div class="contact-form-grid">
+          <div class="contact-field">
+            <label for="ContactFormName">{{ 'contact.name' | t }}</label>
+            <input type="text" id="ContactFormName" name="contact[name]" value="{{ form.name }}" required>
+          </div>
+          <div class="contact-field">
+            <label for="ContactFormEmail">{{ 'contact.email' | t }}</label>
+            <input type="email" id="ContactFormEmail" name="contact[email]" value="{{ form.email }}" required>
+          </div>
+          <div class="contact-field contact-field-full">
+            <label for="ContactFormMessage">{{ 'contact.message' | t }}</label>
+            <textarea id="ContactFormMessage" name="contact[body]" rows="6" required>{{ form.body }}</textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-top:20px;">{{ 'contact.submit' | t }}</button>
+      {%- endform -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Formulaire de contact"
+}
+{% endschema %}
