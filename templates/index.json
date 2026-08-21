@@ -1,7 +1,8 @@
 {
   "sections": {
     "hero": {
-      "type": "hero"
+      "type": "hero",
+      "settings": {}
     },
     "seven-days": {
       "type": "seven-days",
