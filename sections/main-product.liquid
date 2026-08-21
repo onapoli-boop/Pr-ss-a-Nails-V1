@@ -1,0 +1,135 @@
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign featured_media = current_variant.featured_media | default: product.featured_media
+-%}
+<div class="container breadcrumb">
+  <a href="{{ routes.root_url }}">{{ 'layout.breadcrumb.home' | t }}</a><span>/</span>
+  {%- if product.collections.first -%}
+    <a href="{{ product.collections.first.url }}">{{ product.collections.first.title }}</a><span>/</span>
+  {%- endif -%}
+  <span class="current">{{ product.title }}</span>
+</div>
+
+<section class="product-hero">
+  <div class="container product-hero-grid">
+
+    <div class="pdp-gallery">
+      <div class="pdp-main-image">
+        {%- render 'placeholder-media', image: featured_media.preview_image, modifier: 'photo', class: 'js-pdp-main-image' -%}
+      </div>
+      {%- if product.media.size > 1 -%}
+        <div class="pdp-thumbs">
+          {%- for media in product.media -%}
+            <button class="pdp-thumb{% if forloop.first %} active{% endif %}" data-media-id="{{ media.id }}" data-img="{{ media.preview_image | image_url: width: 1200 }}">
+              {%- render 'placeholder-media', image: media.preview_image, sizes: 300 -%}
+            </button>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="pdp-buybox">
+      {%- if product.collections.first -%}<div class="collection">{{ product.collections.first.title }}</div>{%- endif -%}
+      <h1>{{ product.title }}</h1>
+      {%- liquid
+        assign rating = product.metafields.reviews.rating.value
+        assign rating_count = product.metafields.reviews.rating_count.value
+      -%}
+      {%- if rating and rating_count -%}
+        <div class="pdp-rating">
+          <span class="stars">{%- for i in (1..5) -%}{% if i <= rating %}★{% else %}☆{% endif %}{%- endfor -%}</span>
+          <a href="#reviews" class="pdp-rating-count">{{ rating }} · {{ 'products.reviews_count' | t: count: rating_count }}</a>
+        </div>
+      {%- endif -%}
+      <p class="pdp-desc">{{ product.description | strip_html | truncate: 200 }}</p>
+      <div class="pdp-price" data-pdp-price>
+        {{ current_variant.price | money }}
+        {%- if current_variant.compare_at_price > current_variant.price -%}
+          <s style="opacity:.5; font-size:0.6em; margin-left:8px;">{{ current_variant.compare_at_price | money }}</s>
+        {%- endif -%}
+      </div>
+
+      {%- unless product.has_only_default_variant -%}
+        <div id="ProductVariants" data-product-url="{{ product.url }}">
+          {%- for option in product.options_with_values -%}
+            <div class="pdp-option-group">
+              <span class="pdp-option-label">{{ option.name }}</span>
+              <div class="pdp-chips" data-option-index="{{ forloop.index0 }}">
+                {%- for value in option.values -%}
+                  <button type="button" class="pdp-chip{% if option.selected_value == value %} active{% endif %}" data-value="{{ value | escape }}">{{ value }}</button>
+                {%- endfor -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+        <script type="application/json" id="ProductVariantsData">{{ product.variants | json }}</script>
+      {%- endunless -%}
+
+      <p class="pdp-fit-note">{{ section.settings.fit_note }}</p>
+
+      <button
+        class="btn btn-primary pdp-add"
+        id="pdpAddBtn"
+        data-add-to-cart
+        data-variant-id="{{ current_variant.id }}"
+        {% unless current_variant.available %}disabled{% endunless %}
+      >
+        {%- if current_variant.available -%}
+          {{ 'products.add_to_cart' | t }} — <span data-pdp-add-price>{{ current_variant.price | money }}</span>
+        {%- else -%}
+          {{ 'products.sold_out' | t }}
+        {%- endif -%}
+      </button>
+      <button class="pdp-wish" id="pdpWishBtn">
+        {% render 'icon', name: 'wishlist' %}
+        <span data-wish-label>{{ 'products.wishlist_add' | t }}</span>
+      </button>
+
+      {%- if section.settings.upsell_text != blank -%}
+        <div class="pdp-upsell">
+          <div class="pdp-upsell-copy">
+            <span class="eyebrow">{{ section.settings.upsell_eyebrow }}</span>
+            <p>{{ section.settings.upsell_text }}</p>
+          </div>
+          <a href="{{ section.settings.upsell_link | default: routes.root_url | append: '#week' }}" class="btn btn-ghost">{{ section.settings.upsell_cta_label }}</a>
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.trust_1 != blank or section.settings.trust_2 != blank or section.settings.trust_3 != blank -%}
+        <ul class="pdp-trust">
+          {%- if section.settings.trust_1 != blank -%}<li>{{ section.settings.trust_1 }}</li>{%- endif -%}
+          {%- if section.settings.trust_2 != blank -%}<li>{{ section.settings.trust_2 }}</li>{%- endif -%}
+          {%- if section.settings.trust_3 != blank -%}<li>{{ section.settings.trust_3 }}</li>{%- endif -%}
+        </ul>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+<div class="sticky-buy-bar" id="stickyBuyBar">
+  <div class="sbb-info">
+    <span class="sbb-name">{{ product.title }}</span>
+    <span class="sbb-price" data-pdp-sticky-price>{{ current_variant.price | money }}</span>
+  </div>
+  <button class="btn btn-primary" id="stickyAddBtn" data-add-to-cart data-variant-id="{{ current_variant.id }}" {% unless current_variant.available %}disabled{% endunless %}>
+    {%- if current_variant.available -%}{{ 'products.add_to_cart' | t }}{%- else -%}{{ 'products.sold_out' | t }}{%- endif -%}
+  </button>
+</div>
+
+{% schema %}
+{
+  "name": "Fiche produit",
+  "settings": [
+    { "type": "text", "id": "fit_note", "label": "Note (sous les options)", "default": "24 ongles · 10 tailles incluses, lime fournie dans chaque set." },
+    { "type": "header", "content": "Complète ta semaine (upsell 7 Days)" },
+    { "type": "text", "id": "upsell_eyebrow", "label": "Eyebrow", "default": "Complète ta semaine" },
+    { "type": "text", "id": "upsell_text", "label": "Texte", "default": "Intègre ce set à tes 7 looks et profite de cinq sets en plus." },
+    { "type": "text", "id": "upsell_cta_label", "label": "Bouton", "default": "Voir 7 Days · 40€" },
+    { "type": "url", "id": "upsell_link", "label": "Lien (par défaut : #week sur l'accueil)" },
+    { "type": "header", "content": "Réassurance" },
+    { "type": "text", "id": "trust_1", "label": "Ligne 1", "default": "Kit soin des ongles offert dès 40€ d'achat" },
+    { "type": "text", "id": "trust_2", "label": "Ligne 2", "default": "Expédié depuis l'Europe, 2 à 4 jours ouvrés" },
+    { "type": "text", "id": "trust_3", "label": "Ligne 3", "default": "Réutilisable — entretenu, il se reporte" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,77 @@
+<section class="proof" id="reviews">
+  <div class="container">
+    <div class="review-summary reveal">
+      <div class="review-summary-score">
+        <span class="score">{{ section.settings.score }}</span>
+        <span class="stars">{%- assign rounded = section.settings.score | round -%}{%- for i in (1..5) -%}{% if i <= rounded %}★{% else %}☆{% endif %}{%- endfor -%}</span>
+        <span class="count">{{ 'products.reviews_count' | t: count: section.settings.count }}</span>
+      </div>
+      <div class="review-bars">
+        <div class="review-bar-row"><span>5</span><div class="bar"><div class="fill" style="width:{{ section.settings.pct_5 }}%"></div></div><span class="pct">{{ section.settings.pct_5 }}%</span></div>
+        <div class="review-bar-row"><span>4</span><div class="bar"><div class="fill" style="width:{{ section.settings.pct_4 }}%"></div></div><span class="pct">{{ section.settings.pct_4 }}%</span></div>
+        <div class="review-bar-row"><span>3</span><div class="bar"><div class="fill" style="width:{{ section.settings.pct_3 }}%"></div></div><span class="pct">{{ section.settings.pct_3 }}%</span></div>
+        <div class="review-bar-row"><span>2</span><div class="bar"><div class="fill" style="width:{{ section.settings.pct_2 }}%"></div></div><span class="pct">{{ section.settings.pct_2 }}%</span></div>
+        <div class="review-bar-row"><span>1</span><div class="bar"><div class="fill" style="width:{{ section.settings.pct_1 }}%"></div></div><span class="pct">{{ section.settings.pct_1 }}%</span></div>
+      </div>
+    </div>
+    <div class="proof-grid reveal">
+      {%- for block in section.blocks -%}
+        <div class="proof-card" {{ block.shopify_attributes }}>
+          {%- if section.settings.show_demo_flag -%}
+            <span class="demo-flag">{{ 'general.demo_content' | t }}</span>
+          {%- endif -%}
+          <div class="stars">{%- for i in (1..5) -%}{% if i <= block.settings.rating %}★{% else %}☆{% endif %}{%- endfor -%}</div>
+          <p class="quote">&ldquo;{{ block.settings.quote }}&rdquo;</p>
+          <div class="author">— {{ block.settings.author }}{% if block.settings.verified %} · {{ section.settings.verified_label }}{% endif %}</div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Avis clients (PDP)",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_demo_flag",
+      "label": "Afficher la mention \"Contenu démo\"",
+      "info": "À désactiver une fois une vraie app d'avis (Judge.me/Loox) branchée.",
+      "default": true
+    },
+    { "type": "header", "content": "Résumé" },
+    { "type": "text", "id": "score", "label": "Note moyenne", "default": "4.8" },
+    { "type": "text", "id": "count", "label": "Nombre d'avis", "default": "128" },
+    { "type": "text", "id": "verified_label", "label": "Étiquette achat vérifié", "default": "Achat vérifié" },
+    { "type": "range", "id": "pct_5", "label": "% 5 étoiles", "min": 0, "max": 100, "default": 82 },
+    { "type": "range", "id": "pct_4", "label": "% 4 étoiles", "min": 0, "max": 100, "default": 12 },
+    { "type": "range", "id": "pct_3", "label": "% 3 étoiles", "min": 0, "max": 100, "default": 4 },
+    { "type": "range", "id": "pct_2", "label": "% 2 étoiles", "min": 0, "max": 100, "default": 1 },
+    { "type": "range", "id": "pct_1", "label": "% 1 étoile", "min": 0, "max": 100, "default": 1 }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Avis",
+      "settings": [
+        { "type": "range", "id": "rating", "label": "Note", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "textarea", "id": "quote", "label": "Citation", "default": "Un set qui tient vraiment ses promesses." },
+        { "type": "text", "id": "author", "label": "Auteur", "default": "Camille" },
+        { "type": "checkbox", "id": "verified", "label": "Afficher \"achat vérifié\"", "default": true }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Avis clients (PDP)",
+      "blocks": [
+        { "type": "review", "settings": { "rating": 5, "quote": "C'est LE set. J'ai eu des compliments toute la soirée.", "author": "Inès", "verified": true } },
+        { "type": "review", "settings": { "rating": 5, "quote": "Appliqué en dix minutes avant un dîner, tenu toute la semaine.", "author": "Camille", "verified": true } },
+        { "type": "review", "settings": { "rating": 4, "quote": "Couleur magnifique. Dommage que la forme stiletto ne descende pas une taille en dessous.", "author": "Léa", "verified": true } }
+      ]
+    }
+  ]
+}
+{% endschema %}
