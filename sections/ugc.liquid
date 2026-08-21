@@ -1,0 +1,63 @@
+<section class="ugc">
+  <div class="container">
+    <div class="ugc-head reveal">
+      <h2 style="font-family:var(--f-display);font-weight:400;font-size:clamp(28px,3.4vw,44px);">{{ section.settings.heading }}</h2>
+      <div class="handle">{{ section.settings.handle }}</div>
+    </div>
+    <div class="ugc-grid reveal">
+      {%- for block in section.blocks -%}
+        <div class="ugc-item" {{ block.shopify_attributes }}>
+          {%- render 'placeholder-media', image: block.settings.image, modifier: block.settings.modifier -%}
+        </div>
+      {%- endfor -%}
+    </div>
+    <div class="ugc-cta reveal"><a href="{{ section.settings.cta_link | default: '#' }}" class="btn btn-ghost">{{ section.settings.cta_label }}</a></div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Instagram / UGC",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Ton look. Identifié." },
+    { "type": "text", "id": "handle", "label": "Identifiant", "default": "@VELOURNAILS" },
+    { "type": "text", "id": "cta_label", "label": "Bouton", "default": "Nous suivre" },
+    { "type": "url", "id": "cta_link", "label": "Lien du bouton" }
+  ],
+  "blocks": [
+    {
+      "type": "photo",
+      "name": "Photo",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image (placeholder tant que non définie)" },
+        {
+          "type": "select",
+          "id": "modifier",
+          "label": "Variante couleur (si pas d'image)",
+          "options": [
+            { "value": "", "label": "Défaut" },
+            { "value": "rose", "label": "Rose" },
+            { "value": "noir", "label": "Noir" },
+            { "value": "bordeaux", "label": "Bordeaux" }
+          ],
+          "default": ""
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "default": {
+    "blocks": [
+      { "type": "photo", "settings": { "modifier": "" } },
+      { "type": "photo", "settings": { "modifier": "rose" } },
+      { "type": "photo", "settings": { "modifier": "noir" } },
+      { "type": "photo", "settings": { "modifier": "bordeaux" } },
+      { "type": "photo", "settings": { "modifier": "" } },
+      { "type": "photo", "settings": { "modifier": "rose" } }
+    ]
+  },
+  "presets": [
+    { "name": "Instagram / UGC" }
+  ]
+}
+{% endschema %}

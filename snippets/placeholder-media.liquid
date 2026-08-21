@@ -1,0 +1,28 @@
+{%- comment -%}
+  Placeholder-aware media block — mirrors the mockup's <div class="ph"> soft
+  gradient placeholders, but swaps in a real image the moment one is set in
+  the section/block settings. Keeps the exact same markup pattern the
+  mockup uses for real photos (a .ph.ph-photo div with an inline
+  background-image), so no CSS changes are needed once photography lands.
+
+  Params:
+    image     — an Image object from an image_picker setting, or blank
+    modifier  — 'noir' | 'rose' | 'bordeaux' | blank (gradient variant)
+    class     — extra class(es) to append
+    sizes     — width used for image_url (default 1600)
+{%- endcomment -%}
+{%- liquid
+  assign classes = 'ph'
+  if modifier != blank
+    assign classes = classes | append: ' ph-' | append: modifier
+  endif
+  if class != blank
+    assign classes = classes | append: ' ' | append: class
+  endif
+  assign img_width = sizes | default: 1600
+-%}
+{%- if image != blank -%}
+  <div class="{{ classes }} ph-photo" style="background-image:url('{{ image | image_url: width: img_width }}');" role="img" aria-label="{{ image.alt | escape }}"></div>
+{%- else -%}
+  <div class="{{ classes }}"></div>
+{%- endif -%}

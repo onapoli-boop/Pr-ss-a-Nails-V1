@@ -1,0 +1,77 @@
+<section class="hero">
+  <div class="hero-copy">
+    <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+    <h1>{{ section.settings.heading }}</h1>
+    <p>{{ section.settings.subtext }}</p>
+    <div class="hero-ctas">
+      {%- if section.settings.cta_primary_label != blank -%}
+        <a href="{{ section.settings.cta_primary_link | default: '#' }}" class="btn btn-primary">{{ section.settings.cta_primary_label }}</a>
+      {%- endif -%}
+      {%- if section.settings.cta_secondary_label != blank -%}
+        <a href="{{ section.settings.cta_secondary_link | default: '#' }}" class="btn btn-ghost">{{ section.settings.cta_secondary_label }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+  <div class="hero-visual">
+    {%- render 'placeholder-media', image: section.settings.image, modifier: 'photo' -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Ton look. Tes ongles."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Titre",
+      "info": "HTML simple accepté : <br> et <em>.",
+      "default": "Tes ongles.<br>Ton look.<br>Ton <em>moment</em>."
+    },
+    {
+      "type": "text",
+      "id": "subtext",
+      "label": "Texte",
+      "default": "Des press-on pensés pour évoluer avec toi."
+    },
+    {
+      "type": "text",
+      "id": "cta_primary_label",
+      "label": "Bouton principal — texte",
+      "default": "Découvrir les press-on"
+    },
+    {
+      "type": "url",
+      "id": "cta_primary_link",
+      "label": "Bouton principal — lien"
+    },
+    {
+      "type": "text",
+      "id": "cta_secondary_label",
+      "label": "Bouton secondaire — texte",
+      "default": "7 Days · 7 Looks"
+    },
+    {
+      "type": "url",
+      "id": "cta_secondary_link",
+      "label": "Bouton secondaire — lien"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image (placeholder tant que non définie)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero"
+    }
+  ]
+}
+{% endschema %}

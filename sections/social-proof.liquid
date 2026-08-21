@@ -1,0 +1,57 @@
+<section class="proof">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>{{ section.settings.heading }}</h2>
+    </div>
+    <div class="proof-grid reveal">
+      {%- for block in section.blocks -%}
+        <div class="proof-card" {{ block.shopify_attributes }}>
+          {%- if section.settings.show_demo_flag -%}
+            <span class="demo-flag">{{ 'general.demo_content' | t }}</span>
+          {%- endif -%}
+          <div class="stars">{%- for i in (1..5) -%}{% if i <= block.settings.rating %}★{% else %}☆{% endif %}{%- endfor -%}</div>
+          <p class="quote">&ldquo;{{ block.settings.quote }}&rdquo;</p>
+          <div class="author">— {{ block.settings.author }}</div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Avis clients",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Elles adorent" },
+    {
+      "type": "checkbox",
+      "id": "show_demo_flag",
+      "label": "Afficher la mention \"Contenu démo\"",
+      "info": "À désactiver une fois de vrais avis (ou une app comme Judge.me/Loox) branchés.",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Avis",
+      "settings": [
+        { "type": "range", "id": "rating", "label": "Note", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "textarea", "id": "quote", "label": "Citation", "default": "On dirait que je sors du salon." },
+        { "type": "text", "id": "author", "label": "Auteur", "default": "Camille" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "default": {
+    "blocks": [
+      { "type": "review", "settings": { "rating": 5, "quote": "On dirait que je sors du salon.", "author": "Camille" } },
+      { "type": "review", "settings": { "rating": 5, "quote": "Je les ai mis avant d'aller dîner, parfaits toute la soirée.", "author": "Léa" } },
+      { "type": "review", "settings": { "rating": 5, "quote": "Blue Hour, c'est LE set qui fait tourner les têtes.", "author": "Inès" } }
+    ]
+  },
+  "presets": [
+    { "name": "Avis clients" }
+  ]
+}
+{% endschema %}

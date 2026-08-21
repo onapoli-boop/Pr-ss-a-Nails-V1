@@ -1,0 +1,41 @@
+{%- comment -%}
+  Cart drawer — server-rendered with the real cart on first load (so
+  totals are correct with JS disabled/slow), then re-rendered client-side
+  by assets/theme.js on every AJAX Cart mutation (add/change/remove).
+{%- endcomment -%}
+<div class="cart-overlay" id="cartOverlay"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-drawer-head">
+    <h3>{{ 'cart.title' | t }}</h3>
+    <button class="cart-close" id="cartCloseBtn" aria-label="{{ 'general.accessibility.close' | t }}">✕</button>
+  </div>
+  <div class="cart-drawer-body" id="cartDrawerBody">
+    {%- if cart.items.size == 0 -%}
+      <p class="cart-empty">{{ 'cart.empty' | t }}</p>
+    {%- else -%}
+      {%- for item in cart.items -%}
+        <div class="cart-item" data-key="{{ item.key }}">
+          {%- render 'placeholder-media', image: item.image, class: 'cart-item-media' -%}
+          <div class="ci-info">
+            <div class="name">{{ item.product.title }}</div>
+            <div class="coll">{% if item.variant.title != 'Default Title' %}{{ item.variant.title }}{% endif %}</div>
+            <div class="price">{{ item.final_line_price | money }}</div>
+            <div class="ci-qty">
+              <button type="button" class="ci-qty-btn" data-action="decrease" data-key="{{ item.key }}" data-qty="{{ item.quantity | minus: 1 }}" aria-label="{{ 'cart.decrease' | t }}">−</button>
+              <span>{{ item.quantity }}</span>
+              <button type="button" class="ci-qty-btn" data-action="increase" data-key="{{ item.key }}" data-qty="{{ item.quantity | plus: 1 }}" aria-label="{{ 'cart.increase' | t }}">+</button>
+            </div>
+          </div>
+          <button type="button" class="cart-item-remove" data-key="{{ item.key }}" data-qty="0" aria-label="{{ 'cart.remove' | t }}">✕</button>
+        </div>
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+  <div class="cart-drawer-foot">
+    <div class="subtotal"><span>{{ 'cart.subtotal' | t }}</span><span data-cart-subtotal>{{ cart.total_price | money }}</span></div>
+    <div class="gift-note" data-cart-gift-note></div>
+    <a href="{{ routes.cart_url }}" class="btn btn-primary">{{ 'cart.checkout' | t }}</a>
+  </div>
+</div>
+
+<template id="cartEmptyTemplate"><p class="cart-empty">{{ 'cart.empty' | t }}</p></template>

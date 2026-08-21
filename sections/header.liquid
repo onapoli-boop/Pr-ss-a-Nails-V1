@@ -1,0 +1,65 @@
+{%- liquid
+  assign journal_blog = settings.journal_blog
+  if template.name == 'index'
+    assign journal_url = '#journal'
+  elsif journal_blog
+    assign journal_url = journal_blog.url
+  else
+    assign journal_url = routes.root_url
+  endif
+-%}
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="burger" id="burgerBtn" aria-hidden="true"><span></span><span></span><span></span></div>
+    <a href="{{ routes.root_url }}" class="logo">{{ shop.name | default: 'VELOUR' }}</a>
+    <nav class="main-nav">
+      <a href="{{ routes.root_url }}#shop">{{ 'layout.header.nav.shop' | t }}</a>
+      <a href="{{ routes.root_url }}#mood">{{ 'layout.header.nav.collections' | t }}</a>
+      <a href="{{ routes.root_url }}#week">{{ 'layout.header.nav.week' | t }}</a>
+      <a href="{{ routes.root_url }}#edits">{{ 'layout.header.nav.bundles' | t }}</a>
+      <a href="{{ journal_url }}">{{ 'layout.header.nav.journal' | t }}</a>
+      <a href="{{ routes.root_url }}#about">{{ 'layout.header.nav.about' | t }}</a>
+    </nav>
+    <div class="header-actions">
+      {%- form 'localization', id: 'localeForm' -%}
+        <input type="hidden" name="locale_code" value="{{ request.locale.iso_code }}">
+        <div class="lang-select">
+          {%- for code_label in (section.settings.language_codes | split: ',') -%}
+            {%- assign lang = localization.available_languages | where: 'iso_code', code_label | first -%}
+            {%- if lang -%}
+              <button type="button" data-locale="{{ lang.iso_code }}" class="{% if lang.iso_code == request.locale.iso_code %}active{% endif %}">{{ code_label | upcase }}</button>
+            {%- else -%}
+              <button type="button" disabled>{{ code_label | upcase }}</button>
+            {%- endif -%}
+            {%- unless forloop.last %}·{% endunless -%}
+          {%- endfor -%}
+        </div>
+      {%- endform -%}
+      <button class="icon-btn" aria-label="{{ 'general.accessibility.search' | t }}">
+        {% render 'icon', name: 'search' %}
+      </button>
+      <a href="{{ routes.account_url }}" class="icon-btn" aria-label="{{ 'general.accessibility.account' | t }}">
+        {% render 'icon', name: 'account' %}
+      </a>
+      <button class="icon-btn" aria-label="{{ 'general.accessibility.cart' | t }}" id="cartOpenBtn">
+        {% render 'icon', name: 'cart' %}
+        <span class="cart-count">{{ cart.item_count }}</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "En-tête",
+  "settings": [
+    {
+      "type": "text",
+      "id": "language_codes",
+      "label": "Langues affichées (codes ISO, séparés par des virgules)",
+      "default": "fr,de,es,en",
+      "info": "Une langue n'apparaît comme sélectionnable que si elle est publiée dans les paramètres de la boutique."
+    }
+  ]
+}
+{% endschema %}

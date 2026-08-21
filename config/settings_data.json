@@ -1,0 +1,11 @@
+{
+  "current": "Default",
+  "presets": {
+    "Default": {
+      "free_gift_threshold": 40,
+      "social_instagram": "https://instagram.com",
+      "social_tiktok": "https://tiktok.com",
+      "social_pinterest": "https://pinterest.com"
+    }
+  }
+}

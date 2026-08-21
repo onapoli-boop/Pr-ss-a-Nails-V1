@@ -1,0 +1,82 @@
+{%- liquid
+  assign category = article.tags | first
+  assign word_count = article.content | strip_html | split: ' ' | size
+  assign read_minutes = word_count | divided_by: 200 | at_least: 1
+  assign featured_product = section.settings.featured_product
+-%}
+<div class="container breadcrumb">
+  <a href="{{ routes.root_url }}">{{ 'layout.breadcrumb.home' | t }}</a><span>/</span>
+  <a href="{{ blog.url }}">{{ blog.title }}</a><span>/</span>
+  <span class="current">{{ article.title }}</span>
+</div>
+
+<section class="article-header">
+  <div class="container">
+    {%- if category -%}<div class="blog-cat">{{ category }}</div>{%- endif -%}
+    <h1>{{ article.title }}</h1>
+    <div class="article-meta">
+      <span>{{ 'blog.by' | t: author: article.author }}</span>
+      <span class="dot">•</span>
+      <span>{{ 'blog.read_time' | t: minutes: read_minutes }}</span>
+    </div>
+  </div>
+</section>
+
+{%- if article.image -%}
+<section class="article-hero-media">
+  <div class="container">
+    {%- render 'placeholder-media', image: article.image, class: 'article-hero-image' -%}
+  </div>
+</section>
+{%- endif -%}
+
+<section class="article-body">
+  <div class="container article-body-grid">
+    <div class="article-content reveal">
+      {{ article.content }}
+    </div>
+
+    {%- if featured_product -%}
+      <aside class="article-sidebar reveal">
+        <div class="article-sidebar-card">
+          <span class="eyebrow">{{ 'blog.featured_in' | t }}</span>
+          {%- render 'placeholder-media', image: featured_product.featured_image, class: 'article-sidebar-media' -%}
+          <h4>{{ featured_product.title }}</h4>
+          <div class="collection">{{ featured_product.type }}</div>
+          <span class="price">{{ featured_product.price | money }}</span>
+          <a href="{{ featured_product.url }}" class="btn btn-primary">{{ 'products.view_product' | t }}</a>
+        </div>
+      </aside>
+    {%- endif -%}
+  </div>
+</section>
+
+{%- assign related_articles = blog.articles | where_exp: 'a', 'a.id != article.id' -%}
+{%- if related_articles.size > 0 -%}
+<section class="blog-list">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>{{ 'blog.read_also' | t }}</h2>
+    </div>
+    <div class="blog-grid reveal">
+      {%- for related in related_articles limit: 3 -%}
+        {%- render 'article-card', article: related -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Article",
+  "settings": [
+    {
+      "type": "product",
+      "id": "featured_product",
+      "label": "Produit cité dans l'article",
+      "info": "Affiche la carte produit dans la colonne de droite. Laisser vide pour la masquer. Pour un produit différent par article, dupliquer ce modèle (templates/article.[nom].json) et l'assigner à l'article concerné."
+    }
+  ]
+}
+{% endschema %}

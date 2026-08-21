@@ -1,0 +1,219 @@
+{%- liquid
+  assign day_blocks = section.blocks | where: 'type', 'day'
+  assign mood_blocks = section.blocks | where: 'type', 'mood_option'
+  assign weekday_blocks = mood_blocks | where: 'settings.role', 'weekday'
+  assign weekend_blocks = mood_blocks | where: 'settings.role', 'weekend'
+-%}
+<section class="week" id="week">
+  <div class="container">
+    <div class="week-head reveal">
+      <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      <h2>{{ section.settings.heading }}</h2>
+    </div>
+
+    <div class="week-calendar reveal">
+      {%- for block in day_blocks -%}
+        <div class="day-card" {{ block.shopify_attributes }}>
+          {%- render 'placeholder-media', modifier: block.settings.modifier -%}
+          <span class="day-label">{{ block.settings.label }}</span>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <div class="week-offer reveal">
+      <div class="week-offer-copy">
+        <div class="stat-row">
+          <div class="stat"><b data-count="{{ section.settings.stat_1_value }}">0</b><span>{{ section.settings.stat_1_label }}</span></div>
+          <div class="stat"><b data-count="{{ section.settings.stat_2_value }}">0</b><span>{{ section.settings.stat_2_label }}</span></div>
+          <div class="stat"><b data-count="{{ section.settings.stat_3_value }}" data-suffix="{{ section.settings.stat_3_suffix }}">0</b><span>{{ section.settings.stat_3_label }}</span></div>
+        </div>
+        <a href="#" class="btn btn-light" id="openBuilderBtn">{{ section.settings.cta_label }}</a>
+        <p class="note">{{ section.settings.note }}</p>
+      </div>
+      <div class="compare">
+        <div class="compare-row">
+          <span class="label">{{ section.settings.compare_1_label }}</span>
+          <span class="val">{{ section.settings.compare_1_value }}<span class="disclaimer">{{ section.settings.compare_1_disclaimer }}</span></span>
+        </div>
+        <div class="compare-row highlight">
+          <span class="label">{{ section.settings.compare_2_label }}</span>
+          <span class="val">{{ section.settings.compare_2_value }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{%- comment -%} Look Builder — 7 Days quiz popup, triggered from #openBuilderBtn above {%- endcomment -%}
+<div class="modal-overlay" id="builderOverlay"></div>
+<div
+  class="look-builder"
+  id="lookBuilder"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="builderTitle"
+  hidden
+  data-moods='{
+    {%- for block in mood_blocks -%}
+      {{ block.settings.key | json }}: {
+        "label": {{ block.settings.label | json }},
+        "modifier": {{ block.settings.modifier | json }},
+        "variantId": {{ block.settings.product.selected_or_first_available_variant.id | json }}
+      }{% unless forloop.last %},{% endunless %}
+    {%- endfor -%}
+  }'
+>
+  <button class="builder-close" id="builderCloseBtn" aria-label="{{ 'general.accessibility.close' | t }}">✕</button>
+  <div class="builder-progress">
+    <span class="dot active" data-dot="0"></span>
+    <span class="dot" data-dot="1"></span>
+    <span class="dot" data-dot="2"></span>
+    <span class="dot" data-dot="3"></span>
+  </div>
+
+  <div class="builder-step" data-step="0">
+    <span class="eyebrow">{{ 'look_builder.eyebrow' | t }}</span>
+    <h3 id="builderTitle">{{ 'look_builder.intro_title' | t }}</h3>
+    <p>{{ 'look_builder.intro_text' | t }}</p>
+    <button class="btn btn-primary" id="builderStart">{{ 'look_builder.start' | t }}</button>
+  </div>
+
+  <div class="builder-step" data-step="1" hidden>
+    <span class="eyebrow">{{ 'look_builder.step_1_of_2' | t }}</span>
+    <h3>{{ 'look_builder.question_weekday' | t }}</h3>
+    <div class="builder-options">
+      {%- for block in weekday_blocks -%}
+        <button class="builder-option" data-answer="{{ block.settings.key }}">
+          <span class="opt-title">{{ block.settings.label }}</span>
+          <span class="opt-desc">{{ block.settings.description }}</span>
+        </button>
+      {%- endfor -%}
+    </div>
+  </div>
+
+  <div class="builder-step" data-step="2" hidden>
+    <span class="eyebrow">{{ 'look_builder.step_2_of_2' | t }}</span>
+    <h3>{{ 'look_builder.question_weekend' | t }}</h3>
+    <div class="builder-options">
+      {%- for block in weekend_blocks -%}
+        <button class="builder-option" data-answer="{{ block.settings.key }}">
+          <span class="opt-title">{{ block.settings.label }}</span>
+          <span class="opt-desc">{{ block.settings.description }}</span>
+        </button>
+      {%- endfor -%}
+    </div>
+  </div>
+
+  <div class="builder-step builder-result" data-step="3" hidden>
+    <span class="eyebrow">{{ 'look_builder.result_eyebrow' | t }}</span>
+    <h3>{{ 'look_builder.result_title' | t }}</h3>
+    <p class="builder-hint">{{ 'look_builder.result_hint' | t }}</p>
+    <div class="builder-days" id="builderDays"></div>
+    <div class="builder-summary">
+      <div>
+        <span class="builder-summary-title">{{ 'look_builder.eyebrow' | t }}</span>
+        <span class="builder-summary-sub">{{ section.settings.note | strip_html | truncate: 60 }}</span>
+      </div>
+      <span class="builder-price">{{ section.settings.compare_2_value }}</span>
+    </div>
+    <button class="btn btn-primary" id="builderAdd">{{ 'look_builder.add_to_cart' | t }}</button>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "7 Days · 7 Looks",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "L'offre signature" },
+    { "type": "text", "id": "heading", "label": "Titre", "info": "HTML simple accepté : <br> et <em>.", "default": "Une semaine.<br><em>Sept moods.</em><br>Une routine simple." },
+    { "type": "header", "content": "Statistiques" },
+    { "type": "text", "id": "stat_1_value", "label": "Stat 1 — valeur", "default": "7" },
+    { "type": "text", "id": "stat_1_label", "label": "Stat 1 — libellé", "default": "Sets press-on" },
+    { "type": "text", "id": "stat_2_value", "label": "Stat 2 — valeur", "default": "1" },
+    { "type": "text", "id": "stat_2_label", "label": "Stat 2 — libellé", "default": "Semaine de looks" },
+    { "type": "text", "id": "stat_3_value", "label": "Stat 3 — valeur", "default": "40" },
+    { "type": "text", "id": "stat_3_suffix", "label": "Stat 3 — suffixe", "default": "€" },
+    { "type": "text", "id": "stat_3_label", "label": "Stat 3 — libellé", "default": "Tout inclus" },
+    { "type": "text", "id": "cta_label", "label": "Bouton — texte", "default": "Obtenir les 7 looks" },
+    { "type": "text", "id": "note", "label": "Note", "default": "+ Kit soin des ongles offert inclus. Les chiffres de comparaison ci-dessous sont donnés à titre indicatif, basés sur nos prix à l'unité (8,90–18,50 €), uniquement pour cette maquette." },
+    { "type": "header", "content": "Comparatif de prix" },
+    { "type": "text", "id": "compare_1_label", "label": "Ligne 1 — libellé", "default": "Achetés séparément" },
+    { "type": "text", "id": "compare_1_value", "label": "Ligne 1 — valeur", "default": "≈ 92 €" },
+    { "type": "text", "id": "compare_1_disclaimer", "label": "Ligne 1 — mention", "default": "Exemple de maquette, pas un prix réel" },
+    { "type": "text", "id": "compare_2_label", "label": "Ligne 2 — libellé", "default": "7 Days · 7 Looks" },
+    { "type": "text", "id": "compare_2_value", "label": "Ligne 2 — valeur", "default": "40 €" }
+  ],
+  "blocks": [
+    {
+      "type": "day",
+      "name": "Jour (calendrier)",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Nom du jour", "default": "Lundi" },
+        {
+          "type": "select",
+          "id": "modifier",
+          "label": "Variante couleur",
+          "options": [
+            { "value": "", "label": "Défaut" },
+            { "value": "rose", "label": "Rose" },
+            { "value": "noir", "label": "Noir" },
+            { "value": "bordeaux", "label": "Bordeaux" }
+          ],
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": "mood_option",
+      "name": "Option du quiz",
+      "settings": [
+        { "type": "text", "id": "key", "label": "Identifiant unique", "info": "ex: girlboss — sans espace, utilisé en interne", "default": "girlboss" },
+        {
+          "type": "select",
+          "id": "role",
+          "label": "Question",
+          "options": [
+            { "value": "weekday", "label": "Semaine (Q1)" },
+            { "value": "weekend", "label": "Week-end (Q2)" }
+          ],
+          "default": "weekday"
+        },
+        { "type": "text", "id": "label", "label": "Titre", "default": "Girlboss" },
+        { "type": "text", "id": "description", "label": "Description", "default": "Bureau, réunions, soignée." },
+        {
+          "type": "select",
+          "id": "modifier",
+          "label": "Variante couleur",
+          "options": [
+            { "value": "", "label": "Défaut" },
+            { "value": "rose", "label": "Rose" },
+            { "value": "noir", "label": "Noir" },
+            { "value": "bordeaux", "label": "Bordeaux" }
+          ],
+          "default": ""
+        },
+        { "type": "product", "id": "product", "label": "Produit ajouté au panier pour ce mood" }
+      ]
+    }
+  ],
+  "max_blocks": 15,
+  "default": {
+    "blocks": [
+      { "type": "day", "settings": { "label": "Lundi", "modifier": "" } },
+      { "type": "day", "settings": { "label": "Mardi", "modifier": "rose" } },
+      { "type": "day", "settings": { "label": "Mercredi", "modifier": "noir" } },
+      { "type": "day", "settings": { "label": "Jeudi", "modifier": "" } },
+      { "type": "day", "settings": { "label": "Vendredi", "modifier": "bordeaux" } },
+      { "type": "day", "settings": { "label": "Samedi", "modifier": "rose" } },
+      { "type": "day", "settings": { "label": "Dimanche", "modifier": "noir" } },
+      { "type": "mood_option", "settings": { "key": "girlboss", "role": "weekday", "label": "Girlboss", "description": "Bureau, réunions, soignée.", "modifier": "" } },
+      { "type": "mood_option", "settings": { "key": "cleangirl", "role": "weekday", "label": "Clean Girl", "description": "Décontracté, courses, sans effort.", "modifier": "rose" } },
+      { "type": "mood_option", "settings": { "key": "afterwork", "role": "weekend", "label": "Afterwork", "description": "Dîners, verres, chic décontracté.", "modifier": "bordeaux" } },
+      { "type": "mood_option", "settings": { "key": "dark", "role": "weekend", "label": "After Dark", "description": "Sorties qui durent jusqu'au bout de la nuit.", "modifier": "noir" } }
+    ]
+  },
+  "presets": [
+    { "name": "7 Days · 7 Looks" }
+  ]
+}
+{% endschema %}

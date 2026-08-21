@@ -1,0 +1,103 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero"
+    },
+    "seven-days": {
+      "type": "seven-days",
+      "blocks": {
+        "day-1": { "type": "day", "settings": { "label": "Lundi", "modifier": "" } },
+        "day-2": { "type": "day", "settings": { "label": "Mardi", "modifier": "rose" } },
+        "day-3": { "type": "day", "settings": { "label": "Mercredi", "modifier": "noir" } },
+        "day-4": { "type": "day", "settings": { "label": "Jeudi", "modifier": "" } },
+        "day-5": { "type": "day", "settings": { "label": "Vendredi", "modifier": "bordeaux" } },
+        "day-6": { "type": "day", "settings": { "label": "Samedi", "modifier": "rose" } },
+        "day-7": { "type": "day", "settings": { "label": "Dimanche", "modifier": "noir" } },
+        "mood-girlboss": { "type": "mood_option", "settings": { "key": "girlboss", "role": "weekday", "label": "Girlboss", "description": "Bureau, réunions, soignée.", "modifier": "" } },
+        "mood-cleangirl": { "type": "mood_option", "settings": { "key": "cleangirl", "role": "weekday", "label": "Clean Girl", "description": "Décontracté, courses, sans effort.", "modifier": "rose" } },
+        "mood-afterwork": { "type": "mood_option", "settings": { "key": "afterwork", "role": "weekend", "label": "Afterwork", "description": "Dîners, verres, chic décontracté.", "modifier": "bordeaux" } },
+        "mood-dark": { "type": "mood_option", "settings": { "key": "dark", "role": "weekend", "label": "After Dark", "description": "Sorties qui durent jusqu'au bout de la nuit.", "modifier": "noir" } }
+      },
+      "block_order": ["day-1", "day-2", "day-3", "day-4", "day-5", "day-6", "day-7", "mood-girlboss", "mood-cleangirl", "mood-afterwork", "mood-dark"]
+    },
+    "mood": {
+      "type": "mood",
+      "blocks": {
+        "mood-1": { "type": "mood", "settings": { "title": "Clean Girl", "text": "Tes ongles du lundi au vendredi, 9h-17h.", "cta_label": "Découvrir", "link": "#shop", "modifier": "rose" } },
+        "mood-2": { "type": "mood", "settings": { "title": "Girlboss", "text": "Soignée. Affirmée. Impeccable.", "cta_label": "Découvrir", "link": "#shop", "modifier": "" } },
+        "mood-3": { "type": "mood", "settings": { "title": "Soft Girl", "text": "Jolie, sans en faire trop.", "cta_label": "Découvrir", "link": "#shop", "modifier": "" } },
+        "mood-4": { "type": "mood", "settings": { "title": "After Dark", "text": "Tes plans commencent après 18h.", "cta_label": "Découvrir", "link": "#shop", "modifier": "noir" } }
+      },
+      "block_order": ["mood-1", "mood-2", "mood-3", "mood-4"]
+    },
+    "lookbook": {
+      "type": "lookbook"
+    },
+    "bestsellers": {
+      "type": "bestsellers"
+    },
+    "edits": {
+      "type": "edits",
+      "blocks": {
+        "edit-1": { "type": "edit", "settings": { "eyebrow": "Sélection Girlboss", "title": "La Sélection Girlboss", "looks_count": "3 looks", "modifier": "" } },
+        "edit-2": { "type": "edit", "settings": { "eyebrow": "Sélection Soft Girl", "title": "La Sélection Soft Girl", "looks_count": "3 looks", "modifier": "rose" } },
+        "edit-3": { "type": "edit", "settings": { "eyebrow": "Sélection After Dark", "title": "La Sélection After Dark", "looks_count": "3 looks", "modifier": "noir" } }
+      },
+      "block_order": ["edit-1", "edit-2", "edit-3"]
+    },
+    "why-velour": {
+      "type": "why-velour",
+      "blocks": {
+        "reason-1": { "type": "reason", "settings": { "title": "Look salon<br>en quelques minutes", "text": "Prêt en une seule pose." } },
+        "reason-2": { "type": "reason", "settings": { "title": "Réutilisable<br>fait pour durer", "text": "Entretenu, il se reporte." } },
+        "reason-3": { "type": "reason", "settings": { "title": "Sans rendez-vous<br>à ton rythme", "text": "À appliquer quand tu veux." } },
+        "reason-4": { "type": "reason", "settings": { "title": "Change de look<br>quand tu veux", "text": "On change d'humeur, on change de look." } }
+      },
+      "block_order": ["reason-1", "reason-2", "reason-3", "reason-4"]
+    },
+    "before-after": {
+      "type": "before-after"
+    },
+    "social-proof": {
+      "type": "social-proof",
+      "blocks": {
+        "review-1": { "type": "review", "settings": { "rating": 5, "quote": "On dirait que je sors du salon.", "author": "Camille" } },
+        "review-2": { "type": "review", "settings": { "rating": 5, "quote": "Je les ai mis avant d'aller dîner, parfaits toute la soirée.", "author": "Léa" } },
+        "review-3": { "type": "review", "settings": { "rating": 5, "quote": "Blue Hour, c'est LE set qui fait tourner les têtes.", "author": "Inès" } }
+      },
+      "block_order": ["review-1", "review-2", "review-3"]
+    },
+    "ugc": {
+      "type": "ugc",
+      "blocks": {
+        "photo-1": { "type": "photo", "settings": { "modifier": "" } },
+        "photo-2": { "type": "photo", "settings": { "modifier": "rose" } },
+        "photo-3": { "type": "photo", "settings": { "modifier": "noir" } },
+        "photo-4": { "type": "photo", "settings": { "modifier": "bordeaux" } },
+        "photo-5": { "type": "photo", "settings": { "modifier": "" } },
+        "photo-6": { "type": "photo", "settings": { "modifier": "rose" } }
+      },
+      "block_order": ["photo-1", "photo-2", "photo-3", "photo-4", "photo-5", "photo-6"]
+    },
+    "blog-teaser": {
+      "type": "blog-teaser"
+    },
+    "email-capture": {
+      "type": "email-capture"
+    }
+  },
+  "order": [
+    "hero",
+    "seven-days",
+    "mood",
+    "lookbook",
+    "bestsellers",
+    "edits",
+    "why-velour",
+    "before-after",
+    "social-proof",
+    "ugc",
+    "blog-teaser",
+    "email-capture"
+  ]
+}

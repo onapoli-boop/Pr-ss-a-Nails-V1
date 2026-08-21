@@ -1,0 +1,130 @@
+{
+  "general": {
+    "meta": {
+      "tagline": "Press-on nails premium et accessibles, pensés en Europe pour les marchés FR · DE · ES · EN.",
+      "page": "Page {{ page }}"
+    },
+    "accessibility": {
+      "search": "Recherche",
+      "account": "Compte",
+      "cart": "Panier",
+      "close": "Fermer",
+      "menu": "Menu",
+      "skip_to_content": "Aller au contenu"
+    },
+    "search": {
+      "placeholder": "Rechercher...",
+      "submit": "Rechercher",
+      "tagged": "tagué \"{{ tags }}\""
+    },
+    "demo_content": "Contenu démo",
+    "404": {
+      "title": "Page introuvable",
+      "subtext": "Le contenu que tu cherches n'existe pas ou a été déplacé.",
+      "link": "Retour à l'accueil"
+    }
+  },
+  "layout": {
+    "header": {
+      "nav": {
+        "shop": "Boutique",
+        "collections": "Collections",
+        "week": "7 Days",
+        "bundles": "Bundles",
+        "journal": "Journal",
+        "about": "À propos"
+      }
+    },
+    "breadcrumb": {
+      "home": "Accueil"
+    },
+    "footer": {
+      "language": "Langue",
+      "copyright": "© {{ year }} VELOUR — Contenu de maquette, boutique non active",
+      "shop_heading": "Boutique",
+      "shop_collections": "Collections",
+      "shop_bestsellers": "Meilleures ventes",
+      "shop_week": "7 Days",
+      "shop_bundles": "Bundles",
+      "help_heading": "Aide",
+      "help_shipping": "Livraison",
+      "help_returns": "Retours",
+      "help_faq": "FAQ",
+      "help_contact": "Contact",
+      "about_heading": "À propos",
+      "about_story": "Notre histoire",
+      "about_pressons": "Les press-on",
+      "about_care_guide": "Guide d'entretien",
+      "about_journal": "Le Journal",
+      "social_instagram": "Instagram",
+      "social_tiktok": "TikTok",
+      "social_pinterest": "Pinterest"
+    }
+  },
+  "cart": {
+    "title": "Ton panier",
+    "subtotal": "Sous-total",
+    "checkout": "Passer commande",
+    "empty": "Ton panier est vide.",
+    "empty_cta": "Découvrir les press-on",
+    "gift_note": "Ajoute encore %amount% pour débloquer ton kit soin offert.",
+    "gift_unlocked": "Kit soin des ongles offert débloqué !",
+    "remove": "Retirer",
+    "decrease": "Diminuer la quantité",
+    "increase": "Augmenter la quantité",
+    "adding": "Ajout...",
+    "added": "Ajouté ✓"
+  },
+  "products": {
+    "quick_add": "Ajout rapide",
+    "new": "Nouveau",
+    "add_to_cart": "Ajouter au panier",
+    "sold_out": "Épuisé",
+    "view_product": "Voir le produit",
+    "wishlist_add": "Enregistrer",
+    "wishlist_added": "Enregistré",
+    "reviews_count": "{{ count }} avis"
+  },
+  "look_builder": {
+    "eyebrow": "7 Days · 7 Looks",
+    "intro_title": "Construisons ta semaine.",
+    "intro_text": "Deux questions rapides, puis tes 7 looks — modifiable ensuite jour par jour.",
+    "start": "Commencer",
+    "step_1_of_2": "Question 1 / 2",
+    "step_2_of_2": "Question 2 / 2",
+    "question_weekday": "À quoi ressemblent tes semaines de travail ?",
+    "question_weekend": "Et tes soirées du vendredi et samedi ?",
+    "result_eyebrow": "Ta semaine",
+    "result_title": "Tes 7 looks sont prêts.",
+    "result_hint": "Touche un jour pour changer de mood.",
+    "add_to_cart": "Ajouter ma semaine au panier",
+    "day_mon": "Lun",
+    "day_tue": "Mar",
+    "day_wed": "Mer",
+    "day_thu": "Jeu",
+    "day_fri": "Ven",
+    "day_sat": "Sam",
+    "day_sun": "Dim"
+  },
+  "blog": {
+    "all": "Tous",
+    "read_more": "Lire l'article",
+    "read_all": "Voir tous les articles",
+    "read_time": "{{ minutes }} min de lecture",
+    "by": "Par {{ author }}",
+    "empty": "Aucun article dans cette catégorie pour le moment.",
+    "read_also": "À lire aussi",
+    "featured_in": "Cité dans cet article"
+  },
+  "onboarding": {
+    "product_title": "Nom du produit",
+    "no_collection": "Choisis une collection dans les réglages de cette section."
+  },
+  "newsletter": {
+    "eyebrow": "Rejoins la liste",
+    "placeholder": "Ton adresse email",
+    "submit": "Rejoindre la liste",
+    "success": "Merci, tu es inscrite !",
+    "error": "Une erreur est survenue, réessaie."
+  }
+}

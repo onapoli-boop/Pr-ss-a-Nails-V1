@@ -1,0 +1,57 @@
+{%- liquid
+  assign categories = blog.articles | map: 'tags' | join: ',' | split: ',' | uniq | compact
+-%}
+<div class="container breadcrumb">
+  <a href="{{ routes.root_url }}">{{ 'layout.breadcrumb.home' | t }}</a><span>/</span>
+  <span class="current">{{ blog.title }}</span>
+</div>
+
+<section class="blog-hero">
+  <div class="container">
+    <span class="eyebrow">{{ blog.title }}</span>
+    <h1>{{ section.settings.heading }}</h1>
+    <p>{{ section.settings.subtext }}</p>
+  </div>
+</section>
+
+<section class="blog-filters">
+  <div class="container">
+    <div class="pdp-chips" id="blogFilters">
+      <button class="pdp-chip active" data-filter="all">{{ 'blog.all' | t }}</button>
+      {%- for category in categories -%}
+        <button class="pdp-chip" data-filter="{{ category | handle }}">{{ category }}</button>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<section class="blog-list">
+  <div class="container">
+    <div class="blog-grid blog-grid-list reveal" id="blogGrid">
+      {%- paginate blog.articles by 12 -%}
+        {%- for article in blog.articles -%}
+          {%- render 'article-card', article: article, show_excerpt: true -%}
+        {%- endfor -%}
+      {%- endpaginate -%}
+    </div>
+    <p class="blog-empty" id="blogEmpty" hidden>{{ 'blog.empty' | t }}</p>
+    {%- paginate blog.articles by 12 -%}
+      {%- if paginate.pages > 1 -%}
+        <div class="blog-cta reveal">
+          {%- if paginate.previous -%}<a href="{{ paginate.previous.url }}" class="btn btn-ghost">&larr;</a>{%- endif -%}
+          {%- if paginate.next -%}<a href="{{ paginate.next.url }}" class="btn btn-ghost">&rarr;</a>{%- endif -%}
+        </div>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Journal — liste",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Titre", "info": "HTML simple accepté : <br>.", "default": "Conseils, tendances<br>et coulisses de la marque." },
+    { "type": "text", "id": "subtext", "label": "Texte", "default": "Tout ce qu'il faut savoir pour bien poser, bien choisir et bien porter tes press-on." }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,477 @@
+// VELOUR theme — GSAP + ScrollTrigger for animation (with a plain-JS
+// fallback if the CDN scripts fail to load, e.g. no internet connection).
+// Ported from the static mockup's script.js — same interaction patterns,
+// with the cart drawer and add-to-cart controls now wired to Shopify's
+// real AJAX Cart API instead of static markup.
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  const hasGSAP = typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined';
+  if (hasGSAP) gsap.registerPlugin(ScrollTrigger);
+
+  // ------------------------------------------------------------------
+  // Hero entrance — staggered fade-up (falls back to instantly visible)
+  // ------------------------------------------------------------------
+  if (hasGSAP) {
+    gsap.to('.hero-copy > *', {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      ease: 'power2.out',
+      stagger: 0.08,
+      delay: 0.1,
+    });
+  } else {
+    document.querySelectorAll('.hero-copy > *').forEach(el => {
+      el.style.opacity = 1;
+      el.style.transform = 'none';
+    });
+  }
+
+  // ------------------------------------------------------------------
+  // Section reveals on scroll (falls back to instantly visible)
+  // ------------------------------------------------------------------
+  function initReveals(scope = document) {
+    if (hasGSAP) {
+      gsap.utils.toArray(scope.querySelectorAll('.reveal')).forEach((el) => {
+        if (el.dataset.revealed) return;
+        el.dataset.revealed = 'true';
+        gsap.fromTo(
+          el,
+          { opacity: 0, y: 16 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.45,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: el,
+              start: 'top 92%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      });
+    } else {
+      scope.querySelectorAll('.reveal').forEach(el => { el.style.opacity = 1; });
+    }
+  }
+  initReveals();
+
+  // ------------------------------------------------------------------
+  // 7 Days stat count-up (falls back to showing the final number directly)
+  // ------------------------------------------------------------------
+  document.querySelectorAll('[data-count]').forEach((el) => {
+    const target = parseInt(el.dataset.count, 10);
+    const suffix = el.dataset.suffix || '';
+    if (!hasGSAP) { el.textContent = target + suffix; return; }
+    const counter = { val: 0 };
+    ScrollTrigger.create({
+      trigger: el,
+      start: 'top 85%',
+      once: true,
+      onEnter: () => {
+        gsap.to(counter, {
+          val: target,
+          duration: 0.6,
+          ease: 'power2.out',
+          onUpdate: () => { el.textContent = Math.round(counter.val) + suffix; },
+        });
+      },
+    });
+  });
+
+  // ------------------------------------------------------------------
+  // Header shadow on scroll (falls back to a plain scroll listener)
+  // ------------------------------------------------------------------
+  const header = document.querySelector('.site-header');
+  if (header) {
+    if (hasGSAP) {
+      ScrollTrigger.create({
+        start: 'top -12',
+        end: 99999,
+        toggleClass: { targets: header, className: 'is-scrolled' },
+      });
+    } else {
+      window.addEventListener('scroll', () => {
+        header.classList.toggle('is-scrolled', window.scrollY > 12);
+      });
+    }
+  }
+
+  // ------------------------------------------------------------------
+  // Look Builder — 7 Days quiz popup
+  // Mood → variant mapping and cart line items come from the section's
+  // data-* attributes (see sections/seven-days.liquid), populated in the
+  // admin instead of hardcoded, so this stays product-agnostic.
+  // ------------------------------------------------------------------
+  const builderOverlay = document.getElementById('builderOverlay');
+  const lookBuilder = document.getElementById('lookBuilder');
+  const builderCloseBtn = document.getElementById('builderCloseBtn');
+  const openBuilderBtn = document.getElementById('openBuilderBtn');
+  const builderStart = document.getElementById('builderStart');
+  const builderDaysEl = document.getElementById('builderDays');
+  const builderAdd = document.getElementById('builderAdd');
+
+  let moods = {};
+  if (lookBuilder && lookBuilder.dataset.moods) {
+    try { moods = JSON.parse(lookBuilder.dataset.moods); } catch (e) { moods = {}; }
+  }
+  const moodKeys = Object.keys(moods);
+  const dayNames = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
+
+  let weekdayMood = null;
+  let weekendMood = null;
+  let assignment = [];
+
+  function goToStep(step) {
+    document.querySelectorAll('.builder-step').forEach(el => {
+      el.hidden = el.dataset.step !== String(step);
+    });
+    document.querySelectorAll('.builder-progress .dot').forEach(dot => {
+      dot.classList.toggle('active', dot.dataset.dot === String(step));
+    });
+    const activeStep = document.querySelector(`.builder-step[data-step="${step}"]`);
+    if (activeStep && hasGSAP) {
+      gsap.fromTo(activeStep, { opacity: 0, x: 12 }, { opacity: 1, x: 0, duration: 0.35, ease: 'power2.out' });
+    }
+  }
+
+  function openBuilder() {
+    weekdayMood = null;
+    weekendMood = null;
+    lookBuilder.hidden = false;
+    builderOverlay.classList.add('open');
+    goToStep(0);
+  }
+  function closeBuilder() {
+    lookBuilder.hidden = true;
+    builderOverlay.classList.remove('open');
+  }
+
+  function renderDays() {
+    if (!moodKeys.length) return;
+    // Mon–Thu and Sun take the weekday mood, Fri–Sat take the weekend mood
+    assignment = [weekdayMood, weekdayMood, weekdayMood, weekdayMood, weekendMood, weekendMood, weekdayMood];
+    builderDaysEl.innerHTML = '';
+    assignment.forEach((moodKey, i) => {
+      const day = document.createElement('div');
+      day.className = 'builder-day';
+      const mood = moods[moodKey];
+      day.innerHTML = `
+        <div class="ph ${mood.modifier ? 'ph-' + mood.modifier : ''}"></div>
+        <span class="bd-day">${dayNames[i]}</span>
+        <span class="bd-mood">${mood.label}</span>
+      `;
+      day.addEventListener('click', () => {
+        const currentIndex = moodKeys.indexOf(assignment[i]);
+        const nextMood = moodKeys[(currentIndex + 1) % moodKeys.length];
+        assignment[i] = nextMood;
+        const nextModifier = moods[nextMood].modifier;
+        day.querySelector('div').className = `ph ${nextModifier ? 'ph-' + nextModifier : ''}`;
+        day.querySelector('.bd-mood').textContent = moods[nextMood].label;
+        if (hasGSAP) gsap.fromTo(day, { opacity: 0.4 }, { opacity: 1, duration: 0.3 });
+      });
+      builderDaysEl.appendChild(day);
+    });
+  }
+
+  openBuilderBtn?.addEventListener('click', (e) => { e.preventDefault(); openBuilder(); });
+  builderCloseBtn?.addEventListener('click', closeBuilder);
+  builderOverlay?.addEventListener('click', closeBuilder);
+  builderStart?.addEventListener('click', () => goToStep(1));
+
+  document.querySelectorAll('.builder-step[data-step="1"] .builder-option').forEach(btn => {
+    btn.addEventListener('click', () => { weekdayMood = btn.dataset.answer; goToStep(2); });
+  });
+  document.querySelectorAll('.builder-step[data-step="2"] .builder-option').forEach(btn => {
+    btn.addEventListener('click', () => {
+      weekendMood = btn.dataset.answer;
+      renderDays();
+      goToStep(3);
+    });
+  });
+  builderAdd?.addEventListener('click', async () => {
+    if (!assignment.length) { closeBuilder(); return; }
+    const items = assignment
+      .map(moodKey => moods[moodKey] && moods[moodKey].variantId)
+      .filter(Boolean)
+      .map(id => ({ id, quantity: 1 }));
+    if (items.length) {
+      await addMultipleToCart(items);
+    }
+    closeBuilder();
+    openCart();
+  });
+
+  // ------------------------------------------------------------------
+  // Blog — category filters
+  // ------------------------------------------------------------------
+  const blogFilters = document.getElementById('blogFilters');
+  const blogGrid = document.getElementById('blogGrid');
+  const blogEmpty = document.getElementById('blogEmpty');
+  if (blogFilters && blogGrid) {
+    const cards = blogGrid.querySelectorAll('.blog-card');
+    blogFilters.querySelectorAll('.pdp-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        blogFilters.querySelectorAll('.pdp-chip').forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        const filter = chip.dataset.filter;
+        let visibleCount = 0;
+        cards.forEach(card => {
+          const match = filter === 'all' || card.dataset.category === filter;
+          card.classList.toggle('filtered-out', !match);
+          if (match) visibleCount++;
+        });
+        if (blogEmpty) blogEmpty.hidden = visibleCount > 0;
+      });
+    });
+  }
+
+  // ------------------------------------------------------------------
+  // Accordion (product info + FAQ, independent instances)
+  // ------------------------------------------------------------------
+  document.querySelectorAll('.accordion-item').forEach(item => {
+    const head = item.querySelector('.accordion-head');
+    head?.addEventListener('click', () => {
+      const group = item.closest('.accordion');
+      const isOpen = item.classList.contains('open');
+      group.querySelectorAll('.accordion-item').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.accordion-icon').textContent = '+';
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        item.querySelector('.accordion-icon').textContent = '−';
+      }
+    });
+  });
+
+  // ------------------------------------------------------------------
+  // Quick add feedback + real add-to-cart (bestsellers / product grids)
+  // ------------------------------------------------------------------
+  document.querySelectorAll('.quick-add[data-variant-id]').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const variantId = btn.dataset.variantId;
+      if (!variantId) return;
+      const original = btn.textContent;
+      btn.textContent = window.theme?.strings?.adding || '...';
+      const ok = await addToCart(variantId, 1);
+      btn.textContent = ok ? (window.theme?.strings?.added || 'Ajouté ✓') : original;
+      if (ok) openCart();
+      setTimeout(() => { btn.textContent = original; }, 1400);
+    });
+  });
+
+  // ------------------------------------------------------------------
+  // Language selector — switches locale via Shopify's localization form
+  // (header buttons + the duplicate footer links use the same pattern)
+  // ------------------------------------------------------------------
+  document.querySelectorAll('.lang-select button[data-locale]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const form = document.getElementById('localeForm');
+      const input = form?.querySelector('input[name="locale_code"]');
+      if (form && input) {
+        input.value = btn.dataset.locale;
+        form.submit();
+      }
+    });
+  });
+  document.querySelectorAll('[data-locale-footer]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const form = document.getElementById('localeFormFooter');
+      const input = form?.querySelector('input[name="locale_code"]');
+      if (form && input) {
+        input.value = link.dataset.localeFooter;
+        form.submit();
+      }
+    });
+  });
+
+  // ------------------------------------------------------------------
+  // Before / after compare slider — native range drives the clip-path,
+  // GSAP just adds a light touch-feedback pulse on the handle
+  // ------------------------------------------------------------------
+  document.querySelectorAll('.compare-slider').forEach(slider => {
+    const compareRange = slider.querySelector('.compare-range');
+    const compareAfter = slider.querySelector('.compare-after');
+    const compareHandle = slider.querySelector('.compare-handle');
+    if (!compareRange) return;
+
+    if (hasGSAP) gsap.set(compareHandle, { xPercent: -50 });
+    else compareHandle.style.transform = 'translateX(-50%)';
+
+    function updateCompare(value) {
+      compareAfter.style.clipPath = `inset(0 ${100 - value}% 0 0)`;
+      if (hasGSAP) {
+        gsap.to(compareHandle, { left: `${value}%`, duration: 0.05, ease: 'none', overwrite: true });
+      } else {
+        compareHandle.style.left = `${value}%`;
+      }
+    }
+    updateCompare(compareRange.value);
+    compareRange.addEventListener('input', (e) => updateCompare(e.target.value));
+
+    if (hasGSAP) {
+      const pulse = (scale) => gsap.to(compareHandle, { scale, duration: 0.25, ease: 'power2.out' });
+      compareRange.addEventListener('pointerdown', () => pulse(1.15));
+      window.addEventListener('pointerup', () => pulse(1));
+    }
+  });
+
+  // ==================================================================
+  // Shopify AJAX Cart
+  // ==================================================================
+  const cartDrawer = document.getElementById('cartDrawer');
+  const cartOverlay = document.getElementById('cartOverlay');
+  const openBtn = document.getElementById('cartOpenBtn');
+  const closeBtn = document.getElementById('cartCloseBtn');
+  const cartBody = document.getElementById('cartDrawerBody');
+  const cartCountEls = document.querySelectorAll('.cart-count');
+  const cartSubtotalEls = document.querySelectorAll('[data-cart-subtotal]');
+  const cartGiftNoteEls = document.querySelectorAll('[data-cart-gift-note]');
+  const cartEmptyTpl = document.getElementById('cartEmptyTemplate');
+
+  function money(cents) {
+    return (cents / 100).toLocaleString(document.documentElement.lang || 'fr-FR', {
+      style: 'currency',
+      currency: window.theme?.currency || 'EUR',
+    });
+  }
+
+  function openCart() {
+    cartDrawer?.classList.add('open');
+    cartOverlay?.classList.add('open');
+  }
+  function closeCart() {
+    cartDrawer?.classList.remove('open');
+    cartOverlay?.classList.remove('open');
+  }
+  openBtn?.addEventListener('click', (e) => { e.preventDefault(); openCart(); });
+  closeBtn?.addEventListener('click', closeCart);
+  cartOverlay?.addEventListener('click', closeCart);
+
+  function renderCart(cart) {
+    cartCountEls.forEach(el => { el.textContent = cart.item_count; });
+    cartSubtotalEls.forEach(el => { el.textContent = money(cart.total_price); });
+
+    const threshold = parseInt(window.theme?.freeGiftThreshold || 0, 10) * 100;
+    cartGiftNoteEls.forEach(el => {
+      if (!threshold) { el.hidden = true; return; }
+      const remaining = threshold - cart.total_price;
+      if (remaining > 0) {
+        el.hidden = false;
+        el.textContent = (window.theme?.strings?.giftNote || '').replace('%amount%', money(remaining));
+      } else {
+        el.hidden = false;
+        el.textContent = window.theme?.strings?.giftUnlocked || '';
+      }
+    });
+
+    if (!cartBody) return;
+    if (!cart.items.length) {
+      cartBody.innerHTML = cartEmptyTpl ? cartEmptyTpl.innerHTML : '';
+      return;
+    }
+    cartBody.innerHTML = cart.items.map(item => `
+      <div class="cart-item" data-key="${item.key}">
+        <div class="ph ph-photo" style="background-image:url('${item.image || ''}');"></div>
+        <div class="ci-info">
+          <div class="name">${item.product_title}</div>
+          <div class="coll">${item.variant_title && item.variant_title !== 'Default Title' ? item.variant_title : ''}</div>
+          <div class="price">${money(item.final_line_price)}</div>
+          <div class="ci-qty">
+            <button type="button" class="ci-qty-btn" data-action="decrease" data-key="${item.key}" data-qty="${item.quantity - 1}" aria-label="${window.theme?.strings?.decrease || '-'}">−</button>
+            <span>${item.quantity}</span>
+            <button type="button" class="ci-qty-btn" data-action="increase" data-key="${item.key}" data-qty="${item.quantity + 1}" aria-label="${window.theme?.strings?.increase || '+'}">+</button>
+          </div>
+        </div>
+        <button type="button" class="cart-item-remove" data-key="${item.key}" data-qty="0" aria-label="${window.theme?.strings?.remove || 'Retirer'}">✕</button>
+      </div>
+    `).join('');
+  }
+
+  async function fetchCart() {
+    const res = await fetch('/cart.js');
+    return res.json();
+  }
+
+  async function addToCart(variantId, quantity = 1) {
+    try {
+      const res = await fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ id: variantId, quantity }),
+      });
+      if (!res.ok) return false;
+      const cart = await fetchCart();
+      renderCart(cart);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  async function addMultipleToCart(items) {
+    try {
+      const res = await fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ items }),
+      });
+      if (!res.ok) return false;
+      const cart = await fetchCart();
+      renderCart(cart);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  async function changeLineQuantity(key, quantity) {
+    try {
+      const res = await fetch('/cart/change.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ id: key, quantity }),
+      });
+      if (!res.ok) return;
+      const cart = await res.json();
+      renderCart(cart);
+    } catch (e) { /* no-op */ }
+  }
+
+  cartBody?.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-key]');
+    if (!btn) return;
+    const key = btn.dataset.key;
+    const qty = parseInt(btn.dataset.qty, 10);
+    changeLineQuantity(key, qty);
+  });
+
+  // PDP add-to-cart (main buybox + sticky mobile bar) — populated once
+  // sections/main-product.liquid ships; both buttons carry data-variant-id.
+  document.querySelectorAll('[data-add-to-cart]').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const variantId = btn.dataset.variantId;
+      if (!variantId) return;
+      const original = btn.textContent;
+      btn.textContent = window.theme?.strings?.adding || '...';
+      const ok = await addToCart(variantId, 1);
+      btn.textContent = original;
+      if (ok) openCart();
+    });
+  });
+
+  // Initial render from the cart Shopify already knows about, so totals
+  // are correct even before any AJAX call happens on this page load.
+  fetchCart().then(renderCart).catch(() => {});
+
+  // Expose for other sections (e.g. a future main-product.liquid) that
+  // load after this file and need to trigger the same cart flow.
+  window.theme = window.theme || {};
+  window.theme.cart = { addToCart, addMultipleToCart, openCart, closeCart, fetchCart, renderCart };
+  window.theme.initReveals = initReveals;
+
+});
