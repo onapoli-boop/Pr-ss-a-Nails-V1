@@ -24,6 +24,26 @@
     "seven-days": {
       "type": "seven-days",
       "blocks": {
+        "size_option_BG8nz7": {
+          "type": "size_option",
+          "settings": {
+            "value": "Amande",
+            "label": "Amande",
+            "description": "Discret, allongé, féminin."
+          }
+        },
+        "mood_option_Y9BLeK": {
+          "type": "mood_option",
+          "settings": {
+            "key": "girlboss",
+            "role": "weekday",
+            "label": "Girlboss",
+            "description": "Bureau, réunions, soignée.",
+            "modifier": "",
+            "collection": "",
+            "product": ""
+          }
+        },
         "day-1": {
           "type": "day",
           "settings": {
@@ -130,6 +150,8 @@
         }
       },
       "block_order": [
+        "size_option_BG8nz7",
+        "mood_option_Y9BLeK",
         "day-1",
         "day-2",
         "day-3",
