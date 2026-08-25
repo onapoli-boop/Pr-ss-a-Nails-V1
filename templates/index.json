@@ -13,12 +13,13 @@
       "type": "hero",
       "settings": {
         "eyebrow": "Ton look. Tes ongles.",
-        "heading": "Tes ongles.<br>Ton look.<br>Ton <em>moment</em>.",
+        "heading": "Tes ongles.Ton look.Ton moment.",
         "subtext": "Des press-on pensés pour évoluer avec toi.",
         "cta_primary_label": "Découvrir les press-on",
         "cta_primary_link": "",
         "cta_secondary_label": "7 Days · 7 Looks",
-        "cta_secondary_link": ""
+        "cta_secondary_link": "",
+        "image": "shopify://shop_images/watermarked_img_13166591383005068834.jpg"
       }
     },
     "seven-days": {
