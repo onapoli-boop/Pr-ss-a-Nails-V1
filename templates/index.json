@@ -215,7 +215,8 @@
         "heading": "Blue Hour",
         "description": "Cat-eye bleu nuit. Liseré argenté. Énergie after-hours.",
         "price_label": "14,90 €",
-        "cta_label": "Découvrir Blue Hour"
+        "cta_label": "Découvrir Blue Hour",
+        "image": "{{ section.settings.product.featured_image }}"
       }
     },
     "bestsellers": {
