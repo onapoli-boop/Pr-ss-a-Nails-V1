@@ -22,9 +22,9 @@
 -%}
 <header class="site-header">
   <div class="container header-inner">
-    <div class="burger" id="burgerBtn" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div class="burger" id="burgerBtn" aria-label="{{ 'general.accessibility.menu' | t }}"><span></span><span></span><span></span></div>
     <a href="{{ routes.root_url }}" class="logo">{{ shop.name | default: 'VELOUR' }}</a>
-    <nav class="main-nav">
+    <nav class="main-nav" id="MainNav">
       <a href="{{ routes.root_url }}#shop">{{ 'layout.header.nav.shop' | t }}</a>
       <a href="{{ routes.root_url }}#mood">{{ 'layout.header.nav.collections' | t }}</a>
       <a href="{{ routes.root_url }}#week">{{ 'layout.header.nav.week' | t }}</a>

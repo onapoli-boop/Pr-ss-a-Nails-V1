@@ -245,6 +245,7 @@ header.site-header {
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--line);
 }
+body.nav-open { overflow: hidden; }
 header.site-header.is-scrolled { box-shadow: 0 8px 24px rgba(23,19,15,0.06); }
 .header-inner {
   display: flex;
@@ -315,7 +316,24 @@ nav.main-nav a:hover::after { right: 0; }
   display: grid; place-items: center;
   font-weight: 700;
 }
-.burger { display: none; }
+.burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  z-index: 51;
+}
+.burger span {
+  height: 1px;
+  background: var(--noir);
+  transition: transform .3s var(--ease), opacity .3s var(--ease);
+}
+.burger.is-open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.burger.is-open span:nth-child(2) { opacity: 0; }
+.burger.is-open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
 /* ==========================================================================
    Hero
@@ -1301,6 +1319,8 @@ footer.site-footer {
    Responsive
    ========================================================================== */
 @media (max-width: 1080px) {
+  nav.main-nav { gap: 20px; }
+  .header-actions { gap: 16px; }
   .mood-grid { grid-template-columns: repeat(2, 1fr); }
   .product-grid { grid-template-columns: repeat(2, 1fr); }
   .why-grid { grid-template-columns: repeat(2, 1fr); gap: 30px 24px; }
@@ -1311,9 +1331,35 @@ footer.site-footer {
 }
 
 @media (max-width: 860px) {
-  nav.main-nav { display: none; }
-  .burger { display: flex; flex-direction: column; gap: 4px; width: 20px; }
-  .burger span { height: 1px; background: var(--noir); }
+  nav.main-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    max-height: calc(100vh - 78px);
+    overflow-y: auto;
+    background: var(--offwhite);
+    border-bottom: 1px solid var(--line);
+    padding: 4px var(--gutter) 24px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity .3s var(--ease), transform .3s var(--ease), visibility 0s .3s;
+  }
+  nav.main-nav.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: opacity .3s var(--ease), transform .3s var(--ease);
+  }
+  nav.main-nav a {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .burger { display: flex; }
   .lang-select { display: none; }
 
   .hero { grid-template-columns: 1fr; min-height: auto; }

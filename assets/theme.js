@@ -75,6 +75,38 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 1200);
 
   // ------------------------------------------------------------------
+  // Mobile nav (burger) — below 860px nav.main-nav is an off-canvas
+  // panel toggled with the .is-open class; see assets/theme.css.
+  // ------------------------------------------------------------------
+  const burgerBtn = document.getElementById('burgerBtn');
+  const mainNav = document.querySelector('nav.main-nav');
+  if (burgerBtn && mainNav) {
+    const closeNav = () => {
+      burgerBtn.classList.remove('is-open');
+      mainNav.classList.remove('is-open');
+      burgerBtn.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('nav-open');
+    };
+    const toggleNav = () => {
+      const isOpen = mainNav.classList.toggle('is-open');
+      burgerBtn.classList.toggle('is-open', isOpen);
+      burgerBtn.setAttribute('aria-expanded', String(isOpen));
+      document.body.classList.toggle('nav-open', isOpen);
+    };
+    burgerBtn.setAttribute('role', 'button');
+    burgerBtn.setAttribute('tabindex', '0');
+    burgerBtn.setAttribute('aria-expanded', 'false');
+    burgerBtn.setAttribute('aria-controls', 'MainNav');
+    burgerBtn.addEventListener('click', toggleNav);
+    burgerBtn.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleNav(); }
+    });
+    mainNav.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeNav));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeNav(); });
+    window.addEventListener('resize', () => { if (window.innerWidth > 860) closeNav(); });
+  }
+
+  // ------------------------------------------------------------------
   // 7 Days stat count-up (falls back to showing the final number directly)
   // ------------------------------------------------------------------
   document.querySelectorAll('[data-count]').forEach((el) => {

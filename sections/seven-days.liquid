@@ -1,8 +1,6 @@
 {%- liquid
   assign day_blocks = section.blocks | where: 'type', 'day'
   assign mood_blocks = section.blocks | where: 'type', 'mood_option'
-  assign weekday_blocks = mood_blocks | where: 'settings.role', 'weekday'
-  assign weekend_blocks = mood_blocks | where: 'settings.role', 'weekend'
 -%}
 <section class="week" id="week">
   <div class="container">
@@ -97,11 +95,13 @@
     <span class="eyebrow">{{ 'look_builder.step_1_of_2' | t }}</span>
     <h3>{{ 'look_builder.question_weekday' | t }}</h3>
     <div class="builder-options">
-      {%- for block in weekday_blocks -%}
-        <button class="builder-option" data-answer="{{ block.settings.key }}">
-          <span class="opt-title">{{ block.settings.label }}</span>
-          <span class="opt-desc">{{ block.settings.description }}</span>
-        </button>
+      {%- for block in mood_blocks -%}
+        {%- if block.settings.role == 'weekday' -%}
+          <button class="builder-option" data-answer="{{ block.settings.key }}">
+            <span class="opt-title">{{ block.settings.label }}</span>
+            <span class="opt-desc">{{ block.settings.description }}</span>
+          </button>
+        {%- endif -%}
       {%- endfor -%}
     </div>
   </div>
@@ -110,11 +110,13 @@
     <span class="eyebrow">{{ 'look_builder.step_2_of_2' | t }}</span>
     <h3>{{ 'look_builder.question_weekend' | t }}</h3>
     <div class="builder-options">
-      {%- for block in weekend_blocks -%}
-        <button class="builder-option" data-answer="{{ block.settings.key }}">
-          <span class="opt-title">{{ block.settings.label }}</span>
-          <span class="opt-desc">{{ block.settings.description }}</span>
-        </button>
+      {%- for block in mood_blocks -%}
+        {%- if block.settings.role == 'weekend' -%}
+          <button class="builder-option" data-answer="{{ block.settings.key }}">
+            <span class="opt-title">{{ block.settings.label }}</span>
+            <span class="opt-desc">{{ block.settings.description }}</span>
+          </button>
+        {%- endif -%}
       {%- endfor -%}
     </div>
   </div>
