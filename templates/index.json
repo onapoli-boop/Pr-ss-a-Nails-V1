@@ -218,12 +218,12 @@
       "type": "lookbook",
       "settings": {
         "eyebrow": "Adopte le look",
-        "collection_label": "After Dark",
+        "collection_label": "Clean gIRL",
         "product": "10pcs-pure-color-handmade-short-false-nail-with-glue-press-on-nails-full-cover-french-round-head-manicure-wearable-nail-tips-art-copie",
-        "heading": "Blue Hour",
-        "description": "Cat-eye bleu nuit. Liseré argenté. Énergie after-hours.",
-        "price_label": "14,90 €",
-        "cta_label": "Découvrir Blue Hour",
+        "heading": "",
+        "description": "",
+        "price_label": "",
+        "cta_label": "Découvrir",
         "image": "{{ section.settings.product.featured_image }}"
       }
     },
