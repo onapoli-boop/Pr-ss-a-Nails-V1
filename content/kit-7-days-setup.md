@@ -20,7 +20,9 @@ Pour chaque set qui doit pouvoir entrer dans le kit "7 Days" :
 - Type de collection : **Automatique**
 - Condition : `Tag` `est égal à` `7days`
 
-C'est cette collection qu'il faut sélectionner dans **Thème → Personnaliser → Réglages du thème → Kit 7 Days → Collection des sets éligibles**.
+Cette collection doit être sélectionnée à **deux endroits** dans Personnaliser (les réglages globaux du thème ne supportent pas les sélecteurs de collection, donc chaque section qui en a besoin a son propre champ) :
+- Section **En-tête** → réglage "Collection des sets éligibles au kit 7 Days" (pour le badge de progression dans le panier)
+- Section **7 Days · 7 Looks** (sur l'accueil) → même réglage (pour les images du calendrier par jour)
 
 ## 3. Créer la réduction automatique
 
@@ -34,13 +36,15 @@ C'est cette collection qu'il faut sélectionner dans **Thème → Personnaliser 
 
   **Si tu changes le prix unitaire des sets 7 Days, il faut recalculer et mettre à jour ce montant.**
 
-## 4. Vérifier les réglages du thème
+## 4. Vérifier les réglages
 
-**Personnaliser → Réglages du thème → Kit 7 Days**
-- Collection des sets éligibles : `7 Days`
-- Tag produit utilisé pour le kit 7 Days : `7days` (déjà la valeur par défaut)
-- Nombre d'articles pour compléter le kit : `7` (déjà la valeur par défaut)
+**Personnaliser → Réglages du thème → Kit 7 Days** (paramètres globaux, valeurs par défaut déjà correctes)
+- Tag produit utilisé pour le kit 7 Days : `7days`
+- Nombre d'articles pour compléter le kit : `7`
 - Prix affiché du kit complet : `40 €` (texte affiché dans le badge "Kit complet", purement informatif — n'affecte pas le calcul réel)
+
+**Personnaliser → section En-tête** et **Personnaliser → accueil → section 7 Days · 7 Looks**
+- Collection des sets éligibles : `7 Days` (à sélectionner dans les deux, voir étape 2 ci-dessus)
 
 ## Ce que fait le thème automatiquement une fois configuré
 

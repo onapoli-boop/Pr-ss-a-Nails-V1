@@ -15,8 +15,8 @@
       {%- for block in day_blocks -%}
         {%- liquid
           assign day_product = blank
-          if block.settings.day_tag != blank and settings.seven_days_collection
-            for p in settings.seven_days_collection.products
+          if block.settings.day_tag != blank and section.settings.seven_days_collection
+            for p in section.settings.seven_days_collection.products
               if p.tags contains block.settings.day_tag
                 assign day_product = p
                 break
@@ -141,6 +141,12 @@
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "L'offre signature" },
     { "type": "text", "id": "heading", "label": "Titre", "info": "HTML simple accepté : <br> et <em>.", "default": "Une semaine.<br><em>Sept moods.</em><br>Une routine simple." },
+    {
+      "type": "collection",
+      "id": "seven_days_collection",
+      "label": "Collection des sets éligibles au kit 7 Days",
+      "info": "Utilisée pour retrouver, par tag de jour (lundi, mardi...), l'image à afficher dans le calendrier ci-dessus. Doit pointer vers la même collection que dans la section En-tête."
+    },
     { "type": "header", "content": "Statistiques" },
     { "type": "text", "id": "stat_1_value", "label": "Stat 1 — valeur", "default": "7" },
     { "type": "text", "id": "stat_1_label", "label": "Stat 1 — libellé", "default": "Sets press-on" },

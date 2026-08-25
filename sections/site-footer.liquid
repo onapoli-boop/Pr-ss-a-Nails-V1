@@ -1,8 +1,8 @@
 {%- liquid
   if template.name == 'index'
     assign journal_url = '#journal'
-  elsif settings.journal_blog
-    assign journal_url = settings.journal_blog.url
+  elsif settings.journal_url != blank
+    assign journal_url = settings.journal_url
   else
     assign journal_url = routes.root_url
   endif

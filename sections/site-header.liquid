@@ -1,11 +1,23 @@
 {%- liquid
-  assign journal_blog = settings.journal_blog
   if template.name == 'index'
     assign journal_url = '#journal'
-  elsif journal_blog
-    assign journal_url = journal_blog.url
+  elsif settings.journal_url != blank
+    assign journal_url = settings.journal_url
   else
     assign journal_url = routes.root_url
+  endif
+
+  assign seven_days_collection = section.settings.seven_days_collection
+  assign seven_days_variant_ids = blank
+  if seven_days_collection
+    for product in seven_days_collection.products
+      assign variant_ids = product.variants | map: 'id'
+      if seven_days_variant_ids == blank
+        assign seven_days_variant_ids = variant_ids
+      else
+        assign seven_days_variant_ids = seven_days_variant_ids | concat: variant_ids
+      endif
+    endfor
   endif
 -%}
 <header class="site-header">
@@ -43,6 +55,28 @@
   </div>
 </header>
 
+{%- comment -%}
+  Emitted from the header (rather than layout/theme.liquid) because
+  Shopify's global config/settings_schema.json doesn't support resource
+  picker types like "collection" — those only work in section schemas.
+  The header renders on every page, so this is still effectively global.
+{%- endcomment -%}
+<script>
+  window.theme = window.theme || {};
+  window.theme.strings = window.theme.strings || {};
+  Object.assign(window.theme.strings, {
+    kitProgress: {{ 'seven_days_kit.progress' | t | json }},
+    kitComplete: {{ 'seven_days_kit.complete' | t | json }},
+    kitAdd: {{ 'seven_days_kit.add_to_kit' | t | json }},
+    kitInKit: {{ 'seven_days_kit.in_kit' | t | json }}
+  });
+  window.theme.sevenDaysKit = {
+    variantIds: {{ seven_days_variant_ids | json }},
+    target: {{ settings.seven_days_target | default: 7 | json }},
+    price: {{ settings.seven_days_price | json }}
+  };
+</script>
+
 {% schema %}
 {
   "name": "En-tête",
@@ -53,6 +87,12 @@
       "label": "Langues affichées (codes ISO, séparés par des virgules)",
       "default": "fr,de,es,en",
       "info": "Affichage visuel uniquement pour l'instant (comme dans la maquette) — le changement de langue réel sera branché une fois les traductions DE/ES/EN ajoutées."
+    },
+    {
+      "type": "collection",
+      "id": "seven_days_collection",
+      "label": "Collection des sets éligibles au kit 7 Days",
+      "info": "Utilisée pour le badge de progression du kit dans l'en-tête et pour les images du calendrier de la section \"7 Days · 7 Looks\"."
     }
   ]
 }

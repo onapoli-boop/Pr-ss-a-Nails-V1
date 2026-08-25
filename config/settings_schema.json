@@ -2,7 +2,7 @@
   {
     "name": "theme_info",
     "theme_name": "VELOUR",
-    "theme_version": "0.1.1",
+    "theme_version": "0.2.0",
     "theme_author": "VELOUR",
     "theme_documentation_url": "",
     "theme_support_url": ""
@@ -28,12 +28,7 @@
     "settings": [
       {
         "type": "paragraph",
-        "content": "Configuration technique du kit \"7 Days · 7 Looks\". Voir content/kit-7-days-setup.md dans le repo pour la mise en place complète (collection + réduction automatique côté admin)."
-      },
-      {
-        "type": "collection",
-        "id": "seven_days_collection",
-        "label": "Collection des sets éligibles au kit 7 Days"
+        "content": "Configuration technique du kit \"7 Days · 7 Looks\". Voir content/kit-7-days-setup.md dans le repo pour la mise en place complète (tags produit, collection, réduction automatique côté admin). La collection elle-même se choisit dans la section \"En-tête\" (et, pour les images du calendrier, dans la section \"7 Days · 7 Looks\") — les réglages globaux du thème ne supportent pas les sélecteurs de collection/produit/blog."
       },
       {
         "type": "text",
@@ -60,10 +55,10 @@
     "name": "Navigation",
     "settings": [
       {
-        "type": "blog",
-        "id": "journal_blog",
-        "label": "Blog \"Le Journal\"",
-        "info": "Utilisé pour les liens de navigation \"Journal\" sur les pages autres que l'accueil (l'accueil pointe vers sa propre section Journal)."
+        "type": "url",
+        "id": "journal_url",
+        "label": "Lien vers le blog \"Le Journal\"",
+        "info": "Ex : /blogs/journal — utilisé pour les liens de navigation \"Journal\" sur les pages autres que l'accueil (l'accueil pointe vers sa propre section Journal)."
       }
     ]
   },
