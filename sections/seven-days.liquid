@@ -287,17 +287,17 @@
     },
     {
       "type": "size_option",
-      "name": "Forme (taille)",
+      "name": "Taille",
       "settings": [
         {
           "type": "text",
           "id": "value",
           "label": "Valeur exacte de l'option Shopify",
-          "info": "Doit correspondre EXACTEMENT à la valeur de l'option de variante sur tes produits (Forme, Taille...) — sinon le thème ne pourra pas trouver la bonne variante à ajouter au panier.",
-          "default": "Amande"
+          "info": "Doit correspondre EXACTEMENT à la valeur de l'option \"Taille\" sur tes produits (respecte majuscules/minuscules) — sinon le thème ne pourra pas trouver la bonne variante à ajouter au panier.",
+          "default": "S"
         },
-        { "type": "text", "id": "label", "label": "Libellé affiché", "default": "Amande" },
-        { "type": "text", "id": "description", "label": "Description courte", "default": "Discret, allongé, féminin." }
+        { "type": "text", "id": "label", "label": "Libellé affiché", "default": "S" },
+        { "type": "text", "id": "description", "label": "Description courte", "default": "" }
       ]
     }
   ],
@@ -317,10 +317,10 @@
         { "type": "mood_option", "settings": { "key": "cleangirl", "role": "weekday", "label": "Clean Girl", "description": "Décontracté, courses, sans effort.", "modifier": "rose" } },
         { "type": "mood_option", "settings": { "key": "afterwork", "role": "weekend", "label": "Afterwork", "description": "Dîners, verres, chic décontracté.", "modifier": "bordeaux" } },
         { "type": "mood_option", "settings": { "key": "dark", "role": "weekend", "label": "After Dark", "description": "Sorties qui durent jusqu'au bout de la nuit.", "modifier": "noir" } },
-        { "type": "size_option", "settings": { "value": "Amande", "label": "Amande", "description": "Discret, allongé, féminin." } },
-        { "type": "size_option", "settings": { "value": "Ballerine", "label": "Ballerine", "description": "Carré adouci, longueur medium." } },
-        { "type": "size_option", "settings": { "value": "Carré", "label": "Carré", "description": "Net, structuré, longueur courte à medium." } },
-        { "type": "size_option", "settings": { "value": "Stiletto", "label": "Stiletto", "description": "Pointu, long, statement." } }
+        { "type": "size_option", "settings": { "value": "XS", "label": "XS", "description": "" } },
+        { "type": "size_option", "settings": { "value": "S", "label": "S", "description": "" } },
+        { "type": "size_option", "settings": { "value": "M", "label": "M", "description": "" } },
+        { "type": "size_option", "settings": { "value": "L", "label": "L", "description": "" } }
       ]
     }
   ]
