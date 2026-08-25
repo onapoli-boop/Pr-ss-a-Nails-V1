@@ -88,6 +88,7 @@
             "label": "Girlboss",
             "description": "Bureau, réunions, soignée.",
             "modifier": "",
+            "collection": "clean-girl",
             "product": "10pcs-pure-color-handmade-short-false-nail-with-glue-press-on-nails-full-cover-french-round-head-manicure-wearable-nail-tips-art"
           }
         },
@@ -99,6 +100,7 @@
             "label": "Clean Girl",
             "description": "Décontracté, courses, sans effort.",
             "modifier": "rose",
+            "collection": "girlboss",
             "product": ""
           }
         },
@@ -110,6 +112,7 @@
             "label": "Afterwork",
             "description": "Dîners, verres, chic décontracté.",
             "modifier": "bordeaux",
+            "collection": "",
             "product": ""
           }
         },
@@ -121,6 +124,7 @@
             "label": "After Dark",
             "description": "Sorties qui durent jusqu'au bout de la nuit.",
             "modifier": "noir",
+            "collection": "",
             "product": ""
           }
         }
