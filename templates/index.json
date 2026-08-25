@@ -166,7 +166,8 @@
             "title": "Clean Girl",
             "text": "Tes ongles du lundi au vendredi, 9h-17h.",
             "cta_label": "Découvrir",
-            "link": "#shop",
+            "link": "shopify://collections/clean-girl",
+            "image": "shopify://shop_images/Gemini_Generated_Image_1tmtdl1tmtdl1tmt.jpg",
             "modifier": "rose"
           }
         },
@@ -217,11 +218,12 @@
       "settings": {
         "eyebrow": "Adopte le look",
         "collection_label": "After Dark",
-        "product": "",
+        "product": "10pcs-pure-color-handmade-short-false-nail-with-glue-press-on-nails-full-cover-french-round-head-manicure-wearable-nail-tips-art-copie",
         "heading": "Blue Hour",
         "description": "Cat-eye bleu nuit. Liseré argenté. Énergie after-hours.",
         "price_label": "14,90 €",
-        "cta_label": "Découvrir Blue Hour"
+        "cta_label": "Découvrir Blue Hour",
+        "image": "{{ section.settings.product.featured_image }}"
       }
     },
     "bestsellers": {
