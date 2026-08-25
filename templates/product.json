@@ -11,7 +11,16 @@
   "sections": {
     "main": {
       "type": "main-product",
-      "settings": {}
+      "settings": {
+        "fit_note": "24 ongles · 10 tailles incluses, lime fournie dans chaque set.",
+        "upsell_eyebrow": "Complète ta semaine",
+        "upsell_text": "Intègre ce set à tes 7 looks et profite de cinq sets en plus.",
+        "upsell_cta_label": "Voir 7 Days · 40€",
+        "upsell_link": "",
+        "trust_1": "Kit soin des ongles offert dès 40€ d'achat",
+        "trust_2": "Expédié depuis l'Europe, 2 à 4 jours ouvrés",
+        "trust_3": "Réutilisable — entretenu, il se reporte"
+      }
     },
     "key-points": {
       "type": "pdp-key-points",
@@ -53,6 +62,7 @@
           "settings": {
             "title": "Prépare",
             "text": "Nettoie l'ongle, repousse la cuticule et lime légèrement la surface pour une meilleure accroche.",
+            "image": "shopify://shop_images/Capture_d_ecran_2026-08-25_a_23.50.48.png",
             "modifier": "rose"
           }
         },
@@ -61,6 +71,7 @@
           "settings": {
             "title": "Ajuste",
             "text": "Teste chaque gabarit du kit pour trouver la bonne taille sur tes 10 ongles.",
+            "image": "shopify://shop_images/Capture_d_ecran_2026-08-25_a_23.52.00.png",
             "modifier": ""
           }
         },
@@ -69,6 +80,7 @@
           "settings": {
             "title": "Colle",
             "text": "Applique la languette adhésive, positionne le press-on à la base de l'ongle et presse 15 secondes.",
+            "image": "shopify://shop_images/Capture_d_ecran_2026-08-25_a_23.51.01.png",
             "modifier": "bordeaux"
           }
         },
@@ -77,6 +89,7 @@
           "settings": {
             "title": "Sublime",
             "text": "Lime les bords si besoin pour un rendu net, parfaitement fini.",
+            "image": "shopify://shop_images/Capture_d_ecran_2026-08-25_a_23.53.12.png",
             "modifier": "noir"
           }
         }
@@ -87,7 +100,10 @@
         "step-3",
         "step-4"
       ],
-      "settings": {}
+      "settings": {
+        "heading": "Guide de pose",
+        "subheading": "Quatre étapes, quinze minutes, aucun temps de séchage."
+      }
     },
     "info": {
       "type": "pdp-info",
@@ -157,7 +173,17 @@
         "review-2",
         "review-3"
       ],
-      "settings": {}
+      "settings": {
+        "show_demo_flag": true,
+        "score": "4.8",
+        "count": "128",
+        "verified_label": "Achat vérifié",
+        "pct_5": 82,
+        "pct_4": 12,
+        "pct_3": 4,
+        "pct_2": 1,
+        "pct_1": 1
+      }
     },
     "faq": {
       "type": "pdp-faq",
@@ -205,25 +231,34 @@
         "faq-4",
         "faq-5"
       ],
-      "settings": {}
+      "settings": {
+        "heading": "Questions fréquentes"
+      }
     },
     "new-arrivals": {
       "type": "bestsellers",
       "settings": {
         "heading": "Nouveautés du mois",
-        "subheading": "Vient de sortir — avant rupture de stock."
+        "subheading": "Vient de sortir — avant rupture de stock.",
+        "collection": "new-in",
+        "products_to_show": 4
       }
     },
     "related-products": {
       "type": "bestsellers",
       "settings": {
         "heading": "Tu vas aussi aimer",
-        "subheading": "Nos sets les plus aimés, réassortis chaque semaine."
+        "subheading": "Nos sets les plus aimés, réassortis chaque semaine.",
+        "collection": "",
+        "products_to_show": 4
       }
     },
     "email-capture": {
       "type": "email-capture",
-      "settings": {}
+      "settings": {
+        "heading": "Ton prochain look<br>arrive dans ta boîte mail.",
+        "subtext": "Accède en avant-première aux nouveautés, éditions limitées et offres privées."
+      }
     }
   },
   "order": [
