@@ -140,7 +140,8 @@
       ],
       "settings": {
         "eyebrow": "L'offre signature",
-        "heading": "Une semaine.<br><em>Sept moods.</em><br>Une routine simple.",
+        "heading": "Une semaine.Sept moods.Une routine simple.",
+        "seven_days_collection": "7-days",
         "stat_1_value": "7",
         "stat_1_label": "Sets press-on",
         "stat_2_value": "1",
