@@ -172,17 +172,33 @@ document.addEventListener('DOMContentLoaded', () => {
   const moodKeys = Object.keys(moods);
   const dayNames = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
 
+  // Among a product's variants, prefer one matching the customer's chosen
+  // size (from step 1) that's also in stock; fall back to any variant with
+  // that size, then to the first available variant, then to the first one.
+  function pickVariant(variants, size) {
+    if (!variants || !variants.length) return null;
+    if (size) {
+      const availableMatch = variants.find(v => v.available && v.options.includes(size));
+      if (availableMatch) return availableMatch.id;
+      const anyMatch = variants.find(v => v.options.includes(size));
+      if (anyMatch) return anyMatch.id;
+    }
+    const firstAvailable = variants.find(v => v.available);
+    return (firstAvailable || variants[0]).id;
+  }
+
   // Prefer the product tagged for this exact day within the mood's own
   // collection (set in the "Option du quiz" block); fall back to the
   // mood's single manually-picked product if no tagged match exists yet.
-  function variantForDay(moodKey, dayIndex) {
+  function variantForDay(moodKey, dayIndex, size) {
     const mood = moods[moodKey];
     if (!mood) return null;
     const tag = dayTags[dayIndex];
-    const dayVariant = tag && mood.days && mood.days[tag];
-    return dayVariant || mood.variantId || null;
+    const dayVariants = tag && mood.days && mood.days[tag];
+    return pickVariant(dayVariants && dayVariants.length ? dayVariants : mood.variants, size);
   }
 
+  let selectedSize = null;
   let weekdayMood = null;
   let weekendMood = null;
   let assignment = [];
@@ -201,6 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function openBuilder() {
+    selectedSize = null;
     weekdayMood = null;
     weekendMood = null;
     lookBuilder.hidden = false;
@@ -245,19 +262,22 @@ document.addEventListener('DOMContentLoaded', () => {
   builderStart?.addEventListener('click', () => goToStep(1));
 
   document.querySelectorAll('.builder-step[data-step="1"] .builder-option').forEach(btn => {
-    btn.addEventListener('click', () => { weekdayMood = btn.dataset.answer; goToStep(2); });
+    btn.addEventListener('click', () => { selectedSize = btn.dataset.answer; goToStep(2); });
   });
   document.querySelectorAll('.builder-step[data-step="2"] .builder-option').forEach(btn => {
+    btn.addEventListener('click', () => { weekdayMood = btn.dataset.answer; goToStep(3); });
+  });
+  document.querySelectorAll('.builder-step[data-step="3"] .builder-option').forEach(btn => {
     btn.addEventListener('click', () => {
       weekendMood = btn.dataset.answer;
       renderDays();
-      goToStep(3);
+      goToStep(4);
     });
   });
   builderAdd?.addEventListener('click', async () => {
     if (!assignment.length) { closeBuilder(); return; }
     const items = assignment
-      .map((moodKey, i) => variantForDay(moodKey, i))
+      .map((moodKey, i) => variantForDay(moodKey, i, selectedSize))
       .filter(Boolean)
       .map(id => ({ id, quantity: 1 }));
     if (items.length) {

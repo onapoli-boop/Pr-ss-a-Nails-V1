@@ -1,6 +1,7 @@
 {%- liquid
   assign day_blocks = section.blocks | where: 'type', 'day'
   assign mood_blocks = section.blocks | where: 'type', 'mood_option'
+  assign size_blocks = section.blocks | where: 'type', 'size_option'
 
   assign day_tags = ''
   for block in day_blocks
@@ -11,11 +12,14 @@
 
 {%- comment -%}
   For each mood option, "days" maps every day tag (lundi, mardi...) to the
-  first product in that mood's own collection (Girl Boss, Clean Girl...)
-  that also carries the matching day tag — so the quiz result can propose a
-  different, real product per day instead of one single product per mood.
-  Falls back to the mood's manually-picked "product" setting wherever no
-  tagged match exists yet (safety net while tagging is still in progress).
+  full variant list of the product in that mood's own collection (Girl
+  Boss, Clean Girl...) that also carries the matching day tag — so the quiz
+  result can propose a different, real product per day instead of one
+  single product per mood. Falls back to the mood's manually-picked
+  "product" setting wherever no tagged match exists yet (safety net while
+  tagging is still in progress). Full variant lists (not a single resolved
+  id) are needed so the JS can pick the variant matching whichever size the
+  customer answered in step 1 — see assets/theme.js pickVariant().
 {%- endcomment -%}
 {%- capture moods_json -%}
   {
@@ -24,7 +28,7 @@
     {{ mood.settings.key | json }}: {
       "label": {{ mood.settings.label | json }},
       "modifier": {{ mood.settings.modifier | json }},
-      "variantId": {{ mood.settings.product.selected_or_first_available_variant.id | json }},
+      "variants": {{ mood.settings.product.variants | json }},
       "days": {
         {%- for tag in day_tags -%}
           {%- liquid
@@ -38,7 +42,7 @@
               endfor
             endif
           -%}
-          {{ tag | json }}: {{ day_product.selected_or_first_available_variant.id | default: '' | json }}{% unless forloop.last %},{% endunless %}
+          {{ tag | json }}: {% if day_product %}{{ day_product.variants | json }}{% else %}null{% endif %}{% unless forloop.last %},{% endunless %}
         {%- endfor -%}
       }
     }{% unless forloop.last %},{% endunless %}
@@ -118,6 +122,7 @@
     <span class="dot" data-dot="1"></span>
     <span class="dot" data-dot="2"></span>
     <span class="dot" data-dot="3"></span>
+    <span class="dot" data-dot="4"></span>
   </div>
 
   <div class="builder-step" data-step="0">
@@ -128,7 +133,20 @@
   </div>
 
   <div class="builder-step" data-step="1" hidden>
-    <span class="eyebrow">{{ 'look_builder.step_1_of_2' | t }}</span>
+    <span class="eyebrow">{{ 'look_builder.step_1_of_3' | t }}</span>
+    <h3>{{ 'look_builder.question_size' | t }}</h3>
+    <div class="builder-options">
+      {%- for block in size_blocks -%}
+        <button class="builder-option" data-answer="{{ block.settings.value }}">
+          <span class="opt-title">{{ block.settings.label }}</span>
+          <span class="opt-desc">{{ block.settings.description }}</span>
+        </button>
+      {%- endfor -%}
+    </div>
+  </div>
+
+  <div class="builder-step" data-step="2" hidden>
+    <span class="eyebrow">{{ 'look_builder.step_2_of_3' | t }}</span>
     <h3>{{ 'look_builder.question_weekday' | t }}</h3>
     <div class="builder-options">
       {%- for block in mood_blocks -%}
@@ -142,8 +160,8 @@
     </div>
   </div>
 
-  <div class="builder-step" data-step="2" hidden>
-    <span class="eyebrow">{{ 'look_builder.step_2_of_2' | t }}</span>
+  <div class="builder-step" data-step="3" hidden>
+    <span class="eyebrow">{{ 'look_builder.step_3_of_3' | t }}</span>
     <h3>{{ 'look_builder.question_weekend' | t }}</h3>
     <div class="builder-options">
       {%- for block in mood_blocks -%}
@@ -157,7 +175,7 @@
     </div>
   </div>
 
-  <div class="builder-step builder-result" data-step="3" hidden>
+  <div class="builder-step builder-result" data-step="4" hidden>
     <span class="eyebrow">{{ 'look_builder.result_eyebrow' | t }}</span>
     <h3>{{ 'look_builder.result_title' | t }}</h3>
     <p class="builder-hint">{{ 'look_builder.result_hint' | t }}</p>
@@ -266,9 +284,24 @@
         },
         { "type": "product", "id": "product", "label": "Produit de secours pour ce mood", "info": "Utilisé uniquement si aucun produit de la collection ci-dessus ne porte le tag du jour concerné." }
       ]
+    },
+    {
+      "type": "size_option",
+      "name": "Forme (taille)",
+      "settings": [
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Valeur exacte de l'option Shopify",
+          "info": "Doit correspondre EXACTEMENT à la valeur de l'option de variante sur tes produits (Forme, Taille...) — sinon le thème ne pourra pas trouver la bonne variante à ajouter au panier.",
+          "default": "Amande"
+        },
+        { "type": "text", "id": "label", "label": "Libellé affiché", "default": "Amande" },
+        { "type": "text", "id": "description", "label": "Description courte", "default": "Discret, allongé, féminin." }
+      ]
     }
   ],
-  "max_blocks": 15,
+  "max_blocks": 20,
   "presets": [
     {
       "name": "7 Days · 7 Looks",
@@ -283,7 +316,11 @@
         { "type": "mood_option", "settings": { "key": "girlboss", "role": "weekday", "label": "Girlboss", "description": "Bureau, réunions, soignée.", "modifier": "" } },
         { "type": "mood_option", "settings": { "key": "cleangirl", "role": "weekday", "label": "Clean Girl", "description": "Décontracté, courses, sans effort.", "modifier": "rose" } },
         { "type": "mood_option", "settings": { "key": "afterwork", "role": "weekend", "label": "Afterwork", "description": "Dîners, verres, chic décontracté.", "modifier": "bordeaux" } },
-        { "type": "mood_option", "settings": { "key": "dark", "role": "weekend", "label": "After Dark", "description": "Sorties qui durent jusqu'au bout de la nuit.", "modifier": "noir" } }
+        { "type": "mood_option", "settings": { "key": "dark", "role": "weekend", "label": "After Dark", "description": "Sorties qui durent jusqu'au bout de la nuit.", "modifier": "noir" } },
+        { "type": "size_option", "settings": { "value": "Amande", "label": "Amande", "description": "Discret, allongé, féminin." } },
+        { "type": "size_option", "settings": { "value": "Ballerine", "label": "Ballerine", "description": "Carré adouci, longueur medium." } },
+        { "type": "size_option", "settings": { "value": "Carré", "label": "Carré", "description": "Net, structuré, longueur courte à medium." } },
+        { "type": "size_option", "settings": { "value": "Stiletto", "label": "Stiletto", "description": "Pointu, long, statement." } }
       ]
     }
   ]
