@@ -165,8 +165,23 @@ document.addEventListener('DOMContentLoaded', () => {
   if (lookBuilder && lookBuilder.dataset.moods) {
     try { moods = JSON.parse(lookBuilder.dataset.moods); } catch (e) { moods = {}; }
   }
+  let dayTags = [];
+  if (lookBuilder && lookBuilder.dataset.dayTags) {
+    try { dayTags = JSON.parse(lookBuilder.dataset.dayTags); } catch (e) { dayTags = []; }
+  }
   const moodKeys = Object.keys(moods);
   const dayNames = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
+
+  // Prefer the product tagged for this exact day within the mood's own
+  // collection (set in the "Option du quiz" block); fall back to the
+  // mood's single manually-picked product if no tagged match exists yet.
+  function variantForDay(moodKey, dayIndex) {
+    const mood = moods[moodKey];
+    if (!mood) return null;
+    const tag = dayTags[dayIndex];
+    const dayVariant = tag && mood.days && mood.days[tag];
+    return dayVariant || mood.variantId || null;
+  }
 
   let weekdayMood = null;
   let weekendMood = null;
@@ -242,7 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
   builderAdd?.addEventListener('click', async () => {
     if (!assignment.length) { closeBuilder(); return; }
     const items = assignment
-      .map(moodKey => moods[moodKey] && moods[moodKey].variantId)
+      .map((moodKey, i) => variantForDay(moodKey, i))
       .filter(Boolean)
       .map(id => ({ id, quantity: 1 }));
     if (items.length) {

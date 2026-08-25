@@ -1,7 +1,50 @@
 {%- liquid
   assign day_blocks = section.blocks | where: 'type', 'day'
   assign mood_blocks = section.blocks | where: 'type', 'mood_option'
+
+  assign day_tags = ''
+  for block in day_blocks
+    assign day_tags = day_tags | append: block.settings.day_tag | append: '|'
+  endfor
+  assign day_tags = day_tags | split: '|'
 -%}
+
+{%- comment -%}
+  For each mood option, "days" maps every day tag (lundi, mardi...) to the
+  first product in that mood's own collection (Girl Boss, Clean Girl...)
+  that also carries the matching day tag — so the quiz result can propose a
+  different, real product per day instead of one single product per mood.
+  Falls back to the mood's manually-picked "product" setting wherever no
+  tagged match exists yet (safety net while tagging is still in progress).
+{%- endcomment -%}
+{%- capture moods_json -%}
+  {
+  {%- for mood in mood_blocks -%}
+    {%- assign mood_collection = mood.settings.collection -%}
+    {{ mood.settings.key | json }}: {
+      "label": {{ mood.settings.label | json }},
+      "modifier": {{ mood.settings.modifier | json }},
+      "variantId": {{ mood.settings.product.selected_or_first_available_variant.id | json }},
+      "days": {
+        {%- for tag in day_tags -%}
+          {%- liquid
+            assign day_product = blank
+            if tag != blank and mood_collection
+              for p in mood_collection.products
+                if p.tags contains tag
+                  assign day_product = p
+                  break
+                endif
+              endfor
+            endif
+          -%}
+          {{ tag | json }}: {{ day_product.selected_or_first_available_variant.id | default: '' | json }}{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
+      }
+    }{% unless forloop.last %},{% endunless %}
+  {%- endfor -%}
+  }
+{%- endcapture -%}
 <section class="week" id="week">
   <div class="container">
     <div class="week-head reveal">
@@ -66,15 +109,8 @@
   aria-modal="true"
   aria-labelledby="builderTitle"
   hidden
-  data-moods='{
-    {%- for block in mood_blocks -%}
-      {{ block.settings.key | json }}: {
-        "label": {{ block.settings.label | json }},
-        "modifier": {{ block.settings.modifier | json }},
-        "variantId": {{ block.settings.product.selected_or_first_available_variant.id | json }}
-      }{% unless forloop.last %},{% endunless %}
-    {%- endfor -%}
-  }'
+  data-moods='{{ moods_json | strip_newlines | strip }}'
+  data-day-tags='{{ day_tags | json }}'
 >
   <button class="builder-close" id="builderCloseBtn" aria-label="{{ 'general.accessibility.close' | t }}">✕</button>
   <div class="builder-progress">
@@ -222,7 +258,13 @@
           ],
           "default": ""
         },
-        { "type": "product", "id": "product", "label": "Produit ajouté au panier pour ce mood" }
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection de ce mood",
+          "info": "Ex : ta collection \"Girl Boss\", \"Clean Girl\"... Utilisée pour retrouver, via le tag de jour (lundi, mardi...) déjà présent sur tes produits, un produit différent et adapté à ce mood pour chaque jour de la semaine."
+        },
+        { "type": "product", "id": "product", "label": "Produit de secours pour ce mood", "info": "Utilisé uniquement si aucun produit de la collection ci-dessus ne porte le tag du jour concerné." }
       ]
     }
   ],
