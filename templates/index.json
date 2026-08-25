@@ -28,6 +28,7 @@
           "type": "day",
           "settings": {
             "label": "Lundi",
+            "day_tag": "lundi",
             "modifier": ""
           }
         },
@@ -35,6 +36,7 @@
           "type": "day",
           "settings": {
             "label": "Mardi",
+            "day_tag": "mardi",
             "modifier": "rose"
           }
         },
@@ -42,6 +44,7 @@
           "type": "day",
           "settings": {
             "label": "Mercredi",
+            "day_tag": "mercredi",
             "modifier": "noir"
           }
         },
@@ -49,6 +52,7 @@
           "type": "day",
           "settings": {
             "label": "Jeudi",
+            "day_tag": "jeudi",
             "modifier": ""
           }
         },
@@ -56,6 +60,7 @@
           "type": "day",
           "settings": {
             "label": "Vendredi",
+            "day_tag": "vendredi",
             "modifier": "bordeaux"
           }
         },
@@ -63,6 +68,7 @@
           "type": "day",
           "settings": {
             "label": "Samedi",
+            "day_tag": "samedi",
             "modifier": "rose"
           }
         },
@@ -70,6 +76,7 @@
           "type": "day",
           "settings": {
             "label": "Dimanche",
+            "day_tag": "dimanche",
             "modifier": "noir"
           }
         },

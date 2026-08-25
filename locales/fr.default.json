@@ -100,6 +100,12 @@
     "wishlist_added": "Enregistré",
     "reviews_count": "{{ count }} avis"
   },
+  "seven_days_kit": {
+    "progress": "Kit 7 Days · %count%/%target%",
+    "complete": "Kit 7 Days complet — %price% appliqué au panier !",
+    "add_to_kit": "Ajouter à mon kit 7 Days",
+    "in_kit": "Dans ton kit ✓"
+  },
   "look_builder": {
     "eyebrow": "7 Days · 7 Looks",
     "intro_title": "Construisons ta semaine.",

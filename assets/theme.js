@@ -461,7 +461,53 @@ document.addEventListener('DOMContentLoaded', () => {
   closeBtn?.addEventListener('click', closeCart);
   cartOverlay?.addEventListener('click', closeCart);
 
+  // ------------------------------------------------------------------
+  // 7 Days kit progress — counts cart line items whose variant belongs
+  // to the merchant-configured "7 Days" collection (window.theme.sevenDaysKit
+  // .variantIds, output server-side in layout/theme.liquid). The 40€
+  // price itself is applied by a Shopify automatic discount once the
+  // target quantity is reached — this only reflects/displays that state.
+  // ------------------------------------------------------------------
+  const kitBadge = document.querySelector('[data-kit-progress]');
+  function updateKitProgress(cart) {
+    const kit = window.theme?.sevenDaysKit;
+    if (!kit || !kit.variantIds || !kit.variantIds.length) return;
+    const count = cart.items
+      .filter(item => kit.variantIds.includes(item.variant_id))
+      .reduce((sum, item) => sum + item.quantity, 0);
+
+    if (kitBadge) {
+      if (count > 0) {
+        kitBadge.hidden = false;
+        kitBadge.classList.toggle('is-complete', count >= kit.target);
+        const label = count >= kit.target
+          ? (window.theme.strings.kitComplete || '').replace('%price%', kit.price || '')
+          : (window.theme.strings.kitProgress || '').replace('%count%', count).replace('%target%', kit.target);
+        kitBadge.textContent = label;
+      } else {
+        kitBadge.hidden = true;
+      }
+    }
+
+    document.querySelectorAll('[data-add-to-kit]').forEach(btn => {
+      const variantId = parseInt(btn.dataset.variantId, 10);
+      const inKit = cart.items.some(item => item.variant_id === variantId);
+      btn.classList.toggle('is-in-kit', inKit);
+      btn.textContent = inKit ? (window.theme.strings.kitInKit || btn.textContent) : (window.theme.strings.kitAdd || btn.textContent);
+    });
+  }
+
+  document.querySelectorAll('[data-add-to-kit]').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const variantId = btn.dataset.variantId;
+      if (!variantId) return;
+      await addToCart(variantId, 1);
+      openCart();
+    });
+  });
+
   function renderCart(cart) {
+    updateKitProgress(cart);
     cartCountEls.forEach(el => { el.textContent = cart.item_count; });
     cartSubtotalEls.forEach(el => { el.textContent = money(cart.total_price); });
 

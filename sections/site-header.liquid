@@ -28,6 +28,7 @@
           {%- unless forloop.last %}·{% endunless -%}
         {%- endfor -%}
       </div>
+      <button type="button" class="kit-progress-badge" id="kitProgressBadge" data-kit-progress hidden></button>
       <button class="icon-btn" aria-label="{{ 'general.accessibility.search' | t }}">
         {% render 'icon', name: 'search' %}
       </button>

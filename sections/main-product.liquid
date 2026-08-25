@@ -1,6 +1,10 @@
 {%- liquid
   assign current_variant = product.selected_or_first_available_variant
   assign featured_media = current_variant.featured_media | default: product.featured_media
+  assign is_kit_eligible = false
+  if settings.seven_days_tag != blank and product.tags contains settings.seven_days_tag
+    assign is_kit_eligible = true
+  endif
 -%}
 <div class="container breadcrumb">
   <a href="{{ routes.root_url }}">{{ 'layout.breadcrumb.home' | t }}</a><span>/</span>
@@ -80,20 +84,33 @@
           {{ 'products.sold_out' | t }}
         {%- endif -%}
       </button>
+      {%- if is_kit_eligible -%}
+        <button
+          type="button"
+          class="btn btn-ghost pdp-add-kit"
+          id="pdpAddKitBtn"
+          data-add-to-kit
+          data-variant-id="{{ current_variant.id }}"
+        >
+          {{ 'seven_days_kit.add_to_kit' | t }}
+        </button>
+      {%- endif -%}
       <button class="pdp-wish" id="pdpWishBtn">
         {% render 'icon', name: 'wishlist' %}
         <span data-wish-label>{{ 'products.wishlist_add' | t }}</span>
       </button>
 
-      {%- if section.settings.upsell_text != blank -%}
-        <div class="pdp-upsell">
-          <div class="pdp-upsell-copy">
-            <span class="eyebrow">{{ section.settings.upsell_eyebrow }}</span>
-            <p>{{ section.settings.upsell_text }}</p>
+      {%- unless is_kit_eligible -%}
+        {%- if section.settings.upsell_text != blank -%}
+          <div class="pdp-upsell">
+            <div class="pdp-upsell-copy">
+              <span class="eyebrow">{{ section.settings.upsell_eyebrow }}</span>
+              <p>{{ section.settings.upsell_text }}</p>
+            </div>
+            <a href="{{ section.settings.upsell_link | default: routes.root_url | append: '#week' }}" class="btn btn-ghost">{{ section.settings.upsell_cta_label }}</a>
           </div>
-          <a href="{{ section.settings.upsell_link | default: routes.root_url | append: '#week' }}" class="btn btn-ghost">{{ section.settings.upsell_cta_label }}</a>
-        </div>
-      {%- endif -%}
+        {%- endif -%}
+      {%- endunless -%}
 
       {%- if section.settings.trust_1 != blank or section.settings.trust_2 != blank or section.settings.trust_3 != blank -%}
         <ul class="pdp-trust">

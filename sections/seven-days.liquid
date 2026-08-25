@@ -13,8 +13,23 @@
 
     <div class="week-calendar reveal">
       {%- for block in day_blocks -%}
+        {%- liquid
+          assign day_product = blank
+          if block.settings.day_tag != blank and settings.seven_days_collection
+            for p in settings.seven_days_collection.products
+              if p.tags contains block.settings.day_tag
+                assign day_product = p
+                break
+              endif
+            endfor
+          endif
+        -%}
         <div class="day-card" {{ block.shopify_attributes }}>
-          {%- render 'placeholder-media', modifier: block.settings.modifier -%}
+          {%- if day_product -%}
+            {%- render 'placeholder-media', image: day_product.featured_image, modifier: 'photo' -%}
+          {%- else -%}
+            {%- render 'placeholder-media', modifier: block.settings.modifier -%}
+          {%- endif -%}
           <span class="day-label">{{ block.settings.label }}</span>
         </div>
       {%- endfor -%}
@@ -150,9 +165,16 @@
       "settings": [
         { "type": "text", "id": "label", "label": "Nom du jour", "default": "Lundi" },
         {
+          "type": "text",
+          "id": "day_tag",
+          "label": "Tag produit du jour",
+          "info": "Si un produit de la collection 7 Days porte ce tag, son image remplace automatiquement la couleur ci-dessous.",
+          "default": "lundi"
+        },
+        {
           "type": "select",
           "id": "modifier",
-          "label": "Variante couleur",
+          "label": "Variante couleur (repli si aucun produit taggé)",
           "options": [
             { "value": "", "label": "Défaut" },
             { "value": "rose", "label": "Rose" },
@@ -201,13 +223,13 @@
     {
       "name": "7 Days · 7 Looks",
       "blocks": [
-        { "type": "day", "settings": { "label": "Lundi", "modifier": "" } },
-        { "type": "day", "settings": { "label": "Mardi", "modifier": "rose" } },
-        { "type": "day", "settings": { "label": "Mercredi", "modifier": "noir" } },
-        { "type": "day", "settings": { "label": "Jeudi", "modifier": "" } },
-        { "type": "day", "settings": { "label": "Vendredi", "modifier": "bordeaux" } },
-        { "type": "day", "settings": { "label": "Samedi", "modifier": "rose" } },
-        { "type": "day", "settings": { "label": "Dimanche", "modifier": "noir" } },
+        { "type": "day", "settings": { "label": "Lundi", "day_tag": "lundi", "modifier": "" } },
+        { "type": "day", "settings": { "label": "Mardi", "day_tag": "mardi", "modifier": "rose" } },
+        { "type": "day", "settings": { "label": "Mercredi", "day_tag": "mercredi", "modifier": "noir" } },
+        { "type": "day", "settings": { "label": "Jeudi", "day_tag": "jeudi", "modifier": "" } },
+        { "type": "day", "settings": { "label": "Vendredi", "day_tag": "vendredi", "modifier": "bordeaux" } },
+        { "type": "day", "settings": { "label": "Samedi", "day_tag": "samedi", "modifier": "rose" } },
+        { "type": "day", "settings": { "label": "Dimanche", "day_tag": "dimanche", "modifier": "noir" } },
         { "type": "mood_option", "settings": { "key": "girlboss", "role": "weekday", "label": "Girlboss", "description": "Bureau, réunions, soignée.", "modifier": "" } },
         { "type": "mood_option", "settings": { "key": "cleangirl", "role": "weekday", "label": "Clean Girl", "description": "Décontracté, courses, sans effort.", "modifier": "rose" } },
         { "type": "mood_option", "settings": { "key": "afterwork", "role": "weekend", "label": "Afterwork", "description": "Dîners, verres, chic décontracté.", "modifier": "bordeaux" } },

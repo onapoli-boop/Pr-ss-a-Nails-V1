@@ -1492,6 +1492,39 @@ footer.site-footer {
 }
 
 /* ==========================================================================
+   7 Days kit progress
+   ========================================================================== */
+.kit-progress-badge {
+  font-size: 10px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  font-weight: 700;
+  background: var(--rose-poudre);
+  color: var(--bordeaux);
+  padding: 7px 12px;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+  transition: background .2s var(--ease);
+}
+.kit-progress-badge:hover { background: var(--nude-light); }
+.kit-progress-badge.is-complete { background: var(--bordeaux); color: #fff; }
+
+.pdp-add-kit {
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 12px;
+  background: var(--rose-poudre);
+  color: var(--bordeaux);
+  border-color: var(--rose-poudre);
+}
+.pdp-add-kit:hover { background: var(--bordeaux); color: #fff; border-color: var(--bordeaux); }
+.pdp-add-kit.is-in-kit { background: var(--noir); color: var(--offwhite); border-color: var(--noir); }
+
+@media (max-width: 860px) {
+  .kit-progress-badge { display: none; }
+}
+
+/* ==========================================================================
    Accessibility utilities
    ========================================================================== */
 .visually-hidden {

@@ -24,6 +24,39 @@
     ]
   },
   {
+    "name": "Kit 7 Days",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Configuration technique du kit \"7 Days · 7 Looks\". Voir content/kit-7-days-setup.md dans le repo pour la mise en place complète (collection + réduction automatique côté admin)."
+      },
+      {
+        "type": "collection",
+        "id": "seven_days_collection",
+        "label": "Collection des sets éligibles au kit 7 Days"
+      },
+      {
+        "type": "text",
+        "id": "seven_days_tag",
+        "label": "Tag produit utilisé pour le kit 7 Days",
+        "default": "7days",
+        "info": "Chaque produit éligible doit porter ce tag — c'est ce qui affiche le bouton \"Ajouter à mon kit\" sur sa fiche produit."
+      },
+      {
+        "type": "number",
+        "id": "seven_days_target",
+        "label": "Nombre d'articles pour compléter le kit",
+        "default": 7
+      },
+      {
+        "type": "text",
+        "id": "seven_days_price",
+        "label": "Prix affiché du kit complet",
+        "default": "40 €"
+      }
+    ]
+  },
+  {
     "name": "Navigation",
     "settings": [
       {
