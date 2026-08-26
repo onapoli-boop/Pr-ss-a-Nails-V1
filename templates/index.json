@@ -25,12 +25,40 @@
     "seven-days": {
       "type": "seven-days",
       "blocks": {
+        "size_option_TReqhg": {
+          "type": "size_option",
+          "settings": {
+            "value": "M",
+            "label": "M",
+            "description": "Discret, allongé, féminin."
+          }
+        },
+        "size_option_Kiaybf": {
+          "type": "size_option",
+          "settings": {
+            "value": "S",
+            "label": "S",
+            "description": ""
+          }
+        },
         "size_option_LrzyVz": {
           "type": "size_option",
           "settings": {
-            "value": "XS",
-            "label": "XS",
+            "value": "xs",
+            "label": "xs",
             "description": ""
+          }
+        },
+        "mood_option_Y9BLeK": {
+          "type": "mood_option",
+          "settings": {
+            "key": "girlboss",
+            "role": "weekday",
+            "label": "Girlboss",
+            "description": "Bureau, réunions, soignée.",
+            "modifier": "",
+            "collection": "",
+            "product": ""
           }
         },
         "day-1": {
@@ -139,7 +167,10 @@
         }
       },
       "block_order": [
+        "size_option_TReqhg",
+        "size_option_Kiaybf",
         "size_option_LrzyVz",
+        "mood_option_Y9BLeK",
         "day-1",
         "day-2",
         "day-3",
