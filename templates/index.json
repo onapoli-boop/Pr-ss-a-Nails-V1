@@ -25,7 +25,7 @@
     "seven-days": {
       "type": "seven-days",
       "blocks": {
-        "size_option_BG8nz7": {
+        "size_option_LrzyVz": {
           "type": "size_option",
           "settings": {
             "value": "XS",
@@ -97,7 +97,7 @@
             "label": "Girlboss",
             "description": "Bureau, réunions, soignée.",
             "modifier": "",
-            "collection": "clean-girl",
+            "collection": "girlboss",
             "product": "10pcs-pure-color-handmade-short-false-nail-with-glue-press-on-nails-full-cover-french-round-head-manicure-wearable-nail-tips-art"
           }
         },
@@ -109,7 +109,7 @@
             "label": "Clean Girl",
             "description": "Décontracté, courses, sans effort.",
             "modifier": "rose",
-            "collection": "girlboss",
+            "collection": "clean-girl",
             "product": ""
           }
         },
@@ -139,7 +139,7 @@
         }
       },
       "block_order": [
-        "size_option_BG8nz7",
+        "size_option_LrzyVz",
         "day-1",
         "day-2",
         "day-3",
