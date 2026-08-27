@@ -190,12 +190,23 @@ document.addEventListener('DOMContentLoaded', () => {
   // Prefer the product tagged for this exact day within the mood's own
   // collection (set in the "Option du quiz" block); fall back to the
   // mood's single manually-picked product if no tagged match exists yet.
-  function variantForDay(moodKey, dayIndex, size) {
+  function dayProduct(moodKey, dayIndex) {
     const mood = moods[moodKey];
     if (!mood) return null;
     const tag = dayTags[dayIndex];
-    const dayVariants = tag && mood.days && mood.days[tag];
-    return pickVariant(dayVariants && dayVariants.length ? dayVariants : mood.variants, size);
+    const tagged = tag && mood.days && mood.days[tag];
+    if (tagged && tagged.variants && tagged.variants.length) return tagged;
+    return { image: mood.image, variants: mood.variants };
+  }
+
+  function variantForDay(moodKey, dayIndex, size) {
+    const product = dayProduct(moodKey, dayIndex);
+    return product ? pickVariant(product.variants, size) : null;
+  }
+
+  function imageForDay(moodKey, dayIndex) {
+    const product = dayProduct(moodKey, dayIndex);
+    return product && product.image ? product.image : null;
   }
 
   let selectedSize = null;
@@ -229,6 +240,19 @@ document.addEventListener('DOMContentLoaded', () => {
     builderOverlay.classList.remove('open');
   }
 
+  // Renders either the real product photo for this day (once one is
+  // resolved via variantForDay/imageForDay) or, failing that, the same
+  // color-gradient placeholder used elsewhere in the theme — mirrors the
+  // .ph / .ph-photo markup from snippets/placeholder-media.liquid.
+  function phMarkup(moodKey, i) {
+    const mood = moods[moodKey];
+    const image = imageForDay(moodKey, i);
+    if (image) {
+      return `<div class="ph ph-photo" style="background-image:url('${image}');" role="img" aria-label="${mood.label}"></div>`;
+    }
+    return `<div class="ph ${mood.modifier ? 'ph-' + mood.modifier : ''}"></div>`;
+  }
+
   function renderDays() {
     if (!moodKeys.length) return;
     // Mon–Thu and Sun take the weekday mood, Fri–Sat take the weekend mood
@@ -239,7 +263,7 @@ document.addEventListener('DOMContentLoaded', () => {
       day.className = 'builder-day';
       const mood = moods[moodKey];
       day.innerHTML = `
-        <div class="ph ${mood.modifier ? 'ph-' + mood.modifier : ''}"></div>
+        ${phMarkup(moodKey, i)}
         <span class="bd-day">${dayNames[i]}</span>
         <span class="bd-mood">${mood.label}</span>
       `;
@@ -247,10 +271,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const currentIndex = moodKeys.indexOf(assignment[i]);
         const nextMood = moodKeys[(currentIndex + 1) % moodKeys.length];
         assignment[i] = nextMood;
-        const nextModifier = moods[nextMood].modifier;
-        day.querySelector('div').className = `ph ${nextModifier ? 'ph-' + nextModifier : ''}`;
+        day.querySelector('.ph').outerHTML = phMarkup(nextMood, i);
         day.querySelector('.bd-mood').textContent = moods[nextMood].label;
-        if (hasGSAP) gsap.fromTo(day, { opacity: 0.4 }, { opacity: 1, duration: 0.3 });
+        if (hasGSAP) gsap.fromTo(day.querySelector('.ph'), { opacity: 0.4 }, { opacity: 1, duration: 0.3 });
       });
       builderDaysEl.appendChild(day);
     });
