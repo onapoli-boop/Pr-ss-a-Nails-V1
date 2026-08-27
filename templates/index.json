@@ -49,18 +49,6 @@
             "description": ""
           }
         },
-        "mood_option_Y9BLeK": {
-          "type": "mood_option",
-          "settings": {
-            "key": "girlboss",
-            "role": "weekday",
-            "label": "Girlboss",
-            "description": "Bureau, réunions, soignée.",
-            "modifier": "",
-            "collection": "",
-            "product": ""
-          }
-        },
         "day-1": {
           "type": "day",
           "settings": {
@@ -161,7 +149,7 @@
             "label": "After Dark",
             "description": "Sorties qui durent jusqu'au bout de la nuit.",
             "modifier": "noir",
-            "collection": "",
+            "collection": "chaises-fauteuils",
             "product": ""
           }
         }
@@ -170,7 +158,6 @@
         "size_option_TReqhg",
         "size_option_Kiaybf",
         "size_option_LrzyVz",
-        "mood_option_Y9BLeK",
         "day-1",
         "day-2",
         "day-3",
