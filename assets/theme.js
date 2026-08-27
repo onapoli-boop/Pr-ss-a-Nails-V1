@@ -242,13 +242,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Renders either the real product photo for this day (once one is
   // resolved via variantForDay/imageForDay) or, failing that, the same
-  // color-gradient placeholder used elsewhere in the theme — mirrors the
-  // .ph / .ph-photo markup from snippets/placeholder-media.liquid.
+  // color-gradient placeholder used elsewhere in the theme. Uses a real
+  // <img src> rather than an inline background-image style: stores with a
+  // strict style-src CSP (no 'unsafe-inline') silently block inline style
+  // attributes, which was hiding the photo entirely.
   function phMarkup(moodKey, i) {
     const mood = moods[moodKey];
     const image = imageForDay(moodKey, i);
     if (image) {
-      return `<div class="ph ph-photo" style="background-image:url('${image}');" role="img" aria-label="${mood.label}"></div>`;
+      return `<div class="ph ph-photo"><img src="${image}" alt="${mood.label}" loading="lazy"></div>`;
     }
     return `<div class="ph ${mood.modifier ? 'ph-' + mood.modifier : ''}"></div>`;
   }
