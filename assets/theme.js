@@ -163,7 +163,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let moods = {};
   if (lookBuilder && lookBuilder.dataset.moods) {
-    try { moods = JSON.parse(lookBuilder.dataset.moods); } catch (e) { moods = {}; }
+    try {
+      moods = JSON.parse(lookBuilder.dataset.moods);
+    } catch (e) {
+      console.error('7 Days look builder: could not parse data-moods, the quiz result will be empty.', e);
+      moods = {};
+    }
   }
   const moodKeys = Object.keys(moods);
   const dayNames = (window.theme && window.theme.strings && window.theme.strings.days)

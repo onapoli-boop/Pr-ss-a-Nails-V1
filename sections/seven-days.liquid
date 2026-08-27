@@ -103,7 +103,7 @@
   aria-modal="true"
   aria-labelledby="builderTitle"
   hidden
-  data-moods='{{ moods_json | strip_newlines | strip }}'
+  data-moods="{{ moods_json | strip_newlines | strip | escape }}"
 >
   <button class="builder-close" id="builderCloseBtn" aria-label="{{ 'general.accessibility.close' | t }}">✕</button>
   <div class="builder-progress">
