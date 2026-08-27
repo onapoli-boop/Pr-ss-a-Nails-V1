@@ -56,7 +56,18 @@
       decrease: {{ 'cart.decrease' | t | json }},
       increase: {{ 'cart.increase' | t | json }},
       wishlistAdd: {{ 'products.wishlist_add' | t | json }},
-      wishlistAdded: {{ 'products.wishlist_added' | t | json }}
+      wishlistAdded: {{ 'products.wishlist_added' | t | json }},
+      changeMood: {{ 'look_builder.change_mood' | t | json }},
+      changeModel: {{ 'look_builder.change_model' | t | json }},
+      days: [
+        {{ 'look_builder.day_mon' | t | json }},
+        {{ 'look_builder.day_tue' | t | json }},
+        {{ 'look_builder.day_wed' | t | json }},
+        {{ 'look_builder.day_thu' | t | json }},
+        {{ 'look_builder.day_fri' | t | json }},
+        {{ 'look_builder.day_sat' | t | json }},
+        {{ 'look_builder.day_sun' | t | json }}
+      ]
     });
   </script>
 

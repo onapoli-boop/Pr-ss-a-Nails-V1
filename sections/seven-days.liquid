@@ -2,27 +2,19 @@
   assign day_blocks = section.blocks | where: 'type', 'day'
   assign mood_blocks = section.blocks | where: 'type', 'mood_option'
   assign size_blocks = section.blocks | where: 'type', 'size_option'
-
-  assign day_tags = ''
-  for block in day_blocks
-    assign day_tags = day_tags | append: block.settings.day_tag | append: '|'
-  endfor
-  assign day_tags = day_tags | split: '|'
 -%}
 
 {%- comment -%}
-  For each mood option, "days" maps every day tag (lundi, mardi...) to the
-  full variant list and product image of the product in that mood's own
-  collection (Girl Boss, Clean Girl...) that also carries the matching day
-  tag — so the quiz result can propose a different, real product (photo
-  included) per day instead of one single product per mood. Falls back to
-  the mood's manually-picked "product" setting wherever no tagged match
-  exists yet (safety net while tagging is still in progress). Full variant
+  For each mood option, "products" lists every product (photo + full
+  variant list) in that mood's own collection (Girl Boss, Clean Girl...) —
+  no product tagging required. The result step (assets/theme.js) assigns
+  one product per day at random, then lets the customer cycle through the
+  rest of the list with the "Changer le modèle" button, or swap to another
+  mood entirely with "Changer le mood". Falls back to a single manually-
+  picked "product" when no collection is set (or it's empty). Full variant
   lists (not a single resolved id) are needed so the JS can pick the
   variant matching whichever size the customer answered in step 1 — see
-  assets/theme.js pickVariant(). The "image" fields let the result step
-  (renderDays() in assets/theme.js) show the actual product photo instead
-  of a plain color placeholder.
+  pickVariant() in assets/theme.js.
 {%- endcomment -%}
 {%- capture moods_json -%}
   {
@@ -31,24 +23,15 @@
     {{ mood.settings.key | json }}: {
       "label": {{ mood.settings.label | json }},
       "modifier": {{ mood.settings.modifier | json }},
-      "image": {% if mood.settings.product.featured_image %}{{ mood.settings.product.featured_image | image_url: width: 600 | json }}{% else %}null{% endif %},
-      "variants": {{ mood.settings.product.variants | json }},
-      "days": {
-        {%- for tag in day_tags -%}
-          {%- liquid
-            assign day_product = blank
-            if tag != blank and mood_collection
-              for p in mood_collection.products
-                if p.tags contains tag
-                  assign day_product = p
-                  break
-                endif
-              endfor
-            endif
-          -%}
-          {{ tag | json }}: {% if day_product %}{ "image": {% if day_product.featured_image %}{{ day_product.featured_image | image_url: width: 600 | json }}{% else %}null{% endif %}, "variants": {{ day_product.variants | json }} }{% else %}null{% endif %}{% unless forloop.last %},{% endunless %}
-        {%- endfor -%}
-      }
+      "products": [
+        {%- if mood_collection and mood_collection.products.size > 0 -%}
+          {%- for p in mood_collection.products -%}
+            { "image": {% if p.featured_image %}{{ p.featured_image | image_url: width: 600 | json }}{% else %}null{% endif %}, "variants": {{ p.variants | json }} }{% unless forloop.last %},{% endunless %}
+          {%- endfor -%}
+        {%- elsif mood.settings.product -%}
+          { "image": {% if mood.settings.product.featured_image %}{{ mood.settings.product.featured_image | image_url: width: 600 | json }}{% else %}null{% endif %}, "variants": {{ mood.settings.product.variants | json }} }
+        {%- endif -%}
+      ]
     }{% unless forloop.last %},{% endunless %}
   {%- endfor -%}
   }
@@ -60,17 +43,20 @@
       <h2>{{ section.settings.heading }}</h2>
     </div>
 
+    {%- liquid
+      assign week_collection = section.settings.seven_days_collection
+      assign week_products_count = 0
+      if week_collection
+        assign week_products_count = week_collection.products.size
+      endif
+    -%}
     <div class="week-calendar reveal">
       {%- for block in day_blocks -%}
         {%- liquid
           assign day_product = blank
-          if block.settings.day_tag != blank and section.settings.seven_days_collection
-            for p in section.settings.seven_days_collection.products
-              if p.tags contains block.settings.day_tag
-                assign day_product = p
-                break
-              endif
-            endfor
+          if week_products_count > 0
+            assign product_index = forloop.index0 | modulo: week_products_count
+            assign day_product = week_collection.products[product_index]
           endif
         -%}
         <div class="day-card" {{ block.shopify_attributes }}>
@@ -118,7 +104,6 @@
   aria-labelledby="builderTitle"
   hidden
   data-moods='{{ moods_json | strip_newlines | strip }}'
-  data-day-tags='{{ day_tags | json }}'
 >
   <button class="builder-close" id="builderCloseBtn" aria-label="{{ 'general.accessibility.close' | t }}">✕</button>
   <div class="builder-progress">
@@ -205,7 +190,7 @@
       "type": "collection",
       "id": "seven_days_collection",
       "label": "Collection des sets éligibles au kit 7 Days",
-      "info": "Utilisée pour retrouver, par tag de jour (lundi, mardi...), l'image à afficher dans le calendrier ci-dessus. Doit pointer vers la même collection que dans la section En-tête."
+      "info": "Chaque carte du calendrier ci-dessus affiche un produit différent de cette collection (rotation automatique, sans tag à poser)."
     },
     { "type": "header", "content": "Statistiques" },
     { "type": "text", "id": "stat_1_value", "label": "Stat 1 — valeur", "default": "7" },
@@ -231,16 +216,9 @@
       "settings": [
         { "type": "text", "id": "label", "label": "Nom du jour", "default": "Lundi" },
         {
-          "type": "text",
-          "id": "day_tag",
-          "label": "Tag produit du jour",
-          "info": "Si un produit de la collection 7 Days porte ce tag, son image remplace automatiquement la couleur ci-dessous.",
-          "default": "lundi"
-        },
-        {
           "type": "select",
           "id": "modifier",
-          "label": "Variante couleur (repli si aucun produit taggé)",
+          "label": "Variante couleur (repli si la collection est vide)",
           "options": [
             { "value": "", "label": "Défaut" },
             { "value": "rose", "label": "Rose" },
@@ -284,9 +262,9 @@
           "type": "collection",
           "id": "collection",
           "label": "Collection de ce mood",
-          "info": "Ex : ta collection \"Girl Boss\", \"Clean Girl\"... Utilisée pour retrouver, via le tag de jour (lundi, mardi...) déjà présent sur tes produits, un produit différent et adapté à ce mood pour chaque jour de la semaine."
+          "info": "Ex : ta collection \"Girl Boss\", \"Clean Girl\"... Chaque jour assigné à ce mood pioche un produit différent dans cette collection (le client peut ensuite le changer avec le bouton \"Changer le modèle\")."
         },
-        { "type": "product", "id": "product", "label": "Produit de secours pour ce mood", "info": "Utilisé uniquement si aucun produit de la collection ci-dessus ne porte le tag du jour concerné." }
+        { "type": "product", "id": "product", "label": "Produit de secours pour ce mood", "info": "Utilisé uniquement si la collection ci-dessus est vide ou non renseignée." }
       ]
     },
     {
@@ -310,13 +288,13 @@
     {
       "name": "7 Days · 7 Looks",
       "blocks": [
-        { "type": "day", "settings": { "label": "Lundi", "day_tag": "lundi", "modifier": "" } },
-        { "type": "day", "settings": { "label": "Mardi", "day_tag": "mardi", "modifier": "rose" } },
-        { "type": "day", "settings": { "label": "Mercredi", "day_tag": "mercredi", "modifier": "noir" } },
-        { "type": "day", "settings": { "label": "Jeudi", "day_tag": "jeudi", "modifier": "" } },
-        { "type": "day", "settings": { "label": "Vendredi", "day_tag": "vendredi", "modifier": "bordeaux" } },
-        { "type": "day", "settings": { "label": "Samedi", "day_tag": "samedi", "modifier": "rose" } },
-        { "type": "day", "settings": { "label": "Dimanche", "day_tag": "dimanche", "modifier": "noir" } },
+        { "type": "day", "settings": { "label": "Lundi", "modifier": "" } },
+        { "type": "day", "settings": { "label": "Mardi", "modifier": "rose" } },
+        { "type": "day", "settings": { "label": "Mercredi", "modifier": "noir" } },
+        { "type": "day", "settings": { "label": "Jeudi", "modifier": "" } },
+        { "type": "day", "settings": { "label": "Vendredi", "modifier": "bordeaux" } },
+        { "type": "day", "settings": { "label": "Samedi", "modifier": "rose" } },
+        { "type": "day", "settings": { "label": "Dimanche", "modifier": "noir" } },
         { "type": "mood_option", "settings": { "key": "girlboss", "role": "weekday", "label": "Girlboss", "description": "Bureau, réunions, soignée.", "modifier": "" } },
         { "type": "mood_option", "settings": { "key": "cleangirl", "role": "weekday", "label": "Clean Girl", "description": "Décontracté, courses, sans effort.", "modifier": "rose" } },
         { "type": "mood_option", "settings": { "key": "afterwork", "role": "weekend", "label": "Afterwork", "description": "Dîners, verres, chic décontracté.", "modifier": "bordeaux" } },
