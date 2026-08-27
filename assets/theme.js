@@ -207,6 +207,12 @@ document.addEventListener('DOMContentLoaded', () => {
     return products.length ? products[index] : null;
   }
 
+  // No GSAP fade here (unlike the rest of the theme): this popup's steps
+  // must never depend on a gsap.fromTo() opacity animation to become
+  // visible. Stores with a strict style-src CSP (no unsafe-inline) block
+  // GSAP's inline style writes, which can leave a step stuck invisible
+  // with no error and no fallback — the el.hidden toggle below is the
+  // only thing responsible for showing/hiding a step.
   function goToStep(step) {
     document.querySelectorAll('.builder-step').forEach(el => {
       el.hidden = el.dataset.step !== String(step);
@@ -214,10 +220,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.builder-progress .dot').forEach(dot => {
       dot.classList.toggle('active', dot.dataset.dot === String(step));
     });
-    const activeStep = document.querySelector(`.builder-step[data-step="${step}"]`);
-    if (activeStep && hasGSAP) {
-      gsap.fromTo(activeStep, { opacity: 0, x: 12 }, { opacity: 1, x: 0, duration: 0.35, ease: 'power2.out' });
-    }
   }
 
   function openBuilder() {
@@ -275,7 +277,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const nextMood = moodKeys[(currentIndex + 1) % moodKeys.length];
       assignment[i] = { mood: nextMood, index: randomIndex(moodProducts(nextMood).length) };
       refreshDayMedia(day, i);
-      if (hasGSAP) gsap.fromTo(day.querySelector('.bd-media'), { opacity: 0.4 }, { opacity: 1, duration: 0.3 });
     });
 
     day.querySelector('[data-action="model"]').addEventListener('click', () => {
@@ -283,7 +284,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (products.length > 1) {
         assignment[i].index = (assignment[i].index + 1) % products.length;
         refreshDayMedia(day, i);
-        if (hasGSAP) gsap.fromTo(day.querySelector('.bd-media'), { opacity: 0.4 }, { opacity: 1, duration: 0.3 });
       }
     });
 
