@@ -224,6 +224,7 @@
             "text": "Soignée. Affirmée. Impeccable.",
             "cta_label": "Découvrir",
             "link": "#shop",
+            "image": "shopify://shop_images/Gemini_Generated_Image_i7yk07i7yk07i7yk.jpg",
             "modifier": ""
           }
         },
@@ -234,6 +235,7 @@
             "text": "Jolie, sans en faire trop.",
             "cta_label": "Découvrir",
             "link": "#shop",
+            "image": "shopify://shop_images/Gemini_Generated_Image_l8piuzl8piuzl8pi.jpg",
             "modifier": ""
           }
         },
@@ -292,6 +294,7 @@
             "looks_count": "3 looks",
             "cta_label": "Découvrir la sélection",
             "link": "",
+            "image": "shopify://shop_images/Gemini_Generated_Image_i7yk07i7yk07i7yk.jpg",
             "modifier": ""
           }
         },
@@ -303,6 +306,7 @@
             "looks_count": "3 looks",
             "cta_label": "Découvrir la sélection",
             "link": "",
+            "image": "shopify://shop_images/Gemini_Generated_Image_l8piuzl8piuzl8pi.jpg",
             "modifier": "rose"
           }
         },
@@ -425,36 +429,42 @@
         "photo-1": {
           "type": "photo",
           "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image__5.jpg",
             "modifier": ""
           }
         },
         "photo-2": {
           "type": "photo",
           "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_3mdv8g3mdv8g3mdv.jpg",
             "modifier": "rose"
           }
         },
         "photo-3": {
           "type": "photo",
           "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_3k8n7u3k8n7u3k8n_74e7190b-0fe3-4965-9ddb-256f87e57736.jpg",
             "modifier": "noir"
           }
         },
         "photo-4": {
           "type": "photo",
           "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_1195cd1195cd1195.jpg",
             "modifier": "bordeaux"
           }
         },
         "photo-5": {
           "type": "photo",
           "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_cldyk5cldyk5cldy.jpg",
             "modifier": ""
           }
         },
         "photo-6": {
           "type": "photo",
           "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_5swy8c5swy8c5swy.jpg",
             "modifier": "rose"
           }
         }

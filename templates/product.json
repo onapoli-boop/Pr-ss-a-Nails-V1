@@ -173,6 +173,7 @@
         "review-2",
         "review-3"
       ],
+      "disabled": true,
       "settings": {
         "show_demo_flag": true,
         "score": "4.8",
@@ -184,6 +185,52 @@
         "pct_2": 1,
         "pct_1": 1
       }
+    },
+    "1787876151dff2ae53": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_cards_carousel_Da9p3g": {
+          "type": "shopify://apps/judge-me-reviews/blocks/cards_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "show_sample_reviews": true,
+            "reviews_selection": "product_reviews",
+            "products": [
+              "10pcs-rose-red-cats-eye-press-on-nails-solid-pitaya-color-almond-handmade-fake-nail-shiny-sequins-designs-spicy-girl-false-nail"
+            ],
+            "filter_pinned": false,
+            "filter_featured": false,
+            "filter_custom_tags": "",
+            "star_rating": "all",
+            "show_review_media": true,
+            "display_order": "media_first",
+            "no_image_fallback": "review_text_only",
+            "max_reviews": 20,
+            "review_length": "small",
+            "text_size": "medium",
+            "image_ratio": "1",
+            "reviews_shown": 4,
+            "show_reviewer_name": true,
+            "show_product_name": true,
+            "hide_arrows_mobile": true,
+            "arrows_position": "sides",
+            "max_width": 1100,
+            "corner_styling": "soft",
+            "header_text_color": "#000000",
+            "text_color": "#000000",
+            "card_color": "#F9F9F9",
+            "stars_color": "",
+            "arrows_color": "#000000",
+            "transition_speed": 5,
+            "header_text": "Customers are saying",
+            "show_average_rating": true,
+            "rating_display": "default"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_cards_carousel_Da9p3g"
+      ],
+      "settings": {}
     },
     "faq": {
       "type": "pdp-faq",
@@ -267,6 +314,7 @@
     "apply-guide",
     "info",
     "reviews",
+    "1787876151dff2ae53",
     "faq",
     "new-arrivals",
     "related-products",
