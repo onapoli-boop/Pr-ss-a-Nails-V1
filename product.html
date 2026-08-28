@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blue Hour — VELOUR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ANNOUNCEMENT BAR -->
+<div class="announce">
+  <div class="announce-track">
+    <span>KIT SOIN DES ONGLES OFFERT DÈS 40€ D'ACHAT</span><span class="dot">•</span>
+    <span>LIVRAISON EUROPÉENNE — FR · DE · ES · EN</span><span class="dot">•</span>
+    <span>NOUVELLES COLLECTIONS CHAQUE MOIS</span><span class="dot">•</span>
+    <span>KIT SOIN DES ONGLES OFFERT DÈS 40€ D'ACHAT</span><span class="dot">•</span>
+    <span>LIVRAISON EUROPÉENNE — FR · DE · ES · EN</span><span class="dot">•</span>
+    <span>NOUVELLES COLLECTIONS CHAQUE MOIS</span><span class="dot">•</span>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="burger" id="burgerBtn"><span></span><span></span><span></span></div>
+    <a href="index.html" class="logo">VELOUR</a>
+    <nav class="main-nav">
+      <a href="index.html#shop">Boutique</a>
+      <a href="index.html#mood">Collections</a>
+      <a href="index.html#week">7 Days</a>
+      <a href="index.html#edits">Bundles</a>
+      <a href="index.html#journal">Journal</a>
+      <a href="index.html#about">À propos</a>
+    </nav>
+    <div class="header-actions">
+      <div class="lang-select">
+        <button class="active">FR</button>·<button>DE</button>·<button>ES</button>·<button>EN</button>
+      </div>
+      <button class="icon-btn" aria-label="Recherche">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.6" y2="16.6"/></svg>
+      </button>
+      <button class="icon-btn" aria-label="Compte">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20c1.6-4 4.4-6 7.5-6s5.9 2 7.5 6"/></svg>
+      </button>
+      <button class="icon-btn" aria-label="Panier" id="cartOpenBtn">
+        <svg viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        <span class="cart-count">2</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- BREADCRUMB -->
+<div class="container breadcrumb">
+  <a href="index.html">Accueil</a><span>/</span>
+  <a href="index.html#mood">After Dark</a><span>/</span>
+  <span class="current">Blue Hour</span>
+</div>
+
+<!-- PRODUCT HERO -->
+<section class="product-hero">
+  <div class="container product-hero-grid">
+
+    <!-- Gallery -->
+    <div class="pdp-gallery">
+      <div class="pdp-main-image">
+        <div class="ph ph-photo" id="pdpMainImage" style="background-image:url('https://images.unsplash.com/photo-1457972729786-0411a3b2b626?w=1200&h=1500&fit=crop&auto=format&q=80');"></div>
+      </div>
+      <div class="pdp-thumbs">
+        <button class="pdp-thumb active" data-img="https://images.unsplash.com/photo-1457972729786-0411a3b2b626?w=1200&h=1500&fit=crop&auto=format&q=80">
+          <div class="ph ph-photo" style="background-image:url('https://images.unsplash.com/photo-1457972729786-0411a3b2b626?w=300&h=380&fit=crop&auto=format&q=70');"></div>
+        </button>
+        <button class="pdp-thumb" data-img="https://images.unsplash.com/photo-1662580946467-9279de61ed99?w=1200&h=1500&fit=crop&auto=format&q=80">
+          <div class="ph ph-photo" style="background-image:url('https://images.unsplash.com/photo-1662580946467-9279de61ed99?w=300&h=380&fit=crop&auto=format&q=70');"></div>
+        </button>
+        <button class="pdp-thumb" data-img="">
+          <div class="ph ph-noir"></div>
+        </button>
+        <button class="pdp-thumb" data-img="">
+          <div class="ph"></div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Buybox -->
+    <div class="pdp-buybox">
+      <div class="collection">After Dark</div>
+      <h1>Blue Hour</h1>
+      <div class="pdp-rating">
+        <span class="stars">★★★★★</span>
+        <a href="#reviews" class="pdp-rating-count">4,8 · 128 avis</a>
+      </div>
+      <p class="pdp-desc">Cat-eye bleu nuit. Liseré argenté. Énergie after-hours — le set qui termine la tenue, pas seulement la manucure.</p>
+      <div class="pdp-price">14,90 €</div>
+
+      <div class="pdp-option-group">
+        <span class="pdp-option-label">Forme</span>
+        <div class="pdp-chips" id="shapeChips">
+          <button class="pdp-chip active" data-shape="Almond">Amande</button>
+          <button class="pdp-chip" data-shape="Coffin">Ballerine</button>
+          <button class="pdp-chip" data-shape="Square">Carré</button>
+          <button class="pdp-chip" data-shape="Stiletto">Stiletto</button>
+        </div>
+      </div>
+
+      <p class="pdp-fit-note">24 ongles · 10 tailles incluses, lime fournie dans chaque set.</p>
+
+      <button class="btn btn-primary pdp-add" id="pdpAddBtn">Ajouter au panier — 14,90 €</button>
+      <button class="pdp-wish" id="pdpWishBtn">
+        <svg viewBox="0 0 24 24"><path d="M12 20s-7-4.5-9.3-9C1 7 3 4 6.2 4c2 0 3.5 1.2 4.3 2.6C11.3 5.2 12.8 4 14.8 4 18 4 20 7 19.3 11 17 15.5 12 20 12 20z"/></svg>
+        Enregistrer
+      </button>
+
+      <div class="pdp-upsell">
+        <div class="pdp-upsell-copy">
+          <span class="eyebrow">Complète ta semaine</span>
+          <p>Intègre Blue Hour à tes 7 looks et profite de cinq sets en plus.</p>
+        </div>
+        <a href="index.html#week" class="btn btn-ghost">Voir 7 Days · 40€</a>
+      </div>
+
+      <ul class="pdp-trust">
+        <li>Kit soin des ongles offert dès 40€ d'achat</li>
+        <li>Expédié depuis l'Europe, 2 à 4 jours ouvrés</li>
+        <li>Réutilisable — entretenu, il se reporte</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 3 KEY POINTS -->
+<section class="key-points">
+  <div class="container key-points-grid reveal">
+    <div class="key-point">
+      <span class="idx">01</span>
+      <h3>Ne fragilise pas l'ongle naturel</h3>
+      <p>Contrairement à un gel classique, la pose et le retrait ne nécessitent ni ponçage ni UV.</p>
+    </div>
+    <div class="key-point">
+      <span class="idx">02</span>
+      <h3>Tient jusqu'à 2 semaines</h3>
+      <p>Résiste douche, vaisselle et quotidien avec un entretien simple, sans perdre son éclat.</p>
+    </div>
+    <div class="key-point">
+      <span class="idx">03</span>
+      <h3>S'adapte à toutes les mains</h3>
+      <p>10 tailles incluses + lime dans chaque set, pour un fit parfait dès la première pose.</p>
+    </div>
+  </div>
+</section>
+
+<!-- GUIDE DE POSE -->
+<section class="apply-guide">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>Guide de pose</h2>
+      <p class="section-sub">Quatre étapes, quinze minutes, aucun temps de séchage.</p>
+    </div>
+    <div class="apply-steps reveal">
+      <div class="apply-step">
+        <div class="ph ph-rose"></div>
+        <span class="idx">01</span>
+        <h3>Prépare</h3>
+        <p>Nettoie l'ongle, repousse la cuticule et lime légèrement la surface pour une meilleure accroche.</p>
+      </div>
+      <div class="apply-step">
+        <div class="ph"></div>
+        <span class="idx">02</span>
+        <h3>Ajuste</h3>
+        <p>Teste chaque gabarit du kit pour trouver la bonne taille sur tes 10 ongles.</p>
+      </div>
+      <div class="apply-step">
+        <div class="ph ph-bordeaux"></div>
+        <span class="idx">03</span>
+        <h3>Colle</h3>
+        <p>Applique la languette adhésive, positionne le press-on à la base de l'ongle et presse 15 secondes.</p>
+      </div>
+      <div class="apply-step">
+        <div class="ph ph-noir"></div>
+        <span class="idx">04</span>
+        <h3>Sublime</h3>
+        <p>Lime les bords si besoin pour un rendu net, parfaitement fini.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACCORDION -->
+<section class="pdp-info">
+  <div class="container pdp-info-grid">
+    <div class="accordion" id="pdpAccordion">
+      <div class="accordion-item open">
+        <button class="accordion-head">
+          <span>Description</span><span class="accordion-icon">−</span>
+        </button>
+        <div class="accordion-body">
+          <p>Des press-on façon salon, finition cat-eye bleu nuit profond avec un liseré argenté fin. Pensés pour capter la lumière une fois la nuit tombée, sans le temps de séchage d'un rendez-vous en institut.</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-head">
+          <span>Entretien &amp; réutilisation</span><span class="accordion-icon">+</span>
+        </button>
+        <div class="accordion-body">
+          <p>Retire-les en les faisant tremper dans l'eau tiède, range-les à plat dans la boîte, et réapplique-les avec une nouvelle languette adhésive. La plupart des sets se reportent plusieurs fois si bien entretenus.</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-head">
+          <span>Livraison &amp; retours</span><span class="accordion-icon">+</span>
+        </button>
+        <div class="accordion-body">
+          <p>Expédié depuis notre entrepôt européen, 2 à 4 jours ouvrés vers FR · DE · ES. Les sets non ouverts peuvent être retournés sous 14 jours.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="proof" id="reviews">
+  <div class="container">
+    <div class="review-summary reveal">
+      <div class="review-summary-score">
+        <span class="score">4.8</span>
+        <span class="stars">★★★★★</span>
+        <span class="count">128 avis</span>
+      </div>
+      <div class="review-bars">
+        <div class="review-bar-row"><span>5</span><div class="bar"><div class="fill" style="width:82%"></div></div><span class="pct">82%</span></div>
+        <div class="review-bar-row"><span>4</span><div class="bar"><div class="fill" style="width:12%"></div></div><span class="pct">12%</span></div>
+        <div class="review-bar-row"><span>3</span><div class="bar"><div class="fill" style="width:4%"></div></div><span class="pct">4%</span></div>
+        <div class="review-bar-row"><span>2</span><div class="bar"><div class="fill" style="width:1%"></div></div><span class="pct">1%</span></div>
+        <div class="review-bar-row"><span>1</span><div class="bar"><div class="fill" style="width:1%"></div></div><span class="pct">1%</span></div>
+      </div>
+    </div>
+    <div class="proof-grid reveal">
+      <div class="proof-card">
+        <span class="demo-flag">Contenu démo</span>
+        <div class="stars">★★★★★</div>
+        <p class="quote">"Blue Hour, c'est LE set. J'ai eu des compliments toute la soirée."</p>
+        <div class="author">— Inès · Achat vérifié</div>
+      </div>
+      <div class="proof-card">
+        <span class="demo-flag">Contenu démo</span>
+        <div class="stars">★★★★★</div>
+        <p class="quote">"Appliqué en dix minutes avant un dîner, tenu toute la semaine."</p>
+        <div class="author">— Camille · Achat vérifié</div>
+      </div>
+      <div class="proof-card">
+        <span class="demo-flag">Contenu démo</span>
+        <div class="stars">★★★★☆</div>
+        <p class="quote">"Couleur magnifique. Dommage que la forme stiletto ne descende pas une taille en dessous."</p>
+        <div class="author">— Léa · Achat vérifié</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="pdp-info">
+  <div class="container pdp-info-grid">
+    <div class="section-head reveal">
+      <h2>Questions fréquentes</h2>
+    </div>
+    <div class="accordion" id="pdpFaq">
+      <div class="accordion-item open">
+        <button class="accordion-head">
+          <span>Est-ce que ça abîme les ongles naturels ?</span><span class="accordion-icon">−</span>
+        </button>
+        <div class="accordion-body">
+          <p>Non. Contrairement au gel ou à la capsule classique, la pose ne nécessite ni ponçage ni UV, et un retrait à l'eau tiède préserve l'ongle naturel.</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-head">
+          <span>Combien de temps ça tient ?</span><span class="accordion-icon">+</span>
+        </button>
+        <div class="accordion-body">
+          <p>Jusqu'à 2 semaines avec un entretien normal — douche, vaisselle et quotidien inclus, à condition de bien préparer l'ongle avant la pose.</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-head">
+          <span>Je peux les réutiliser ?</span><span class="accordion-icon">+</span>
+        </button>
+        <div class="accordion-body">
+          <p>Oui. La plupart des sets se reportent plusieurs fois si tu les retires correctement et les ranges à plat entre deux poses, avec une nouvelle languette adhésive à chaque fois.</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-head">
+          <span>Quelle taille choisir si j'hésite ?</span><span class="accordion-icon">+</span>
+        </button>
+        <div class="accordion-body">
+          <p>Chaque set inclut 10 tailles pour couvrir toutes les largeurs d'ongle — teste plusieurs gabarits avant de coller, la bonne taille tient sans forcer ni laisser d'espace sur les côtés.</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-head">
+          <span>Et si la taille ou la couleur ne me convient pas ?</span><span class="accordion-icon">+</span>
+        </button>
+        <div class="accordion-body">
+          <p>Les sets non ouverts peuvent être retournés sous 14 jours. Voir la rubrique Livraison &amp; retours ci-dessus pour le détail.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEW ARRIVALS -->
+<section class="products">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>Nouveautés du mois</h2>
+      <p class="section-sub">Vient de sortir — avant rupture de stock.</p>
+    </div>
+    <div class="product-grid reveal">
+      <div class="product-card">
+        <div class="product-media">
+          <span class="new-tag">Nouveau</span>
+          <div class="ph ph-rose"></div>
+          <button class="wish-btn" aria-label="Ajouter aux favoris"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.5-9.3-9C1 7 3 4 6.2 4c2 0 3.5 1.2 4.3 2.6C11.3 5.2 12.8 4 14.8 4 18 4 20 7 19.3 11 17 15.5 12 20 12 20z"/></svg></button>
+          <div class="quick-add">Ajout rapide</div>
+        </div>
+        <div class="product-info">
+          <div class="collection">Soft Girl</div>
+          <h3>Pearl Kiss</h3>
+          <div class="meta"><span class="price">13,90 €</span><span class="rating">★★★★★ (12)</span></div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-media">
+          <span class="new-tag">Nouveau</span>
+          <div class="ph"></div>
+          <button class="wish-btn" aria-label="Ajouter aux favoris"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.5-9.3-9C1 7 3 4 6.2 4c2 0 3.5 1.2 4.3 2.6C11.3 5.2 12.8 4 14.8 4 18 4 20 7 19.3 11 17 15.5 12 20 12 20z"/></svg></button>
+          <div class="quick-add">Ajout rapide</div>
+        </div>
+        <div class="product-info">
+          <div class="collection">Girlboss</div>
+          <h3>Espresso French</h3>
+          <div class="meta"><span class="price">12,90 €</span><span class="rating">★★★★★ (9)</span></div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-media">
+          <span class="new-tag">Nouveau</span>
+          <div class="ph ph-bordeaux"></div>
+          <button class="wish-btn" aria-label="Ajouter aux favoris"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.5-9.3-9C1 7 3 4 6.2 4c2 0 3.5 1.2 4.3 2.6C11.3 5.2 12.8 4 14.8 4 18 4 20 7 19.3 11 17 15.5 12 20 12 20z"/></svg></button>
+          <div class="quick-add">Ajout rapide</div>
+        </div>
+        <div class="product-info">
+          <div class="collection">After Dark</div>
+          <h3>Plum Cat Eye</h3>
+          <div class="meta"><span class="price">14,90 €</span><span class="rating">★★★★★ (7)</span></div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-media">
+          <span class="new-tag">Nouveau</span>
+          <div class="ph ph-rose"></div>
+          <button class="wish-btn" aria-label="Ajouter aux favoris"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.5-9.3-9C1 7 3 4 6.2 4c2 0 3.5 1.2 4.3 2.6C11.3 5.2 12.8 4 14.8 4 18 4 20 7 19.3 11 17 15.5 12 20 12 20z"/></svg></button>
+          <div class="quick-add">Ajout rapide</div>
+        </div>
+        <div class="product-info">
+          <div class="collection">Clean Girl</div>
+          <h3>Lavender Dream</h3>
+          <div class="meta"><span class="price">11,90 €</span><span class="rating">★★★★★ (15)</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BESTSELLERS -->
+<section class="products" id="shop" style="padding-top:0;">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>Tu vas aussi aimer</h2>
+      <p class="section-sub">Our most-loved sets, restocked weekly.</p>
+    </div>
+    <div class="product-grid reveal">
+      <div class="product-card">
+        <div class="product-media">
+          <div class="ph"></div>
+          <button class="wish-btn" aria-label="Ajouter aux favoris"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.5-9.3-9C1 7 3 4 6.2 4c2 0 3.5 1.2 4.3 2.6C11.3 5.2 12.8 4 14.8 4 18 4 20 7 19.3 11 17 15.5 12 20 12 20z"/></svg></button>
+          <div class="quick-add">Ajout rapide</div>
+        </div>
+        <div class="product-info">
+          <div class="collection">Girlboss</div>
+          <h3>CEO Nude</h3>
+          <div class="meta"><span class="price">12,90 €</span><span class="rating">★★★★★ (94)</span></div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-media">
+          <div class="ph ph-rose"></div>
+          <button class="wish-btn" aria-label="Ajouter aux favoris"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.5-9.3-9C1 7 3 4 6.2 4c2 0 3.5 1.2 4.3 2.6C11.3 5.2 12.8 4 14.8 4 18 4 20 7 19.3 11 17 15.5 12 20 12 20z"/></svg></button>
+          <div class="quick-add">Ajout rapide</div>
+        </div>
+        <div class="product-info">
+          <div class="collection">Clean Girl</div>
+          <h3>Milky Monday</h3>
+          <div class="meta"><span class="price">11,90 €</span><span class="rating">★★★★★ (156)</span></div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-media">
+          <div class="ph ph-bordeaux"></div>
+          <button class="wish-btn" aria-label="Ajouter aux favoris"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.5-9.3-9C1 7 3 4 6.2 4c2 0 3.5 1.2 4.3 2.6C11.3 5.2 12.8 4 14.8 4 18 4 20 7 19.3 11 17 15.5 12 20 12 20z"/></svg></button>
+          <div class="quick-add">Ajout rapide</div>
+        </div>
+        <div class="product-info">
+          <div class="collection">After Dark</div>
+          <h3>Cherry After Hours</h3>
+          <div class="meta"><span class="price">14,90 €</span><span class="rating">★★★★★ (77)</span></div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-media">
+          <div class="ph ph-noir"></div>
+          <button class="wish-btn" aria-label="Ajouter aux favoris"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.5-9.3-9C1 7 3 4 6.2 4c2 0 3.5 1.2 4.3 2.6C11.3 5.2 12.8 4 14.8 4 18 4 20 7 19.3 11 17 15.5 12 20 12 20z"/></svg></button>
+          <div class="quick-add">Ajout rapide</div>
+        </div>
+        <div class="product-info">
+          <div class="collection">After Dark</div>
+          <h3>Black Chrome</h3>
+          <div class="meta"><span class="price">14,90 €</span><span class="rating">★★★★★ (61)</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EMAIL CAPTURE -->
+<section class="capture">
+  <div class="container">
+    <span class="eyebrow">Rejoins la liste</span>
+    <h2>Ton prochain look<br>arrive dans ta boîte mail.</h2>
+    <p class="sub">Accède en avant-première aux nouveautés, éditions limitées et offres privées.</p>
+    <form class="capture-form" onsubmit="event.preventDefault();">
+      <input type="email" placeholder="Ton adresse email" required>
+      <button type="submit">Rejoindre la liste</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer" id="about">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">VELOUR</div>
+        <p>Press-on nails premium et accessibles, pensés en Europe pour les marchés FR · DE · ES · EN.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Boutique</h4>
+        <ul>
+          <li><a href="index.html#mood">Collections</a></li>
+          <li><a href="index.html#shop">Meilleures ventes</a></li>
+          <li><a href="index.html#week">7 Days</a></li>
+          <li><a href="index.html#edits">Bundles</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Aide</h4>
+        <ul>
+          <li><a href="#">Livraison</a></li>
+          <li><a href="#">Retours</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>À propos</h4>
+        <ul>
+          <li><a href="#">Notre histoire</a></li>
+          <li><a href="#">Les press-on</a></li>
+          <li><a href="#">Guide d'entretien</a></li>
+          <li><a href="index.html#journal">Le Journal</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Langue</h4>
+        <ul>
+          <li><a href="#">FR</a></li>
+          <li><a href="#">DE</a></li>
+          <li><a href="#">ES</a></li>
+          <li><a href="#">EN</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 VELOUR — Contenu de maquette, boutique non active</span>
+      <div class="legal">
+        <a href="#">Instagram</a><a href="#">TikTok</a><a href="#">Pinterest</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- STICKY MOBILE ADD TO CART -->
+<div class="sticky-buy-bar" id="stickyBuyBar">
+  <div class="sbb-info">
+    <span class="sbb-name">Blue Hour</span>
+    <span class="sbb-price">14,90 €</span>
+  </div>
+  <button class="btn btn-primary" id="stickyAddBtn">Ajouter au panier</button>
+</div>
+
+<!-- CART DRAWER -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-drawer-head">
+    <h3>Ton panier</h3>
+    <button class="cart-close" id="cartCloseBtn">✕</button>
+  </div>
+  <div class="cart-drawer-body">
+    <div class="cart-item">
+      <div class="ph ph-photo" style="background-image:url('https://images.unsplash.com/photo-1457972729786-0411a3b2b626?w=200&h=240&fit=crop&auto=format&q=70');"></div>
+      <div class="ci-info">
+        <div class="name">Blue Hour</div>
+        <div class="coll">After Dark</div>
+        <div class="price">14,90 €</div>
+      </div>
+    </div>
+  </div>
+  <div class="cart-drawer-foot">
+    <div class="subtotal"><span>Sous-total</span><span>14,90 €</span></div>
+    <div class="gift-note">Ajoute encore 25,10 € pour débloquer ton kit soin offert.</div>
+    <a href="#" class="btn btn-primary">Passer commande</a>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

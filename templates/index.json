@@ -1,0 +1,518 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "eyebrow": "Ton look. Tes ongles.",
+        "heading": "Tes ongles.Ton look.Ton moment.",
+        "subtext": "Des press-on pensés pour évoluer avec toi.",
+        "cta_primary_label": "Découvrir les press-on",
+        "cta_primary_link": "",
+        "cta_secondary_label": "7 Days · 7 Looks",
+        "cta_secondary_link": "",
+        "image": "shopify://shop_images/watermarked_img_13166591383005068834.jpg"
+      }
+    },
+    "seven-days": {
+      "type": "seven-days",
+      "blocks": {
+        "size_option_TReqhg": {
+          "type": "size_option",
+          "settings": {
+            "value": "M",
+            "label": "M",
+            "description": "Discret, allongé, féminin."
+          }
+        },
+        "size_option_Kiaybf": {
+          "type": "size_option",
+          "settings": {
+            "value": "S",
+            "label": "S",
+            "description": ""
+          }
+        },
+        "size_option_LrzyVz": {
+          "type": "size_option",
+          "settings": {
+            "value": "xs",
+            "label": "xs",
+            "description": ""
+          }
+        },
+        "mood_option_Y9BLeK": {
+          "type": "mood_option",
+          "settings": {
+            "key": "girlboss",
+            "role": "weekday",
+            "label": "Girlboss",
+            "description": "Bureau, réunions, soignée.",
+            "modifier": "",
+            "collection": "",
+            "product": ""
+          }
+        },
+        "day-1": {
+          "type": "day",
+          "settings": {
+            "label": "Lundi",
+            "day_tag": "lundi",
+            "modifier": ""
+          }
+        },
+        "day-2": {
+          "type": "day",
+          "settings": {
+            "label": "Mardi",
+            "day_tag": "mardi",
+            "modifier": "rose"
+          }
+        },
+        "day-3": {
+          "type": "day",
+          "settings": {
+            "label": "Mercredi",
+            "day_tag": "mercredi",
+            "modifier": "noir"
+          }
+        },
+        "day-4": {
+          "type": "day",
+          "settings": {
+            "label": "Jeudi",
+            "day_tag": "jeudi",
+            "modifier": ""
+          }
+        },
+        "day-5": {
+          "type": "day",
+          "settings": {
+            "label": "Vendredi",
+            "day_tag": "vendredi",
+            "modifier": "bordeaux"
+          }
+        },
+        "day-6": {
+          "type": "day",
+          "settings": {
+            "label": "Samedi",
+            "day_tag": "samedi",
+            "modifier": "rose"
+          }
+        },
+        "day-7": {
+          "type": "day",
+          "settings": {
+            "label": "Dimanche",
+            "day_tag": "dimanche",
+            "modifier": "noir"
+          }
+        },
+        "mood-girlboss": {
+          "type": "mood_option",
+          "settings": {
+            "key": "girlboss",
+            "role": "weekday",
+            "label": "Girlboss",
+            "description": "Bureau, réunions, soignée.",
+            "modifier": "",
+            "collection": "girlboss",
+            "product": "10pcs-pure-color-handmade-short-false-nail-with-glue-press-on-nails-full-cover-french-round-head-manicure-wearable-nail-tips-art"
+          }
+        },
+        "mood-cleangirl": {
+          "type": "mood_option",
+          "settings": {
+            "key": "cleangirl",
+            "role": "weekday",
+            "label": "Clean Girl",
+            "description": "Décontracté, courses, sans effort.",
+            "modifier": "rose",
+            "collection": "clean-girl",
+            "product": "10pcs-pure-color-handmade-short-false-nail-with-glue-press-on-nails-full-cover-french-round-head-manicure-wearable-nail-tips-art-copie-1"
+          }
+        },
+        "mood-afterwork": {
+          "type": "mood_option",
+          "settings": {
+            "key": "afterwork",
+            "role": "weekend",
+            "label": "Afterwork",
+            "description": "Dîners, verres, chic décontracté.",
+            "modifier": "bordeaux",
+            "collection": "",
+            "product": ""
+          }
+        },
+        "mood-dark": {
+          "type": "mood_option",
+          "settings": {
+            "key": "dark",
+            "role": "weekend",
+            "label": "After Dark",
+            "description": "Sorties qui durent jusqu'au bout de la nuit.",
+            "modifier": "noir",
+            "collection": "",
+            "product": ""
+          }
+        }
+      },
+      "block_order": [
+        "size_option_TReqhg",
+        "size_option_Kiaybf",
+        "size_option_LrzyVz",
+        "mood_option_Y9BLeK",
+        "day-1",
+        "day-2",
+        "day-3",
+        "day-4",
+        "day-5",
+        "day-6",
+        "day-7",
+        "mood-girlboss",
+        "mood-cleangirl",
+        "mood-afterwork",
+        "mood-dark"
+      ],
+      "settings": {
+        "eyebrow": "L'offre signature",
+        "heading": "Une semaine.Sept moods.Une routine simple.",
+        "seven_days_collection": "7-days",
+        "stat_1_value": "7",
+        "stat_1_label": "Sets press-on",
+        "stat_2_value": "1",
+        "stat_2_label": "Semaine de looks",
+        "stat_3_value": "40",
+        "stat_3_suffix": "€",
+        "stat_3_label": "Tout inclus",
+        "cta_label": "Obtenir les 7 looks",
+        "note": "+ Kit soin des ongles offert inclus. Les chiffres de comparaison ci-dessous sont donnés à titre indicatif, basés sur nos prix à l'unité (8,90–18,50 €), uniquement pour cette maquette.",
+        "compare_1_label": "Achetés séparément",
+        "compare_1_value": "≈ 92 €",
+        "compare_1_disclaimer": "Exemple de maquette, pas un prix réel",
+        "compare_2_label": "7 Days · 7 Looks",
+        "compare_2_value": "40 €"
+      }
+    },
+    "mood": {
+      "type": "mood",
+      "blocks": {
+        "mood-1": {
+          "type": "mood",
+          "settings": {
+            "title": "Clean Girl",
+            "text": "Tes ongles du lundi au vendredi, 9h-17h.",
+            "cta_label": "Découvrir",
+            "link": "shopify://collections/clean-girl",
+            "image": "shopify://shop_images/Gemini_Generated_Image_1tmtdl1tmtdl1tmt.jpg",
+            "modifier": "rose"
+          }
+        },
+        "mood-2": {
+          "type": "mood",
+          "settings": {
+            "title": "Girlboss",
+            "text": "Soignée. Affirmée. Impeccable.",
+            "cta_label": "Découvrir",
+            "link": "#shop",
+            "image": "shopify://shop_images/Gemini_Generated_Image_i7yk07i7yk07i7yk.jpg",
+            "modifier": ""
+          }
+        },
+        "mood-3": {
+          "type": "mood",
+          "settings": {
+            "title": "Soft Girl",
+            "text": "Jolie, sans en faire trop.",
+            "cta_label": "Découvrir",
+            "link": "#shop",
+            "image": "shopify://shop_images/Gemini_Generated_Image_l8piuzl8piuzl8pi.jpg",
+            "modifier": ""
+          }
+        },
+        "mood-4": {
+          "type": "mood",
+          "settings": {
+            "title": "After Dark",
+            "text": "Tes plans commencent après 18h.",
+            "cta_label": "Découvrir",
+            "link": "#shop",
+            "modifier": "noir"
+          }
+        }
+      },
+      "block_order": [
+        "mood-1",
+        "mood-2",
+        "mood-3",
+        "mood-4"
+      ],
+      "settings": {
+        "heading": "Quel est ton mood ?",
+        "subheading": "Choisis ton esthétique avant de choisir un produit."
+      }
+    },
+    "lookbook": {
+      "type": "lookbook",
+      "settings": {
+        "eyebrow": "Adopte le look",
+        "collection_label": "Clean gIRL",
+        "product": "10pcs-pure-color-handmade-short-false-nail-with-glue-press-on-nails-full-cover-french-round-head-manicure-wearable-nail-tips-art-copie",
+        "heading": "",
+        "description": "",
+        "price_label": "",
+        "cta_label": "Découvrir",
+        "image": "{{ section.settings.product.featured_image }}"
+      }
+    },
+    "bestsellers": {
+      "type": "bestsellers",
+      "settings": {
+        "heading": "Les incontournables",
+        "subheading": "Nos sets les plus aimés, réassortis chaque semaine.",
+        "collection": "after-dark",
+        "products_to_show": 4
+      }
+    },
+    "edits": {
+      "type": "edits",
+      "blocks": {
+        "edit-1": {
+          "type": "edit",
+          "settings": {
+            "eyebrow": "Sélection Girlboss",
+            "title": "La Sélection Girlboss",
+            "looks_count": "3 looks",
+            "cta_label": "Découvrir la sélection",
+            "link": "",
+            "image": "shopify://shop_images/Gemini_Generated_Image_i7yk07i7yk07i7yk.jpg",
+            "modifier": ""
+          }
+        },
+        "edit-2": {
+          "type": "edit",
+          "settings": {
+            "eyebrow": "Sélection Soft Girl",
+            "title": "La Sélection Soft Girl",
+            "looks_count": "3 looks",
+            "cta_label": "Découvrir la sélection",
+            "link": "",
+            "image": "shopify://shop_images/Gemini_Generated_Image_l8piuzl8piuzl8pi.jpg",
+            "modifier": "rose"
+          }
+        },
+        "edit-3": {
+          "type": "edit",
+          "settings": {
+            "eyebrow": "Sélection After Dark",
+            "title": "La Sélection After Dark",
+            "looks_count": "3 looks",
+            "cta_label": "Découvrir la sélection",
+            "link": "",
+            "modifier": "noir"
+          }
+        }
+      },
+      "block_order": [
+        "edit-1",
+        "edit-2",
+        "edit-3"
+      ],
+      "settings": {
+        "heading": "Les sélections",
+        "subheading": "Trois looks choisis pour toi, en édition limitée."
+      }
+    },
+    "why-velour": {
+      "type": "why-velour",
+      "blocks": {
+        "reason-1": {
+          "type": "reason",
+          "settings": {
+            "title": "Look salon<br>en quelques minutes",
+            "text": "Prêt en une seule pose."
+          }
+        },
+        "reason-2": {
+          "type": "reason",
+          "settings": {
+            "title": "Réutilisable<br>fait pour durer",
+            "text": "Entretenu, il se reporte."
+          }
+        },
+        "reason-3": {
+          "type": "reason",
+          "settings": {
+            "title": "Sans rendez-vous<br>à ton rythme",
+            "text": "À appliquer quand tu veux."
+          }
+        },
+        "reason-4": {
+          "type": "reason",
+          "settings": {
+            "title": "Change de look<br>quand tu veux",
+            "text": "On change d'humeur, on change de look."
+          }
+        }
+      },
+      "block_order": [
+        "reason-1",
+        "reason-2",
+        "reason-3",
+        "reason-4"
+      ],
+      "settings": {
+        "heading": "Pourquoi Velour"
+      }
+    },
+    "before-after": {
+      "type": "before-after",
+      "settings": {
+        "heading": "Vois la différence",
+        "subheading": "Glisse pour comparer — ongles nus vs. ton look Velour.",
+        "before_label": "Avant",
+        "after_label": "Après",
+        "before_image": "shopify://shop_images/Gemini_Generated_Image_1daday1daday1dad.jpg",
+        "after_image": "shopify://shop_images/b677deb1-ffad-4c23-97a2-b7dc6e4f2d38.jpg"
+      }
+    },
+    "social-proof": {
+      "type": "social-proof",
+      "blocks": {
+        "review-1": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "On dirait que je sors du salon.",
+            "author": "Camille"
+          }
+        },
+        "review-2": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "Je les ai mis avant d'aller dîner, parfaits toute la soirée.",
+            "author": "Léa"
+          }
+        },
+        "review-3": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "Blue Hour, c'est LE set qui fait tourner les têtes.",
+            "author": "Inès"
+          }
+        }
+      },
+      "block_order": [
+        "review-1",
+        "review-2",
+        "review-3"
+      ],
+      "settings": {
+        "heading": "Elles adorent",
+        "show_demo_flag": true
+      }
+    },
+    "ugc": {
+      "type": "ugc",
+      "blocks": {
+        "photo-1": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image__5.jpg",
+            "modifier": ""
+          }
+        },
+        "photo-2": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_3mdv8g3mdv8g3mdv.jpg",
+            "modifier": "rose"
+          }
+        },
+        "photo-3": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_3k8n7u3k8n7u3k8n_74e7190b-0fe3-4965-9ddb-256f87e57736.jpg",
+            "modifier": "noir"
+          }
+        },
+        "photo-4": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_1195cd1195cd1195.jpg",
+            "modifier": "bordeaux"
+          }
+        },
+        "photo-5": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_cldyk5cldyk5cldy.jpg",
+            "modifier": ""
+          }
+        },
+        "photo-6": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_5swy8c5swy8c5swy.jpg",
+            "modifier": "rose"
+          }
+        }
+      },
+      "block_order": [
+        "photo-1",
+        "photo-2",
+        "photo-3",
+        "photo-4",
+        "photo-5",
+        "photo-6"
+      ],
+      "settings": {
+        "heading": "Ton look. Identifié.",
+        "handle": "@VELOURNAILS",
+        "cta_label": "Nous suivre",
+        "cta_link": ""
+      }
+    },
+    "blog-teaser": {
+      "type": "blog-teaser",
+      "settings": {
+        "heading": "Le Journal",
+        "subheading": "Conseils de pose, tendances mood et coulisses de la marque.",
+        "blog": "",
+        "articles_to_show": 3
+      }
+    },
+    "email-capture": {
+      "type": "email-capture",
+      "settings": {
+        "heading": "Ton prochain look<br>arrive dans ta boîte mail.",
+        "subtext": "Accède en avant-première aux nouveautés, éditions limitées et offres privées."
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "seven-days",
+    "mood",
+    "lookbook",
+    "bestsellers",
+    "edits",
+    "why-velour",
+    "before-after",
+    "social-proof",
+    "ugc",
+    "blog-teaser",
+    "email-capture"
+  ]
+}

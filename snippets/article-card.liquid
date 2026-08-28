@@ -1,0 +1,22 @@
+{%- comment -%}
+  Article card — ported from the mockup's .blog-card markup. Category
+  comes from the article's first tag (merchant tags each post with its
+  category, e.g. "Conseils"), read time is estimated from word count.
+  Usage: {% render 'article-card', article: article, show_excerpt: false %}
+{%- endcomment -%}
+{%- liquid
+  assign category = article.tags | first
+  assign word_count = article.content | strip_html | split: ' ' | size
+  assign read_minutes = word_count | divided_by: 200 | at_least: 1
+-%}
+<a class="blog-card" href="{{ article.url }}" data-category="{{ category | handle }}">
+  <div class="blog-media">{%- render 'placeholder-media', image: article.image -%}</div>
+  <div class="blog-info">
+    {%- if category -%}<div class="blog-cat">{{ category }}</div>{%- endif -%}
+    <h3>{{ article.title }}</h3>
+    {%- if show_excerpt -%}
+      <p class="blog-excerpt">{{ article.excerpt | default: article.content | strip_html | truncate: 140 }}</p>
+    {%- endif -%}
+    <span class="blog-meta">{{ 'blog.read_time' | t: minutes: read_minutes }}</span>
+  </div>
+</a>

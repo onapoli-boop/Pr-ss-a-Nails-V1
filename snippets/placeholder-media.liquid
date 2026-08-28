@@ -1,0 +1,32 @@
+{%- comment -%}
+  Placeholder-aware media block — mirrors the mockup's <div class="ph"> soft
+  gradient placeholders, but swaps in a real <img> the moment one is set in
+  the section/block settings. Uses a real <img src>, not an inline
+  background-image style: stores with a strict style-src CSP (no
+  'unsafe-inline') silently block inline style attributes, which would hide
+  every photo. The .ph-photo img CSS rule (assets/theme.css) makes it fill
+  the same box the old background-image used to.
+
+  Params:
+    image     — an Image object from an image_picker setting, or blank
+    modifier  — 'noir' | 'rose' | 'bordeaux' | blank (gradient variant)
+    class     — extra class(es) to append
+    sizes     — width used for image_url (default 1600)
+{%- endcomment -%}
+{%- liquid
+  assign classes = 'ph'
+  if modifier != blank
+    assign classes = classes | append: ' ph-' | append: modifier
+  endif
+  if class != blank
+    assign classes = classes | append: ' ' | append: class
+  endif
+  assign img_width = sizes | default: 1600
+-%}
+{%- if image != blank -%}
+  <div class="{{ classes }} ph-photo">
+    <img src="{{ image | image_url: width: img_width }}" alt="{{ image.alt | escape }}" loading="lazy">
+  </div>
+{%- else -%}
+  <div class="{{ classes }}"></div>
+{%- endif -%}

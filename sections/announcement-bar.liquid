@@ -1,0 +1,39 @@
+<div class="announce">
+  <div class="announce-track">
+    {%- for i in (1..2) -%}
+      {%- for block in section.blocks -%}
+        <span {{ block.shopify_attributes }}>{{ block.settings.text }}</span><span class="dot">•</span>
+      {%- endfor -%}
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Barre d'annonce",
+  "tag": "div",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "message",
+      "name": "Message",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texte",
+          "default": "KIT SOIN DES ONGLES OFFERT DÈS 40€ D'ACHAT"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "default": {
+    "blocks": [
+      { "type": "message", "settings": { "text": "KIT SOIN DES ONGLES OFFERT DÈS 40€ D'ACHAT" } },
+      { "type": "message", "settings": { "text": "LIVRAISON EUROPÉENNE — FR · DE · ES · EN" } },
+      { "type": "message", "settings": { "text": "NOUVELLES COLLECTIONS CHAQUE MOIS" } }
+    ]
+  }
+}
+{% endschema %}

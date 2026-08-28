@@ -1,0 +1,83 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "VELOUR",
+    "theme_version": "0.2.0",
+    "theme_author": "VELOUR"
+  },
+  {
+    "name": "Panier",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Kit soin offert"
+      },
+      {
+        "type": "number",
+        "id": "free_gift_threshold",
+        "label": "Seuil du kit soin offert (€)",
+        "info": "Montant du panier à partir duquel le kit soin des ongles est offert. Utilisé dans la barre d'annonce et le panier.",
+        "default": 40
+      }
+    ]
+  },
+  {
+    "name": "Kit 7 Days",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Configuration technique du kit \"7 Days · 7 Looks\". Voir content/kit-7-days-setup.md dans le repo pour la mise en place complète (tags produit, collection, réduction automatique côté admin). La collection elle-même se choisit dans la section \"En-tête\" (et, pour les images du calendrier, dans la section \"7 Days · 7 Looks\") — les réglages globaux du thème ne supportent pas les sélecteurs de collection/produit/blog."
+      },
+      {
+        "type": "text",
+        "id": "seven_days_tag",
+        "label": "Tag produit utilisé pour le kit 7 Days",
+        "default": "7days",
+        "info": "Chaque produit éligible doit porter ce tag — c'est ce qui affiche le bouton \"Ajouter à mon kit\" sur sa fiche produit."
+      },
+      {
+        "type": "number",
+        "id": "seven_days_target",
+        "label": "Nombre d'articles pour compléter le kit",
+        "default": 7
+      },
+      {
+        "type": "text",
+        "id": "seven_days_price",
+        "label": "Prix affiché du kit complet",
+        "default": "40 €"
+      }
+    ]
+  },
+  {
+    "name": "Navigation",
+    "settings": [
+      {
+        "type": "url",
+        "id": "journal_url",
+        "label": "Lien vers le blog \"Le Journal\"",
+        "info": "Ex : /blogs/journal — utilisé pour les liens de navigation \"Journal\" sur les pages autres que l'accueil (l'accueil pointe vers sa propre section Journal)."
+      }
+    ]
+  },
+  {
+    "name": "Réseaux sociaux",
+    "settings": [
+      {
+        "type": "url",
+        "id": "social_instagram",
+        "label": "Instagram"
+      },
+      {
+        "type": "url",
+        "id": "social_tiktok",
+        "label": "TikTok"
+      },
+      {
+        "type": "url",
+        "id": "social_pinterest",
+        "label": "Pinterest"
+      }
+    ]
+  }
+]

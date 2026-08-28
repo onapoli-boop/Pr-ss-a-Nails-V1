@@ -1,0 +1,85 @@
+{%- liquid
+  if template.name == 'index'
+    assign journal_url = '#journal'
+  elsif settings.journal_url != blank
+    assign journal_url = settings.journal_url
+  else
+    assign journal_url = routes.root_url
+  endif
+-%}
+<footer class="site-footer" id="about">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">{{ shop.name | default: 'VELOUR' }}</div>
+        <p>{{ 'general.meta.tagline' | t }}</p>
+      </div>
+      <div class="footer-col">
+        <h4>{{ 'layout.footer.shop_heading' | t }}</h4>
+        <ul>
+          <li><a href="{{ routes.root_url }}#mood">{{ 'layout.footer.shop_collections' | t }}</a></li>
+          <li><a href="{{ routes.root_url }}#shop">{{ 'layout.footer.shop_bestsellers' | t }}</a></li>
+          <li><a href="{{ routes.root_url }}#week">{{ 'layout.footer.shop_week' | t }}</a></li>
+          <li><a href="{{ routes.root_url }}#edits">{{ 'layout.footer.shop_bundles' | t }}</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>{{ 'layout.footer.help_heading' | t }}</h4>
+        <ul>
+          <li><a href="{{ pages['livraison'].url | default: '#' }}">{{ 'layout.footer.help_shipping' | t }}</a></li>
+          <li><a href="{{ shop.policies.refund_policy.url | default: pages['retours'].url | default: '#' }}">{{ 'layout.footer.help_returns' | t }}</a></li>
+          <li><a href="{{ pages['faq'].url | default: '#' }}">{{ 'layout.footer.help_faq' | t }}</a></li>
+          <li><a href="{{ pages['contact'].url | default: '#' }}">{{ 'layout.footer.help_contact' | t }}</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>{{ 'layout.footer.about_heading' | t }}</h4>
+        <ul>
+          <li><a href="{{ pages['notre-histoire'].url | default: '#' }}">{{ 'layout.footer.about_story' | t }}</a></li>
+          <li><a href="{{ pages['les-press-on'].url | default: '#' }}">{{ 'layout.footer.about_pressons' | t }}</a></li>
+          <li><a href="{{ pages['guide-dentretien'].url | default: '#' }}">{{ 'layout.footer.about_care_guide' | t }}</a></li>
+          <li><a href="{{ journal_url }}">{{ 'layout.footer.about_journal' | t }}</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>{{ 'layout.footer.language' | t }}</h4>
+        <ul>
+          {%- assign lang_codes = section.settings.language_codes | split: ',' -%}
+          {%- for code_label in lang_codes -%}
+            <li><a href="#">{{ code_label | upcase }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      {%- assign current_year = 'now' | date: '%Y' -%}
+      <span>{{ 'layout.footer.copyright' | t: year: current_year }}</span>
+      {%- if shop.policies.size > 0 -%}
+        <div class="legal">
+          {%- for policy in shop.policies -%}
+            <a href="{{ policy.url }}">{{ policy.title }}</a>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+      <div class="legal">
+        {%- if settings.social_instagram != blank -%}<a href="{{ settings.social_instagram }}">{{ 'layout.footer.social_instagram' | t }}</a>{%- endif -%}
+        {%- if settings.social_tiktok != blank -%}<a href="{{ settings.social_tiktok }}">{{ 'layout.footer.social_tiktok' | t }}</a>{%- endif -%}
+        {%- if settings.social_pinterest != blank -%}<a href="{{ settings.social_pinterest }}">{{ 'layout.footer.social_pinterest' | t }}</a>{%- endif -%}
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Pied de page",
+  "settings": [
+    {
+      "type": "text",
+      "id": "language_codes",
+      "label": "Langues affichées (codes ISO, séparés par des virgules)",
+      "default": "fr,de,es,en"
+    }
+  ]
+}
+{% endschema %}

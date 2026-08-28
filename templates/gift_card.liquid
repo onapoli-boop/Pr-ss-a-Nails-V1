@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ shop.name }} — {{ 'gift_card.title' | t }}</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+{{ 'theme.css' | asset_url | stylesheet_tag }}
+<style>
+  body { display: grid; place-items: center; min-height: 100vh; background: var(--noir); padding: 40px 20px; }
+  .gift-card { background: var(--offwhite); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); padding: clamp(32px, 5vw, 56px); max-width: 480px; width: 100%; text-align: center; }
+  .gift-card .logo { font-size: 28px; margin-bottom: 30px; }
+  .gift-card .amount { font-family: var(--f-display); font-size: 44px; margin: 20px 0; }
+  .gift-card .code { font-family: var(--f-body); font-size: 20px; letter-spacing: .1em; border: 1px dashed var(--line); border-radius: var(--radius-md); padding: 16px; margin: 24px 0; }
+  .gift-card .expired { color: var(--bordeaux); font-size: 13px; margin-top: 10px; }
+  @media print { body { background: #fff; padding: 0; } .gift-card { box-shadow: none; } .no-print { display: none; } }
+</style>
+</head>
+<body class="template-gift-card">
+  <div class="gift-card">
+    <div class="logo">{{ shop.name | default: 'VELOUR' }}</div>
+    <span class="eyebrow">{{ 'gift_card.title' | t }}</span>
+    <div class="amount">{{ gift_card.initial_value | money }}</div>
+    {%- if gift_card.enabled and gift_card.expired == false -%}
+      {%- assign formatted_balance = gift_card.balance | money -%}
+      <p>{{ 'gift_card.remaining' | t: balance: formatted_balance }}</p>
+    {%- else -%}
+      <p class="expired">{{ 'gift_card.expired' | t }}</p>
+    {%- endif -%}
+    <div class="code">{{ gift_card.code | format_code }}</div>
+    <p class="note">{{ 'gift_card.instructions' | t }}</p>
+    <div class="hero-ctas no-print" style="justify-content:center; margin-top:24px;">
+      <button type="button" class="btn btn-ghost" onclick="window.print()">{{ 'gift_card.print' | t }}</button>
+      <a href="{{ shop.url }}" class="btn btn-primary">{{ 'general.404.link' | t }}</a>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<section class="key-points">
+  <div class="container key-points-grid reveal">
+    {%- for block in section.blocks -%}
+      <div class="key-point" {{ block.shopify_attributes }}>
+        <span class="idx">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+        <h3>{{ block.settings.title }}</h3>
+        <p>{{ block.settings.text }}</p>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "3 points clés (PDP)",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "point",
+      "name": "Point",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titre", "default": "Ne fragilise pas l'ongle naturel" },
+        { "type": "text", "id": "text", "label": "Texte", "default": "Contrairement à un gel classique, la pose et le retrait ne nécessitent ni ponçage ni UV." }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [
+    {
+      "name": "3 points clés (PDP)",
+      "blocks": [
+        { "type": "point", "settings": { "title": "Ne fragilise pas l'ongle naturel", "text": "Contrairement à un gel classique, la pose et le retrait ne nécessitent ni ponçage ni UV." } },
+        { "type": "point", "settings": { "title": "Tient jusqu'à 2 semaines", "text": "Résiste douche, vaisselle et quotidien avec un entretien simple, sans perdre son éclat." } },
+        { "type": "point", "settings": { "title": "S'adapte à toutes les mains", "text": "10 tailles incluses + lime dans chaque set, pour un fit parfait dès la première pose." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,38 @@
+{%- comment -%}
+  Product card — ported from the mockup's .product-card markup.
+  Usage: {% render 'product-card', product: product, show_new_tag: false %}
+
+  Rating: the mockup shows static demo star ratings/review counts. Real
+  products have no such data until a reviews app (Judge.me, Loox, etc.)
+  is installed, so this only renders the rating line when a compatible
+  metafield is actually present — no fabricated numbers.
+{%- endcomment -%}
+{%- liquid
+  assign variant = product.selected_or_first_available_variant
+  assign rating = product.metafields.reviews.rating.value
+  assign rating_count = product.metafields.reviews.rating_count.value
+-%}
+<div class="product-card">
+  <div class="product-media">
+    {%- if show_new_tag -%}<span class="new-tag">{{ 'products.new' | t }}</span>{%- endif -%}
+    <a href="{{ product.url }}" aria-label="{{ 'products.view_product' | t }} {{ product.title }}">
+      {%- render 'placeholder-media', image: product.featured_image -%}
+    </a>
+    <button class="wish-btn" aria-label="{{ 'products.wishlist_add' | t }}">
+      {% render 'icon', name: 'wishlist' %}
+    </button>
+    <button class="quick-add" {% if variant %}data-variant-id="{{ variant.id }}"{% endif %}>
+      {{ 'products.quick_add' | t }}
+    </button>
+  </div>
+  <div class="product-info">
+    <div class="collection">{{ product.type }}</div>
+    <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
+    <div class="meta">
+      <span class="price">{{ product.price | money }}</span>
+      {%- if rating and rating_count -%}
+        <span class="rating">{%- for i in (1..5) -%}{% if i <= rating %}★{% else %}☆{% endif %}{%- endfor -%} ({{ rating_count }})</span>
+      {%- endif -%}
+    </div>
+  </div>
+</div>

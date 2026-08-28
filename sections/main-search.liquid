@@ -1,0 +1,61 @@
+<section class="blog-hero">
+  <div class="container">
+    <span class="eyebrow">{{ 'general.search.submit' | t }}</span>
+    <h1>
+      {%- if search.performed -%}
+        {{ 'search.results_for' | t: terms: search.terms }}
+      {%- else -%}
+        {{ 'general.search.submit' | t }}
+      {%- endif -%}
+    </h1>
+  </div>
+</section>
+
+<section class="blog-filters">
+  <div class="container">
+    {%- form 'search', class: 'search-form' -%}
+      <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}">
+      <button type="submit">{{ 'general.search.submit' | t }}</button>
+    {%- endform -%}
+  </div>
+</section>
+
+{%- if search.performed -%}
+  <section class="blog-list">
+    <div class="container">
+      {%- if search.results.size == 0 -%}
+        <p class="blog-empty">{{ 'search.no_results' | t: terms: search.terms }}</p>
+      {%- else -%}
+        <p class="section-sub" style="margin-bottom:24px;">{{ 'search.results_count' | t: count: search.results_count }}</p>
+        {%- paginate search.results by 24 -%}
+          <div class="product-grid reveal">
+            {%- for item in search.results -%}
+              {%- case item.object_type -%}
+                {%- when 'product' -%}
+                  {%- render 'product-card', product: item -%}
+                {%- when 'article' -%}
+                  {%- render 'article-card', article: item, show_excerpt: true -%}
+                {%- else -%}
+                  <a class="blog-card" href="{{ item.url }}">
+                    <div class="blog-info"><h3>{{ item.title }}</h3></div>
+                  </a>
+              {%- endcase -%}
+            {%- endfor -%}
+          </div>
+          {%- if paginate.pages > 1 -%}
+            <div class="blog-cta reveal">
+              {%- if paginate.previous -%}<a href="{{ paginate.previous.url }}" class="btn btn-ghost">&larr;</a>{%- endif -%}
+              {%- if paginate.next -%}<a href="{{ paginate.next.url }}" class="btn btn-ghost">&rarr;</a>{%- endif -%}
+            </div>
+          {%- endif -%}
+        {%- endpaginate -%}
+      {%- endif -%}
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Recherche"
+}
+{% endschema %}

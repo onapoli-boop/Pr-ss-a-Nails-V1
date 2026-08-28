@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  {{ page_title }}
+  {%- if current_tags %} &ndash; {{ 'general.search.tagged' | t: tags: current_tags | join: ', ' }}{% endif -%}
+  {%- if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif -%}
+  {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+</title>
+{%- if page_description %}
+<meta name="description" content="{{ page_description | escape }}">
+{%- endif %}
+<link rel="canonical" href="{{ canonical_url }}">
+<link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+{{ 'theme.css' | asset_url | stylesheet_tag }}
+
+{{ content_for_header }}
+</head>
+<body class="template-{{ template.name }}">
+  <a class="visually-hidden skip-to-content-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
+
+  {% section 'announcement-bar' %}
+  {% section 'site-header' %}
+
+  <main id="MainContent">
+    {{ content_for_layout }}
+  </main>
+
+  {% section 'site-footer' %}
+
+  {% render 'cart-drawer' %}
+
+  {%- comment -%}
+    window.theme.strings is built incrementally (this block + the one in
+    sections/site-header.liquid, which renders earlier in the page and
+    adds its own kit-related strings) — always merge with Object.assign
+    here rather than reassigning, or whichever block runs first gets
+    wiped out by the other.
+  {%- endcomment -%}
+  <script>
+    window.theme = window.theme || {};
+    window.theme.currency = {{ cart.currency.iso_code | json }};
+    window.theme.freeGiftThreshold = {{ settings.free_gift_threshold | json }};
+    window.theme.strings = Object.assign(window.theme.strings || {}, {
+      adding: {{ 'cart.adding' | t | json }},
+      added: {{ 'cart.added' | t | json }},
+      giftNote: {{ 'cart.gift_note' | t | json }},
+      giftUnlocked: {{ 'cart.gift_unlocked' | t | json }},
+      remove: {{ 'cart.remove' | t | json }},
+      decrease: {{ 'cart.decrease' | t | json }},
+      increase: {{ 'cart.increase' | t | json }},
+      wishlistAdd: {{ 'products.wishlist_add' | t | json }},
+      wishlistAdded: {{ 'products.wishlist_added' | t | json }},
+      changeMood: {{ 'look_builder.change_mood' | t | json }},
+      changeModel: {{ 'look_builder.change_model' | t | json }},
+      days: [
+        {{ 'look_builder.day_mon' | t | json }},
+        {{ 'look_builder.day_tue' | t | json }},
+        {{ 'look_builder.day_wed' | t | json }},
+        {{ 'look_builder.day_thu' | t | json }},
+        {{ 'look_builder.day_fri' | t | json }},
+        {{ 'look_builder.day_sat' | t | json }},
+        {{ 'look_builder.day_sun' | t | json }}
+      ]
+    });
+  </script>
+
+  {%- comment -%}
+    GSAP + ScrollTrigger from the mockup, kept as-is. assets/theme.js
+    detects window.gsap and falls back to plain JS/CSS if these CDN
+    scripts fail to load (offline, blocked, etc.) — see the hasGSAP
+    pattern at the top of the file.
+  {%- endcomment -%}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+{%- liquid
+  if template.name == 'index'
+    assign journal_url = '#journal'
+  elsif settings.journal_url != blank
+    assign journal_url = settings.journal_url
+  else
+    assign journal_url = routes.root_url
+  endif
+
+  assign seven_days_collection = section.settings.seven_days_collection
+  assign seven_days_variant_ids = blank
+  if seven_days_collection
+    for product in seven_days_collection.products
+      assign variant_ids = product.variants | map: 'id'
+      if seven_days_variant_ids == blank
+        assign seven_days_variant_ids = variant_ids
+      else
+        assign seven_days_variant_ids = seven_days_variant_ids | concat: variant_ids
+      endif
+    endfor
+  endif
+-%}
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="burger" id="burgerBtn" aria-label="{{ 'general.accessibility.menu' | t }}"><span></span><span></span><span></span></div>
+    <a href="{{ routes.root_url }}" class="logo">{{ shop.name | default: 'VELOUR' }}</a>
+    <nav class="main-nav" id="MainNav">
+      <a href="{{ routes.root_url }}#shop">{{ 'layout.header.nav.shop' | t }}</a>
+      <a href="{{ routes.root_url }}#mood">{{ 'layout.header.nav.collections' | t }}</a>
+      <a href="{{ routes.root_url }}#week">{{ 'layout.header.nav.week' | t }}</a>
+      <a href="{{ routes.root_url }}#edits">{{ 'layout.header.nav.bundles' | t }}</a>
+      <a href="{{ journal_url }}">{{ 'layout.header.nav.journal' | t }}</a>
+      <a href="{{ routes.root_url }}#about">{{ 'layout.header.nav.about' | t }}</a>
+    </nav>
+    <div class="header-actions">
+      <div class="lang-select">
+        {%- assign lang_codes = section.settings.language_codes | split: ',' -%}
+        {%- for code_label in lang_codes -%}
+          <button type="button" class="{% if code_label == request.locale.iso_code %}active{% endif %}">{{ code_label | upcase }}</button>
+          {%- unless forloop.last %}·{% endunless -%}
+        {%- endfor -%}
+      </div>
+      <button type="button" class="kit-progress-badge" id="kitProgressBadge" data-kit-progress hidden></button>
+      <button class="icon-btn" aria-label="{{ 'general.accessibility.search' | t }}">
+        {% render 'icon', name: 'search' %}
+      </button>
+      <a href="{{ routes.account_url }}" class="icon-btn" aria-label="{{ 'general.accessibility.account' | t }}">
+        {% render 'icon', name: 'account' %}
+      </a>
+      <button class="icon-btn" aria-label="{{ 'general.accessibility.cart' | t }}" id="cartOpenBtn">
+        {% render 'icon', name: 'cart' %}
+        <span class="cart-count">{{ cart.item_count }}</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+{%- comment -%}
+  Emitted from the header (rather than layout/theme.liquid) because
+  Shopify's global config/settings_schema.json doesn't support resource
+  picker types like "collection" — those only work in section schemas.
+  The header renders on every page, so this is still effectively global.
+{%- endcomment -%}
+<script>
+  window.theme = window.theme || {};
+  window.theme.strings = window.theme.strings || {};
+  Object.assign(window.theme.strings, {
+    kitProgress: {{ 'seven_days_kit.progress' | t | json }},
+    kitComplete: {{ 'seven_days_kit.complete' | t | json }},
+    kitAdd: {{ 'seven_days_kit.add_to_kit' | t | json }},
+    kitInKit: {{ 'seven_days_kit.in_kit' | t | json }}
+  });
+  window.theme.sevenDaysKit = {
+    variantIds: {{ seven_days_variant_ids | json }},
+    target: {{ settings.seven_days_target | default: 7 | json }},
+    price: {{ settings.seven_days_price | json }}
+  };
+</script>
+
+{% schema %}
+{
+  "name": "En-tête",
+  "settings": [
+    {
+      "type": "text",
+      "id": "language_codes",
+      "label": "Langues affichées (codes ISO, séparés par des virgules)",
+      "default": "fr,de,es,en",
+      "info": "Affichage visuel uniquement pour l'instant (comme dans la maquette) — le changement de langue réel sera branché une fois les traductions DE/ES/EN ajoutées."
+    },
+    {
+      "type": "collection",
+      "id": "seven_days_collection",
+      "label": "Collection des sets éligibles au kit 7 Days",
+      "info": "Utilisée pour le badge de progression du kit dans l'en-tête et pour les images du calendrier de la section \"7 Days · 7 Looks\"."
+    }
+  ]
+}
+{% endschema %}

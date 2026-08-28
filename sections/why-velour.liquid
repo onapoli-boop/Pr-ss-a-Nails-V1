@@ -1,0 +1,47 @@
+<section class="why">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>{{ section.settings.heading }}</h2>
+    </div>
+    <div class="why-grid reveal">
+      {%- for block in section.blocks -%}
+        <div class="why-item" {{ block.shopify_attributes }}>
+          <span class="idx">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+          <h3>{{ block.settings.title }}</h3>
+          <p>{{ block.settings.text }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Pourquoi Velour",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Pourquoi Velour" }
+  ],
+  "blocks": [
+    {
+      "type": "reason",
+      "name": "Raison",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titre", "info": "HTML simple accepté : <br>.", "default": "Look salon<br>en quelques minutes" },
+        { "type": "text", "id": "text", "label": "Texte", "default": "Prêt en une seule pose." }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Pourquoi Velour",
+      "blocks": [
+        { "type": "reason", "settings": { "title": "Look salon<br>en quelques minutes", "text": "Prêt en une seule pose." } },
+        { "type": "reason", "settings": { "title": "Réutilisable<br>fait pour durer", "text": "Entretenu, il se reporte." } },
+        { "type": "reason", "settings": { "title": "Sans rendez-vous<br>à ton rythme", "text": "À appliquer quand tu veux." } },
+        { "type": "reason", "settings": { "title": "Change de look<br>quand tu veux", "text": "On change d'humeur, on change de look." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

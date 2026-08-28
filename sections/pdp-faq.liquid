@@ -1,0 +1,51 @@
+<section class="pdp-info">
+  <div class="container pdp-info-grid">
+    <div class="section-head reveal">
+      <h2>{{ section.settings.heading }}</h2>
+    </div>
+    <div class="accordion">
+      {%- for block in section.blocks -%}
+        <div class="accordion-item{% if forloop.first %} open{% endif %}" {{ block.shopify_attributes }}>
+          <button class="accordion-head">
+            <span>{{ block.settings.question }}</span><span class="accordion-icon">{% if forloop.first %}−{% else %}+{% endif %}</span>
+          </button>
+          <div class="accordion-body">
+            {{ block.settings.answer }}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FAQ (PDP)",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Questions fréquentes" }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "Est-ce que ça abîme les ongles naturels ?" },
+        { "type": "richtext", "id": "answer", "label": "Réponse" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "FAQ (PDP)",
+      "blocks": [
+        { "type": "faq", "settings": { "question": "Est-ce que ça abîme les ongles naturels ?", "answer": "<p>Non. Contrairement au gel ou à la capsule classique, la pose ne nécessite ni ponçage ni UV, et un retrait à l'eau tiède préserve l'ongle naturel.</p>" } },
+        { "type": "faq", "settings": { "question": "Combien de temps ça tient ?", "answer": "<p>Jusqu'à 2 semaines avec un entretien normal — douche, vaisselle et quotidien inclus, à condition de bien préparer l'ongle avant la pose.</p>" } },
+        { "type": "faq", "settings": { "question": "Je peux les réutiliser ?", "answer": "<p>Oui. La plupart des sets se reportent plusieurs fois si tu les retires correctement et les ranges à plat entre deux poses, avec une nouvelle languette adhésive à chaque fois.</p>" } },
+        { "type": "faq", "settings": { "question": "Quelle taille choisir si j'hésite ?", "answer": "<p>Chaque set inclut 10 tailles pour couvrir toutes les largeurs d'ongle — teste plusieurs gabarits avant de coller, la bonne taille tient sans forcer ni laisser d'espace sur les côtés.</p>" } },
+        { "type": "faq", "settings": { "question": "Et si la taille ou la couleur ne me convient pas ?", "answer": "<p>Les sets non ouverts peuvent être retournés sous 14 jours.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

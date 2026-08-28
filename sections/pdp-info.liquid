@@ -1,0 +1,44 @@
+<section class="pdp-info">
+  <div class="container pdp-info-grid">
+    <div class="accordion">
+      {%- for block in section.blocks -%}
+        <div class="accordion-item{% if forloop.first %} open{% endif %}" {{ block.shopify_attributes }}>
+          <button class="accordion-head">
+            <span>{{ block.settings.title }}</span><span class="accordion-icon">{% if forloop.first %}−{% else %}+{% endif %}</span>
+          </button>
+          <div class="accordion-body">
+            {{ block.settings.content }}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Infos produit (accordéon)",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Rubrique",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titre", "default": "Description" },
+        { "type": "richtext", "id": "content", "label": "Contenu" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Infos produit (accordéon)",
+      "blocks": [
+        { "type": "item", "settings": { "title": "Description", "content": "<p>Des press-on façon salon, pensés pour capter la lumière sans le temps de séchage d'un rendez-vous en institut.</p>" } },
+        { "type": "item", "settings": { "title": "Entretien & réutilisation", "content": "<p>Retire-les en les faisant tremper dans l'eau tiède, range-les à plat dans la boîte, et réapplique-les avec une nouvelle languette adhésive. La plupart des sets se reportent plusieurs fois si bien entretenus.</p>" } },
+        { "type": "item", "settings": { "title": "Livraison & retours", "content": "<p>Expédié depuis notre entrepôt européen, 2 à 4 jours ouvrés vers FR · DE · ES. Les sets non ouverts peuvent être retournés sous 14 jours.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
